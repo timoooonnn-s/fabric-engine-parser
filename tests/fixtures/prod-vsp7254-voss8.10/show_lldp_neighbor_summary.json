@@ -1,0 +1,137 @@
+[
+  {
+    "local_port": "1/1",
+    "protocol": "LLDP",
+    "address": "10.0.0.70",
+    "chassis_id": "a4:25:1b:52:70:00",
+    "remote_port": "1/11",
+    "system_name": "core-sw-a",
+    "system_description": "VSP-7400-48Y-8C (9.3.1.0)"
+  },
+  {
+    "local_port": "1/2",
+    "protocol": "LLDP",
+    "address": "10.0.0.70",
+    "chassis_id": "a4:25:1b:52:70:00",
+    "remote_port": "1/12",
+    "system_name": "core-sw-a",
+    "system_description": "VSP-7400-48Y-8C (9.3.1.0)"
+  },
+  {
+    "local_port": "1/7",
+    "protocol": "LLDP",
+    "address": "10.0.0.5",
+    "chassis_id": null,
+    "remote_port": "Embedded ALOM, Po~",
+    "system_name": null,
+    "system_description": "ProLiant DL380 Gen10"
+  },
+  {
+    "local_port": "1/8",
+    "protocol": "LLDP",
+    "address": "10.0.0.30",
+    "chassis_id": "a4:25:1b:52:72:00",
+    "remote_port": "1/8",
+    "system_name": "dist-sw-02",
+    "system_description": "VSP-7254XSQ (8.10.9.0)"
+  },
+  {
+    "local_port": "1/10",
+    "protocol": "LLDP",
+    "address": "10.0.0.233",
+    "chassis_id": null,
+    "remote_port": "3c:a8:2a:00:00:0a",
+    "system_name": null,
+    "system_description": "HPE ProLiant DL580 Gen10"
+  },
+  {
+    "local_port": "1/13",
+    "protocol": "LLDP",
+    "address": "10.0.0.21",
+    "chassis_id": null,
+    "remote_port": "3c:a8:2a:00:00:0d",
+    "system_name": null,
+    "system_description": "HPE ProLiant DL380 Gen10"
+  },
+  {
+    "local_port": "1/14",
+    "protocol": "LLDP",
+    "address": "10.0.0.22",
+    "chassis_id": null,
+    "remote_port": "3c:a8:2a:00:00:0e",
+    "system_name": null,
+    "system_description": "HPE ProLiant DL380 Gen10"
+  },
+  {
+    "local_port": "1/15",
+    "protocol": "LLDP",
+    "address": "10.0.0.117",
+    "chassis_id": null,
+    "remote_port": "3c:a8:2a:00:00:0f",
+    "system_name": null,
+    "system_description": "HPE ProLiant DL380 Gen10"
+  },
+  {
+    "local_port": "1/16",
+    "protocol": "LLDP",
+    "address": "10.0.0.30",
+    "chassis_id": "a4:25:1b:52:72:00",
+    "remote_port": "1/16",
+    "system_name": "dist-sw-02",
+    "system_description": "VSP-7254XSQ (8.10.9.0)"
+  },
+  {
+    "local_port": "1/23",
+    "protocol": "LLDP",
+    "address": "10.0.0.71",
+    "chassis_id": "a4:25:1b:52:71:00",
+    "remote_port": "1/11",
+    "system_name": "core-sw-b",
+    "system_description": "VSP-7400-48Y-8C (9.3.1.0)"
+  },
+  {
+    "local_port": "1/24",
+    "protocol": "LLDP",
+    "address": "10.0.0.71",
+    "chassis_id": "a4:25:1b:52:71:00",
+    "remote_port": "1/12",
+    "system_name": "core-sw-b",
+    "system_description": "VSP-7400-48Y-8C (9.3.1.0)"
+  },
+  {
+    "local_port": "1/29",
+    "protocol": "LLDP",
+    "address": "10.0.0.101",
+    "chassis_id": "b0:ad:aa:00:59:01",
+    "remote_port": "1/50",
+    "system_name": "access-sw-1",
+    "system_description": "Ethernet Routing Switch 5952GTS          HW:07       FW~"
+  },
+  {
+    "local_port": "1/43",
+    "protocol": "LLDP",
+    "address": "10.0.0.118",
+    "chassis_id": null,
+    "remote_port": "3c:a8:2a:00:00:2b",
+    "system_name": null,
+    "system_description": "HPE ProLiant DL380 Gen10"
+  },
+  {
+    "local_port": "1/45",
+    "protocol": "LLDP",
+    "address": "10.0.0.32",
+    "chassis_id": null,
+    "remote_port": "3c:a8:2a:00:00:2d",
+    "system_name": null,
+    "system_description": "HPE ProLiant DL380 Gen9"
+  },
+  {
+    "local_port": "1/46",
+    "protocol": "LLDP",
+    "address": "10.0.0.105",
+    "chassis_id": null,
+    "remote_port": "3c:a8:2a:00:00:2e",
+    "system_name": null,
+    "system_description": "HPE ProLiant DL380 Gen9"
+  }
+]

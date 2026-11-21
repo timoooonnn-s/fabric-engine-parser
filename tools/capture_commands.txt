@@ -1,0 +1,62 @@
+# Commands tools/capture.py runs, one per line. '#' starts a comment.
+# {vrf} lines run once per --vrf given on the command line.
+#
+# Lines marked "parser exists" already have a parser; the capture checks it against a
+# real switch. The others are captured so their parsers can be written from real output.
+
+# --- system
+show sys-info
+show software
+
+# --- ports (parser exists for interface, name, state)
+show interfaces gigabitEthernet
+show interfaces gigabitEthernet interface
+show interfaces gigabitEthernet name
+show interfaces gigabitEthernet state
+show interfaces gigabitEthernet vlan
+show interfaces gigabitEthernet i-sid
+show interfaces gigabitEthernet l1-config
+
+# --- VLANs (parser exists for basic, members, i-sid)
+show vlan basic
+show vlan members
+show vlan i-sid
+show vlan mac-address-entry
+
+# --- Fabric Connect / SPB (parser exists for i-sid and spbm i-sid all)
+show i-sid
+show isis
+show isis adjacencies
+show isis interface
+show isis spbm
+show isis spbm i-sid all
+show isis spbm nick-name
+show isis spbm unicast-fib
+show isis lsdb
+show isis system-id
+show dvr
+show dvr interfaces
+show dvr members
+
+# --- MLT / vIST (parser exists for mlt and virtual-ist)
+show mlt
+show smlt mlt
+show virtual-ist
+show lacp interface
+
+# --- LLDP (parser exists for both)
+show lldp neighbor
+show lldp neighbor summary
+
+# --- L3
+show ip vrf
+show ip interface
+show ip interface vrf {vrf}
+show ip route
+show ip route vrf {vrf}
+show ip arp
+show ip arp vrf {vrf}
+show ipv6 route
+
+# --- configuration (for the config standards linter)
+show running-config

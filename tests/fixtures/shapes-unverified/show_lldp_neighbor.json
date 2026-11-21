@@ -1,0 +1,32 @@
+[
+  {
+    "local_port": "1/1",
+    "index": 1,
+    "age": "10 days, 02:33:19",
+    "protocol": "LLDP",
+    "chassis_id_subtype": "MAC Address",
+    "chassis_id": "a4:25:1b:52:70:00",
+    "port_id_subtype": "MAC Address",
+    "port_id": "a4:25:1b:52:70:31",
+    "system_name": "core-01",
+    "system_description": null,
+    "system_capabilities": "Br / Br",
+    "port_description": null,
+    "address": null
+  },
+  {
+    "local_port": "1/47",
+    "index": 2,
+    "age": "12 days, 07:01:44",
+    "protocol": "LLDP",
+    "chassis_id_subtype": "MAC Address",
+    "chassis_id": "a4:25:1b:52:71:00",
+    "port_id_subtype": "MAC Address",
+    "port_id": "a4:25:1b:52:71:2f",
+    "system_name": "old-agg-02",
+    "system_description": null,
+    "system_capabilities": "Br / Br",
+    "port_description": null,
+    "address": null
+  }
+]

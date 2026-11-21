@@ -1,0 +1,97 @@
+[
+  {
+    "mlt_id": 1,
+    "ifindex": 6144,
+    "name": "vIST-MLT",
+    "port_type": "trunk",
+    "admin_type": "norm",
+    "current_type": "norm",
+    "members": [
+      "1/47",
+      "1/48"
+    ],
+    "vlan_ids": [
+      4000
+    ],
+    "designated_port": "1/47",
+    "lacp_enabled": false,
+    "lacp_oper_up": false,
+    "created_on": "LOC & REM",
+    "remote_members": [
+      "1/47",
+      "1/48"
+    ],
+    "programmed_on": "LOCAL & REMOTE",
+    "dot1q_encapsulation": true,
+    "lossless": false,
+    "private_vlan": false,
+    "flex_uni": false
+  },
+  {
+    "mlt_id": 2,
+    "ifindex": 6145,
+    "name": "MLT002.s.1/1/2",
+    "port_type": "trunk",
+    "admin_type": "smlt",
+    "current_type": "smlt",
+    "members": [
+      "1/1",
+      "1/2"
+    ],
+    "vlan_ids": [
+      100,
+      200,
+      300,
+      2200,
+      2201,
+      2230,
+      2232,
+      2233,
+      2246,
+      2261,
+      2262,
+      2266,
+      2600,
+      2601
+    ],
+    "designated_port": "1/1",
+    "lacp_enabled": true,
+    "lacp_oper_up": true,
+    "created_on": "LOC & REM",
+    "remote_members": [
+      "1/1",
+      "1/2"
+    ],
+    "programmed_on": "LOCAL & REMOTE",
+    "dot1q_encapsulation": true,
+    "lossless": false,
+    "private_vlan": false,
+    "flex_uni": false
+  },
+  {
+    "mlt_id": 10,
+    "ifindex": 6153,
+    "name": "MLT-SRV",
+    "port_type": "access",
+    "admin_type": "norm",
+    "current_type": "norm",
+    "members": [
+      "2/1/1"
+    ],
+    "vlan_ids": [
+      100
+    ],
+    "designated_port": "2/1/1",
+    "lacp_enabled": false,
+    "lacp_oper_up": false,
+    "created_on": "LOC & REM",
+    "remote_members": [
+      "2/1/1"
+    ],
+    "programmed_on": "LOCAL",
+    "dot1q_encapsulation": false,
+    "lossless": false,
+    "private_vlan": false,
+    "flex_uni": false
+  }
+]

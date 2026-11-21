@@ -1,0 +1,57 @@
+[
+  {
+    "port": "1/1",
+    "ifindex": 192,
+    "description": "1000BaseTX",
+    "link_trap": true,
+    "port_lock": false,
+    "mtu": 1950,
+    "mac": "b0:ad:aa:41:b4:00",
+    "admin_up": true,
+    "oper_up": true
+  },
+  {
+    "port": "1/2",
+    "ifindex": 193,
+    "description": "1000BaseTX",
+    "link_trap": true,
+    "port_lock": false,
+    "mtu": 1950,
+    "mac": "b0:ad:aa:41:b4:01",
+    "admin_up": true,
+    "oper_up": false
+  },
+  {
+    "port": "1/47",
+    "ifindex": 238,
+    "description": "10GbNone",
+    "link_trap": true,
+    "port_lock": false,
+    "mtu": 1950,
+    "mac": "b0:ad:aa:41:b4:2e",
+    "admin_up": true,
+    "oper_up": true
+  },
+  {
+    "port": "1/48",
+    "ifindex": 239,
+    "description": "10GbNone",
+    "link_trap": true,
+    "port_lock": false,
+    "mtu": 1950,
+    "mac": "b0:ad:aa:41:b4:2f",
+    "admin_up": false,
+    "oper_up": false
+  },
+  {
+    "port": "2/1/1",
+    "ifindex": 400,
+    "description": "10GbSR",
+    "link_trap": true,
+    "port_lock": false,
+    "mtu": 1950,
+    "mac": "b0:ad:aa:41:b5:00",
+    "admin_up": true,
+    "oper_up": true
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "isid": 10100,
+    "nickname": "0.00.42",
+    "bvlan": 4051,
+    "system_id": "b0ad.aa41.b4df",
+    "origin": "config",
+    "host_name": "dvr-01"
+  },
+  {
+    "isid": 10100,
+    "nickname": "0.00.43",
+    "bvlan": 4052,
+    "system_id": "b0ad.aa41.c2aa",
+    "origin": "discover",
+    "host_name": "beb-07"
+  },
+  {
+    "isid": 10200,
+    "nickname": "0.00.42",
+    "bvlan": 4051,
+    "system_id": "b0ad.aa41.b4df",
+    "origin": "config",
+    "host_name": "dvr-01"
+  },
+  {
+    "isid": 20300,
+    "nickname": "0.00.44",
+    "bvlan": 4051,
+    "system_id": "b0ad.aa41.d3bb",
+    "origin": "discover",
+    "host_name": "beb-08"
+  },
+  {
+    "isid": 20400,
+    "nickname": "0.00.44",
+    "bvlan": 4052,
+    "system_id": "b0ad.aa41.d3bb",
+    "origin": "discover",
+    "host_name": "beb-08"
+  }
+]

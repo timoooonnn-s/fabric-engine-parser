@@ -1,0 +1,267 @@
+[
+  {
+    "mlt_id": 1,
+    "ifindex": 6144,
+    "name": "MLT001.svi.108.116",
+    "port_type": "trunk",
+    "admin_type": "norm",
+    "current_type": "norm",
+    "members": [
+      "1/8",
+      "1/16"
+    ],
+    "vlan_ids": [
+      4051,
+      4052
+    ],
+    "designated_port": "1/8",
+    "lacp_enabled": false,
+    "lacp_oper_up": false,
+    "created_on": "LOC & REM",
+    "remote_members": [
+      "1/8",
+      "1/16"
+    ],
+    "programmed_on": "LOCAL",
+    "dot1q_encapsulation": true,
+    "lossless": false,
+    "private_vlan": false,
+    "flex_uni": false
+  },
+  {
+    "mlt_id": 35,
+    "ifindex": 6178,
+    "name": "MLT035.s.1/2/23/24",
+    "port_type": "trunk",
+    "admin_type": "smlt",
+    "current_type": "smlt",
+    "members": [
+      "1/1",
+      "1/2",
+      "1/23",
+      "1/24"
+    ],
+    "vlan_ids": [
+      174,
+      695,
+      696,
+      699,
+      735,
+      839,
+      847,
+      848,
+      849,
+      850,
+      851,
+      852,
+      853,
+      2200,
+      2201,
+      2230,
+      2232,
+      2233,
+      2246,
+      2261,
+      2262,
+      2266,
+      2600,
+      2601,
+      2602,
+      2603,
+      2604,
+      2900,
+      2901,
+      2903,
+      2905,
+      2906,
+      2907,
+      2952
+    ],
+    "designated_port": "1/1",
+    "lacp_enabled": false,
+    "lacp_oper_up": false,
+    "created_on": "LOC & REM",
+    "remote_members": [
+      "1/1",
+      "1/2",
+      "1/23",
+      "1/24"
+    ],
+    "programmed_on": "LOCAL & REMOTE",
+    "dot1q_encapsulation": true,
+    "lossless": false,
+    "private_vlan": false,
+    "flex_uni": false
+  },
+  {
+    "mlt_id": 38,
+    "ifindex": 6181,
+    "name": "s129",
+    "port_type": "trunk",
+    "admin_type": "smlt",
+    "current_type": "smlt",
+    "members": [
+      "1/29"
+    ],
+    "vlan_ids": [
+      174,
+      695,
+      696,
+      699,
+      735,
+      839,
+      847,
+      848,
+      849,
+      850,
+      851,
+      852,
+      853,
+      2200,
+      2246,
+      2901
+    ],
+    "designated_port": "1/29",
+    "lacp_enabled": false,
+    "lacp_oper_up": false,
+    "created_on": "LOC & REM",
+    "remote_members": [
+      "1/29"
+    ],
+    "programmed_on": "LOCAL & REMOTE",
+    "dot1q_encapsulation": true,
+    "lossless": false,
+    "private_vlan": false,
+    "flex_uni": false
+  },
+  {
+    "mlt_id": 196,
+    "ifindex": 6339,
+    "name": "f110",
+    "port_type": "trunk",
+    "admin_type": "smlt",
+    "current_type": "smlt",
+    "members": [
+      "1/10"
+    ],
+    "vlan_ids": [
+      735
+    ],
+    "designated_port": "1/10",
+    "lacp_enabled": true,
+    "lacp_oper_up": true,
+    "created_on": "LOC & REM",
+    "remote_members": [
+      "1/10"
+    ],
+    "programmed_on": "LOCAL & REMOTE",
+    "dot1q_encapsulation": true,
+    "lossless": false,
+    "private_vlan": false,
+    "flex_uni": false
+  },
+  {
+    "mlt_id": 197,
+    "ifindex": 6340,
+    "name": "f143",
+    "port_type": "trunk",
+    "admin_type": "smlt",
+    "current_type": "smlt",
+    "members": [
+      "1/43"
+    ],
+    "vlan_ids": [
+      695
+    ],
+    "designated_port": "1/43",
+    "lacp_enabled": true,
+    "lacp_oper_up": true,
+    "created_on": "LOC & REM",
+    "remote_members": [
+      "1/43"
+    ],
+    "programmed_on": "LOCAL & REMOTE",
+    "dot1q_encapsulation": true,
+    "lossless": false,
+    "private_vlan": false,
+    "flex_uni": false
+  },
+  {
+    "mlt_id": 198,
+    "ifindex": 6341,
+    "name": "f115",
+    "port_type": "trunk",
+    "admin_type": "smlt",
+    "current_type": "smlt",
+    "members": [
+      "1/15"
+    ],
+    "vlan_ids": [
+      695
+    ],
+    "designated_port": "1/15",
+    "lacp_enabled": true,
+    "lacp_oper_up": true,
+    "created_on": "LOC & REM",
+    "remote_members": [
+      "1/15"
+    ],
+    "programmed_on": "LOCAL & REMOTE",
+    "dot1q_encapsulation": true,
+    "lossless": false,
+    "private_vlan": false,
+    "flex_uni": false
+  },
+  {
+    "mlt_id": 199,
+    "ifindex": 6342,
+    "name": "f145",
+    "port_type": "access",
+    "admin_type": "smlt",
+    "current_type": "smlt",
+    "members": [
+      "1/45"
+    ],
+    "vlan_ids": [
+      695
+    ],
+    "designated_port": "1/45",
+    "lacp_enabled": true,
+    "lacp_oper_up": true,
+    "created_on": "LOC & REM",
+    "remote_members": [
+      "1/45"
+    ],
+    "programmed_on": "LOCAL & REMOTE",
+    "dot1q_encapsulation": false,
+    "lossless": false,
+    "private_vlan": false,
+    "flex_uni": false
+  },
+  {
+    "mlt_id": 200,
+    "ifindex": 6343,
+    "name": "f146",
+    "port_type": "access",
+    "admin_type": "smlt",
+    "current_type": "smlt",
+    "members": [
+      "1/46"
+    ],
+    "vlan_ids": [
+      695
+    ],
+    "designated_port": "1/46",
+    "lacp_enabled": true,
+    "lacp_oper_up": true,
+    "created_on": "LOC & REM",
+    "remote_members": [
+      "1/46"
+    ],
+    "programmed_on": "LOCAL & REMOTE",
+    "dot1q_encapsulation": false,
+    "lossless": false,
+    "private_vlan": false,
+    "flex_uni": false
+  }
+]

@@ -1,0 +1,11 @@
+[
+  {
+    "peer_ip": "10.41.8.10",
+    "vlan_id": 31,
+    "enabled": true,
+    "up": true,
+    "dialect": "v6.0",
+    "state": "Up",
+    "role": "Slave"
+  }
+]

@@ -1,0 +1,63 @@
+[
+  {
+    "isid": 10100,
+    "isid_type": "ELAN",
+    "port_bindings": [
+      {
+        "port": "1/10",
+        "customer_vid": 100
+      },
+      {
+        "port": "1/11",
+        "customer_vid": 100
+      }
+    ],
+    "mlt_bindings": [
+      {
+        "mlt_id": 2,
+        "customer_vid": 100
+      }
+    ],
+    "origin": "CONFIG",
+    "name": "Server-100"
+  },
+  {
+    "isid": 10200,
+    "isid_type": "ELAN",
+    "port_bindings": [],
+    "mlt_bindings": [
+      {
+        "mlt_id": 2,
+        "customer_vid": 200
+      }
+    ],
+    "origin": "CONFIG",
+    "name": "Server-200"
+  },
+  {
+    "isid": 20300,
+    "isid_type": "ELAN",
+    "port_bindings": [
+      {
+        "port": "1/12",
+        "customer_vid": 300
+      }
+    ],
+    "mlt_bindings": [],
+    "origin": "CONFIG",
+    "name": "Special-300"
+  },
+  {
+    "isid": 2502201,
+    "isid_type": "CVLAN",
+    "port_bindings": [
+      {
+        "port": "1/36",
+        "customer_vid": 2201
+      }
+    ],
+    "mlt_bindings": [],
+    "origin": "CONFIG",
+    "name": "quarantaine"
+  }
+]
