@@ -52,11 +52,11 @@ def test_find_parser_accepts_abbreviations_and_arguments(typed: str, expected: o
 @pytest.mark.parametrize(
     "typed",
     [
-        "show interfaces gigabitethernet l1-config 1/1",
+        "show interfaces gigabitethernet statistics 1/1",
     ],
 )
 def test_subcommand_is_not_taken_for_a_port_argument(typed: str) -> None:
-    # the bare command accepts port lists only, so 'l1-config' is a command still to write
+    # the bare command accepts port lists only, so 'statistics' is a command still to write
     with pytest.raises(UnknownCommandError):
         find_parser(typed)
 

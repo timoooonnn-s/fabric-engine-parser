@@ -95,20 +95,29 @@ header and are picked by title), real 9.4 evidence on all five lab captures (130
 LACP is disabled everywhere in the lab, so every value is a default and every partner
 is empty. The LACP Aggregator tables (per MLT) are not read: no capture has rows yet.
 
-## Next
+## Done: installed software (2026-11-22)
 
-Every command from the first backlog table that has rows now has a parser. Captured,
-with content, but never on that table (decide whether they are needed):
+`show software` → `Software`, real 9.4 evidence on all five lab captures (one release
+each). A switch with a backup release next to the primary is still unseen; the labels
+are kept as printed.
 
-| Command | Content in fe-01 | Likely use |
-|---|---|---|
-| `show software` | release, image | every report (the exact release string, `FEGNS3.9.4.0.0.GA`) |
-| `show isis system-id` | this switch's system ID | joining IS-IS output across switches |
-| `show isis spbm` | the SPBM instance (B-VLANs, nickname) | L2 VSN verifier |
-| `show isis` | global IS-IS settings | config checks |
-| `show isis lsdb` | 8 LSPs | fabric overview |
-| `show interfaces gigabitEthernet l1-config` | per port | config checks |
+## Done: IS-IS system ID (2026-11-22)
 
+`show isis system-id` → `IsisSystemId` (HOME and REMOTE), real 9.4 evidence on all five
+lab captures. The HOME ID is each switch's entry in its neighbours' adjacencies and in
+the LSDB, so a report can name "this switch" in IS-IS output.
+
+## Done: the rest of the four-node capture (2026-11-22)
+
+`show isis` → `IsisSettings`, `show isis lsdb` → `IsisLsp`, `show isis spbm` →
+`SpbmInstance` (three tables merged), `show interfaces gigabitEthernet l1-config` →
+`PortL1Config`. Real 9.4 evidence on all five lab captures (l1-config: fe-01 … fe-04).
+Units in `IsisSettings` field names (seconds, `spf_delay_ms`) follow the IS-IS defaults
+the switch prints (900, 10, 2, 5, 100); the output itself names no unit.
+
+## Next: needs a new capture
+
+Every captured command with rows now has a parser.
 Captured but empty in this lab: `show dvr`, `dvr interfaces`, `dvr members`,
 `show smlt mlt`, `show ipv6 route`.
 

@@ -4,9 +4,9 @@
 header (UPTIME, HOLDTIME), so the values do not start where the labels do: their rows
 are read with patterns anchored on the numbers and the system ID.
 
-`show isis spbm nick-name` and `show isis spbm unicast-fib` print every value where its
-label starts, and some cells can be empty (a node without a nickname), so they are cut
-by column.
+`show isis spbm nick-name`, `show isis spbm unicast-fib` and `show isis system-id` print
+every value where its label starts, and some cells can be empty (a node without a
+nickname), so they are cut by column.
 """
 
 from __future__ import annotations
@@ -15,11 +15,23 @@ import re
 from collections.abc import Iterator
 from dataclasses import dataclass
 from datetime import timedelta
+from typing import Any
 
+from fabric_weft.fields import required
 from fabric_weft.output import Output, fullmatch
 from fabric_weft.registry import parser
 from fabric_weft.tables import Columns
-from fabric_weft.values import PORT, SYSTEM_ID, duration, flag, mac, nickname, optional, system_id
+from fabric_weft.values import (
+    PORT,
+    SYSTEM_ID,
+    duration,
+    flag,
+    mac,
+    nickname,
+    optional,
+    optional_int,
+    system_id,
+)
 
 
 @dataclass(frozen=True, slots=True)
@@ -57,6 +69,89 @@ class IsisInterface:
     origin: str  # 'CONFIG', ... kept as printed
     area: str
     area_name: str | None
+
+
+@dataclass(frozen=True, slots=True)
+class IsisSystemId:
+    """This switch's IS-IS system ID in one area. HOME is the one its neighbours see."""
+
+    system_id: str
+    area: str  # 'HOME' / 'REMOTE'
+    area_name: str | None
+
+
+@dataclass(frozen=True, slots=True)
+class IsisSettings:
+    """Global IS-IS settings of this switch (`show isis`). Empty values become None."""
+
+    admin_enabled: bool
+    router_type: str  # 'Level 1', ... kept as printed
+    system_id: str
+    max_lsp_gen_interval_seconds: int
+    metric: str  # 'wide' / 'narrow'
+    overload_on_startup_seconds: int
+    overload: bool
+    csnp_interval_seconds: int
+    psnp_interval_seconds: int
+    retransmit_lsp_interval_seconds: int
+    spf_delay_ms: int
+    router_name: str | None
+    ip_source_address: str | None
+    ipv6_source_address: str | None
+    ip_tunnel_source_address: str | None
+    tunnel_vrf: str | None
+    ip_tunnel_mtu: int | None
+    interface_count: int
+    area_address_count: int
+    inband_mgmt_clip_ip: str | None
+    backbone_enabled: bool
+    dynamically_learned_area: str | None
+    fan_member: bool
+    hello_padding: bool
+    multi_area_oper_enabled: bool
+    multi_area_flags: str | None  # 'home-always-up', ... kept as printed
+    designated_bn_host_name: str | None
+    designated_bn_home_system_id: str | None
+    designated_bn_remote_system_id: str | None
+
+
+@dataclass(frozen=True, slots=True)
+class SpbmInstance:
+    """One SPBM instance (`show isis spbm`), merged from its three tables."""
+
+    instance: int
+    bvlans: tuple[int, ...]
+    primary_bvlan: int
+    nickname: str | None  # None: no nickname yet
+    lsdb_trap: bool
+    ip_shortcuts: bool  # IP
+    ipv6_shortcuts: bool  # IPV6
+    multicast: bool
+    spb_pim_gateway: bool
+    stp_multi_homing: bool
+    origin: str  # 'config' / 'dynamic', kept as printed
+    # ISIS SPBM SMLT Info; None if the table is not printed
+    smlt_split_beb: str | None = None  # 'primary' / 'secondary'
+    smlt_virtual_bmac: str | None = None  # 00:00:00:00:00:00 without vIST
+    smlt_peer_system_id: str | None = None
+    smlt_peer_nickname: str | None = None
+    smlt_peer_host_name: str | None = None
+    # ISIS Remote SPBM Info (multi-area); as printed, '0.00.00' when not used
+    remote_nickname: str | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class IsisLsp:
+    """One link-state packet in the IS-IS database (`show isis lsdb`)."""
+
+    lsp_id: str  # 'xxxx.xxxx.xxxx.00-00' as printed
+    system_id: str  # of the node that sent it
+    level: str  # '1', as printed
+    lifetime_seconds: int
+    sequence_number: int  # printed in hex: '0x4' -> 4
+    checksum: int  # printed in hex
+    host_name: str | None
+    area: str
 
 
 @dataclass(frozen=True, slots=True)
@@ -227,6 +322,214 @@ def parse_spbm_unicast_fib(output: Output) -> Iterator[SpbmUnicastRoute]:
             cost=int(cost),
             area=area,
             area_name=optional(area_name),
+        )
+
+    yield from output.build_each(map(columns.cut, table.rows), build)
+
+
+@parser("show isis system-id")
+def parse_isis_system_ids(output: Output) -> Iterator[IsisSystemId]:
+    """`show isis system-id` -> one IsisSystemId per area (HOME, REMOTE)."""
+    table = output.table("SYSTEM-ID", "AREA")
+    if table is None:
+        return
+    columns = Columns.locate(table.header, "SYSTEM-ID", "AREA", "AREA-NAME")
+
+    def build(cells: list[str]) -> IsisSystemId:
+        system, area, area_name = cells
+        if not area:
+            raise ValueError("line does not have the expected format")
+        return IsisSystemId(system_id(system), area, optional(area_name))
+
+    yield from output.build_each(map(columns.cut, table.rows), build)
+
+
+@parser("show isis")
+def parse_isis_settings(output: Output) -> Iterator[IsisSettings]:
+    """`show isis` -> one IsisSettings. The output is `Key : value` lines (decision 0009)."""
+    fields = output.section("")
+    if fields is None:
+        return
+
+    def text(key: str) -> str | None:
+        return optional(required(fields, key))
+
+    def number(key: str) -> int:
+        return int(required(fields, key))
+
+    def enabled(key: str) -> bool:
+        return flag(required(fields, key))
+
+    try:
+        system = text("Designated BN Home System ID")
+        remote = text("Designated BN Remote System ID")
+        yield IsisSettings(
+            admin_enabled=enabled("AdminState"),
+            router_type=required(fields, "RouterType"),
+            system_id=system_id(required(fields, "System ID")),
+            max_lsp_gen_interval_seconds=number("Max LSP Gen Interval"),
+            metric=required(fields, "Metric"),
+            overload_on_startup_seconds=number("Overload-on-startup"),
+            overload=enabled("Overload"),
+            csnp_interval_seconds=number("Csnp Interval"),
+            psnp_interval_seconds=number("PSNP Interval"),
+            retransmit_lsp_interval_seconds=number("Rxmt LSP Interval"),
+            spf_delay_ms=number("spf-delay"),
+            router_name=text("Router Name"),
+            ip_source_address=text("ip source-address"),
+            ipv6_source_address=text("ipv6 source-address"),
+            ip_tunnel_source_address=text("ip tunnel source-address"),
+            tunnel_vrf=text("Tunnel vrf"),
+            ip_tunnel_mtu=optional_int(required(fields, "ip tunnel mtu")),
+            interface_count=number("Num of Interfaces"),
+            area_address_count=number("Num of Area Addresses"),
+            inband_mgmt_clip_ip=text("Inband Mgmt Clip Ip"),
+            backbone_enabled=enabled("backbone"),
+            dynamically_learned_area=text("Dynamically Learned Area"),
+            fan_member=enabled("FAN Member"),
+            hello_padding=enabled("Hello Padding"),
+            multi_area_oper_enabled=enabled("Multi-Area OperState"),
+            multi_area_flags=text("Multi-Area Flags"),
+            designated_bn_host_name=text("Designated BN Hostname"),
+            designated_bn_home_system_id=system_id(system) if system else None,
+            designated_bn_remote_system_id=system_id(remote) if remote else None,
+        )
+    except ValueError as error:  # a missing field or a value that does not convert
+        output.skip("", str(error))
+
+
+def _vlan_ranges(cell: str) -> tuple[int, ...]:
+    """'4051-4052' or '4051,4052' -> (4051, 4052)."""
+    vlans: list[int] = []
+    for chunk in filter(None, cell.split(",")):
+        first, _, last = chunk.partition("-")
+        vlans.extend(range(int(first), int(last or first) + 1))
+    return tuple(vlans)
+
+
+@parser("show isis spbm")
+def parse_spbm_instances(output: Output) -> Iterator[SpbmInstance]:
+    """`show isis spbm` -> one SpbmInstance per instance, merged from its three tables.
+
+    Cut by column: the nickname is empty until one is assigned.
+    """
+    info = output.table("B-VID", "PRIMARY", "NICK")
+    if info is None:
+        return
+    smlt = output.table("SMLT-SPLIT-BEB", "SMLT-VIRTUAL-BMAC", required=False)
+    remote = output.table("SPBM", "NICK", title="ISIS Remote SPBM Info", required=False)
+    fields: dict[int, dict[str, Any]] = {}
+
+    info_columns = Columns.locate(
+        info.header,
+        "SPBM",
+        "B-VID",
+        "PRIMARY",
+        "NICK",
+        "LSDB",
+        "IP",
+        "IPV6",
+        "MULTICAST",
+        "SPB-PIM-GW",
+        "STP-MULTI",
+        "ORIGIN",
+    )
+    for row in info.rows:
+        try:
+            instance, bvlans, primary, nick, trap, ip, ipv6, multicast, pim_gw, stp, origin = (
+                info_columns.cut(row)
+            )
+            if not origin:
+                raise ValueError("line does not have the expected format")
+            fields[int(instance)] = {
+                "instance": int(instance),
+                "bvlans": _vlan_ranges(bvlans),
+                "primary_bvlan": int(primary),
+                "nickname": nickname(nick),
+                "lsdb_trap": flag(trap),
+                "ip_shortcuts": flag(ip),
+                "ipv6_shortcuts": flag(ipv6),
+                "multicast": flag(multicast),
+                "spb_pim_gateway": flag(pim_gw),
+                "stp_multi_homing": flag(stp),
+                "origin": origin,
+            }
+        except ValueError as error:
+            output.skip(row, str(error))
+
+    def merge(row: str, instance: str, values: dict[str, Any]) -> None:
+        target = fields.get(int(instance))
+        if target is None:
+            raise ValueError("SPBM instance not in the ISIS SPBM Info table")
+        target.update(values)
+
+    if smlt is not None:
+        smlt_columns = Columns.locate(
+            smlt.header,
+            "SPBM",
+            "SMLT-SPLIT-BEB",
+            "SMLT-VIRTUAL-BMAC",
+            "SMLT-PEER-SYSTEM-ID",
+            "SMLT-PEER-NICK-NAME",
+            "SMLT-PEER-HOST-NAME",
+        )
+        for row in smlt.rows:
+            try:
+                instance, split_beb, virtual_bmac, peer, peer_nick, peer_host = smlt_columns.cut(
+                    row
+                )
+                peer_system = optional(peer)
+                merge(
+                    row,
+                    instance,
+                    {
+                        "smlt_split_beb": optional(split_beb),
+                        "smlt_virtual_bmac": mac(virtual_bmac) if optional(virtual_bmac) else None,
+                        "smlt_peer_system_id": system_id(peer_system) if peer_system else None,
+                        "smlt_peer_nickname": nickname(peer_nick),
+                        "smlt_peer_host_name": optional(peer_host),
+                    },
+                )
+            except ValueError as error:
+                output.skip(row, str(error))
+
+    if remote is not None:
+        remote_columns = Columns.locate(remote.header, "SPBM", "NICK")
+        for row in remote.rows:
+            try:
+                instance, nick = remote_columns.cut(row)
+                merge(row, instance, {"remote_nickname": nickname(nick)})
+            except ValueError as error:
+                output.skip(row, str(error))
+
+    for values in fields.values():
+        yield SpbmInstance(**values)
+
+
+@parser("show isis lsdb")
+def parse_isis_lsdb(output: Output) -> Iterator[IsisLsp]:
+    """`show isis lsdb` -> one IsisLsp per link-state packet."""
+    table = output.table("LSP", "SEQNUM", "CHKSUM")
+    if table is None:
+        return
+    columns = Columns.locate(
+        table.header, "LSP", "LEVEL", "LIFETIME", "SEQNUM", "CHKSUM", "HOST-NAME", "AREA"
+    )
+
+    def build(cells: list[str]) -> IsisLsp:
+        lsp_id, level, lifetime, sequence, checksum, host, area = cells
+        lsp = _LSP_ID.fullmatch(lsp_id)
+        if lsp is None or not level or not area:
+            raise ValueError("line does not have the expected format")
+        return IsisLsp(
+            lsp_id=lsp_id,
+            system_id=lsp["system_id"],
+            level=level,
+            lifetime_seconds=int(lifetime),
+            sequence_number=int(sequence, 16),
+            checksum=int(checksum, 16),
+            host_name=optional(host),
+            area=area,
         )
 
     yield from output.build_each(map(columns.cut, table.rows), build)

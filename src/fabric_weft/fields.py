@@ -38,3 +38,11 @@ def split_sections(lines: Iterable[str]) -> dict[str, dict[str, str]]:
         if found and found["key"]:
             current.setdefault(found["key"], found["value"].strip())
     return sections
+
+
+def required(section: dict[str, str], key: str) -> str:
+    """A field that must be there (it may still be empty). Missing -> ValueError."""
+    try:
+        return section[key]
+    except KeyError:
+        raise ValueError(f"no field {key!r}") from None

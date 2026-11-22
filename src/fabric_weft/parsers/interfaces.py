@@ -88,6 +88,23 @@ class PortIsid:
 
 
 @dataclass(frozen=True, slots=True)
+class PortL1Config:
+    """Layer 1 settings of a port (`show interfaces gigabitEthernet l1-config`)."""
+
+    port: str
+    auto_negotiation: bool
+    oper_auto_negotiation: bool
+    custom_advertisements: tuple[str, ...]  # ('10F', '10H', ...); () for 'Not Configured'
+    cana_origin: str  # 'CONFIG', ... kept as printed
+    admin_duplex: str  # 'full' / 'half'
+    admin_speed_mbps: int
+    oper_duplex: str | None  # None while the port is down
+    oper_speed_mbps: int  # 0 while the port is down
+    admin_tx_flow_control: bool
+    oper_tx_flow_control: bool
+
+
+@dataclass(frozen=True, slots=True)
 class PortState:
     port: str
     admin_up: bool
@@ -280,6 +297,55 @@ def parse_port_isids(output: Output) -> Iterator[PortIsid]:
             isid_name=optional(name),
             bpdu=optional(bpdu),
             mac_suni=flag(mac_suni),
+        )
+
+    yield from output.build_each(map(columns.cut, table.rows), build)
+
+
+@parser("show interfaces gigabitethernet l1-config", arguments=PORT_LIST)
+def parse_port_l1_config(output: Output) -> Iterator[PortL1Config]:
+    """`show interfaces gigabitEthernet l1-config` -> one PortL1Config per port.
+
+    Cut by column: the advertisements contain spaces, the oper duplex is empty while
+    the port is down.
+    """
+    table = output.table("ADVERTISEMENTS", "DPLX", "TX-FLW-CTRL")
+    if table is None:
+        return
+    columns = Columns.locate(
+        header_line_with(table, "ADVERTISEMENTS"),
+        "NUM",
+        "NEG.",
+        "AUTO-NEG",
+        "ADVERTISEMENTS",
+        "ORIGIN",
+        "DPLX",
+        "SPD",
+        "DPLX",
+        "SPD",
+        "TX-FLW-CTRL",
+        "TX-FLW-CTRL",
+    )
+
+    def build(cells: list[str]) -> PortL1Config:
+        number, auto_neg, oper_auto_neg, advertisements, origin = cells[:5]
+        admin_duplex, admin_speed, oper_duplex, oper_speed, admin_flow, oper_flow = cells[5:]
+        if not origin or not admin_duplex:
+            raise ValueError("line does not have the expected format")
+        return PortL1Config(
+            port=port(number),
+            auto_negotiation=flag(auto_neg),
+            oper_auto_negotiation=flag(oper_auto_neg),
+            custom_advertisements=()
+            if advertisements == "Not Configured"
+            else tuple(advertisements.split()),
+            cana_origin=origin,
+            admin_duplex=admin_duplex,
+            admin_speed_mbps=int(admin_speed),
+            oper_duplex=optional(oper_duplex),
+            oper_speed_mbps=int(oper_speed),
+            admin_tx_flow_control=flag(admin_flow),
+            oper_tx_flow_control=flag(oper_flow),
         )
 
     yield from output.build_each(map(columns.cut, table.rows), build)

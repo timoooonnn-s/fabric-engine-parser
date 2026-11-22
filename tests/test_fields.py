@@ -4,7 +4,7 @@ from datetime import timedelta
 
 import pytest
 
-from fabric_weft import parse_sys_info, values
+from fabric_weft import parse_software, parse_sys_info, values
 from fabric_weft.fields import split_sections
 
 SYS_INFO = """\
@@ -72,3 +72,33 @@ def test_duration(cell: str, expected: timedelta) -> None:
 def test_duration_rejects_other_text() -> None:
     with pytest.raises(ValueError, match="duration"):
         values.duration("9 minutes")
+
+
+SOFTWARE = """\
+====================================================================================================
+                    software releases in /intflash/release/
+====================================================================================================
+VOSS8.10.1.0.GA               (Backup Release)
+FEGNS3.9.4.0.0.GA             (Primary Release)             (Signed Release)
+
+-----------------------------------------------------------------------------------------------------------
+Auto Commit     : disabled
+Commit Timeout  : 10 minutes
+"""
+
+
+def test_software_lists_every_release_and_finds_the_primary() -> None:
+    (software,) = parse_software(SOFTWARE, strict=True)
+    assert [release.name for release in software.releases] == [
+        "VOSS8.10.1.0.GA",
+        "FEGNS3.9.4.0.0.GA",
+    ]
+    assert software.releases[0].labels == ("Backup Release",)
+    assert software.primary_release == "FEGNS3.9.4.0.0.GA"
+    assert (software.auto_commit, software.commit_timeout_minutes) == (False, 10)
+
+
+def test_software_without_a_release_list_is_reported() -> None:
+    result = parse_software("Auto Commit     : enabled\n")
+    assert not result.records
+    assert result.skipped[0].reason == "no 'software releases in' list"

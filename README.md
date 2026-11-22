@@ -39,6 +39,7 @@ and called directly.
 | `show interfaces gigabitEthernet state` | `parse_port_states` | `PortState` |
 | `show interfaces gigabitEthernet vlan` | `parse_port_vlans` | `PortVlans` |
 | `show interfaces gigabitEthernet i-sid` | `parse_port_isids` | `PortIsid` |
+| `show interfaces gigabitEthernet l1-config` | `parse_port_l1_config` | `PortL1Config` |
 | `show vlan basic` | `parse_vlans` | `Vlan` |
 | `show vlan members` | `parse_vlan_members` | `VlanMembers` |
 | `show vlan i-sid` | `parse_vlan_isids` | `VlanIsid` |
@@ -51,8 +52,13 @@ and called directly.
 | `show lldp neighbor summary` | `parse_lldp_summary` | `LldpNeighborSummary` |
 | `show lldp neighbor` | `parse_lldp_neighbors` | `LldpNeighbor` |
 | `show sys-info` | `parse_sys_info` | `SysInfo` (name, release, model, uptime, MACs) |
+| `show software` | `parse_software` | `Software` (with `SoftwareRelease`) |
 | `show isis adjacencies` | `parse_isis_adjacencies` | `IsisAdjacency` |
 | `show isis interface` | `parse_isis_interfaces` | `IsisInterface` |
+| `show isis system-id` | `parse_isis_system_ids` | `IsisSystemId` |
+| `show isis` | `parse_isis_settings` | `IsisSettings` |
+| `show isis lsdb` | `parse_isis_lsdb` | `IsisLsp` |
+| `show isis spbm` | `parse_spbm_instances` | `SpbmInstance` |
 | `show isis spbm nick-name` | `parse_spbm_nicknames` | `SpbmNickname` |
 | `show isis spbm unicast-fib` | `parse_spbm_unicast_fib` | `SpbmUnicastRoute` |
 | `show ip vrf` | `parse_vrfs` | `Vrf` |
