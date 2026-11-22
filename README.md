@@ -62,6 +62,7 @@ and called directly.
 | `show isis spbm nick-name` | `parse_spbm_nicknames` | `SpbmNickname` |
 | `show isis spbm unicast-fib` | `parse_spbm_unicast_fib` | `SpbmUnicastRoute` |
 | `show ip vrf` | `parse_vrfs` | `Vrf` |
+| `show running-config` | `parse_running_config` | `ConfigCommand` (section, context, command as printed) |
 
 The records are frozen dataclasses. Their fields are listed in the source, one module per
 command family under `src/fabric_weft/parsers/`. Next up: routes, ARP and IP

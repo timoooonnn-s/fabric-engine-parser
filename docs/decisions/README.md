@@ -18,6 +18,7 @@ record that says which one it supersedes, and the old record gets a "superseded 
 | [0011](0011-command-arguments.md) | A parser may say which arguments it accepts | accepted |
 | [0012](0012-column-one-left.md) | A value one character left of its header belongs to that column | accepted |
 | [0013](0013-vlan-zero.md) | VLAN 0 in a VLAN cell means "no VLAN" | accepted, user may veto |
+| [0014](0014-running-config.md) | `show running-config`: one record per command, kept as printed | accepted, user may veto |
 
 Template: **Status**, **Date**, **Proposed by**, **Objection**, then *Decision*, *Why*,
 and the objection with its answer.

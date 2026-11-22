@@ -115,6 +115,13 @@ the LSDB, so a report can name "this switch" in IS-IS output.
 Units in `IsisSettings` field names (seconds, `spf_delay_ms`) follow the IS-IS defaults
 the switch prints (900, 10, 2, 5, 100); the output itself names no unit.
 
+## Done: running-config (2026-11-22)
+
+`show running-config` → `ConfigCommand(section, context, command)`, decision 0014. Real
+9.4 evidence on fe-01 … fe-04 (136–138 commands each, every command in order, every
+context closed where the capture's `exit` is). Commands are not interpreted; that is the
+config linter's job. Still unseen: nested contexts.
+
 ## Next: needs a new capture
 
 Every captured command with rows now has a parser.
@@ -138,8 +145,6 @@ Tables with rows are worth far more than empty ones. Still missing from the four
 
 ## Later
 
-- `show running-config` is a different shape (a config, not tables). It needs a parser
-  for the config standards linter, and that needs its own decision.
 - BOSS/ERS output (for #4, the migration assistant) is a different OS family. Not in
   this library unless the user decides otherwise.
 - Captures from 8.10 and 9.3 at work would cover the mixed fleet. They can't come here

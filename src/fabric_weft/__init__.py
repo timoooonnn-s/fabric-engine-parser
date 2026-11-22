@@ -12,6 +12,7 @@ Every parser can also be called directly, e.g. `parse_mlts(text)`.
 """
 
 from fabric_weft.errors import DeviceError, ParseError, UnknownCommandError, WeftError
+from fabric_weft.parsers.config import ConfigCommand, parse_running_config
 from fabric_weft.parsers.interfaces import (
     PortInterface,
     PortIsid,
@@ -91,6 +92,7 @@ from fabric_weft.result import ParseResult, SkippedLine
 __version__ = "0.1.0"
 
 __all__ = [
+    "ConfigCommand",
     "DeviceError",
     "Isid",
     "IsisAdjacency",
@@ -148,6 +150,7 @@ __all__ = [
     "parse_port_names",
     "parse_port_states",
     "parse_port_vlans",
+    "parse_running_config",
     "parse_software",
     "parse_spbm_instances",
     "parse_spbm_isids",

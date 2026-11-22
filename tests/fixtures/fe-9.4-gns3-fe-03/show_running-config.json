@@ -1,0 +1,682 @@
+[
+  {
+    "section": "BOOT CONFIGURATION",
+    "context": null,
+    "command": "boot config flags advanced-feature-bandwidth-reservation vim"
+  },
+  {
+    "section": "BOOT CONFIGURATION",
+    "context": null,
+    "command": "boot config flags sshd"
+  },
+  {
+    "section": "SPBM CONFIGURATION",
+    "context": null,
+    "command": "spbm"
+  },
+  {
+    "section": "SPBM CONFIGURATION",
+    "context": null,
+    "command": "spbm ethertype 0x8100"
+  },
+  {
+    "section": "CLI CONFIGURATION",
+    "context": null,
+    "command": "prompt \"fe-03\""
+  },
+  {
+    "section": "CLI CONFIGURATION",
+    "context": null,
+    "command": "password hash sha2"
+  },
+  {
+    "section": "SYSTEM CONFIGURATION",
+    "context": null,
+    "command": "no autotopology"
+  },
+  {
+    "section": "SSH CONFIGURATION",
+    "context": null,
+    "command": "ssh"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE I",
+    "context": null,
+    "command": "interface GigabitEthernet 1/1"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE I",
+    "context": "interface GigabitEthernet 1/1",
+    "command": "encapsulation dot1q"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE I",
+    "context": null,
+    "command": "interface GigabitEthernet 1/2"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE I",
+    "context": "interface GigabitEthernet 1/2",
+    "command": "encapsulation dot1q"
+  },
+  {
+    "section": "ISIS SPBM CONFIGURATION",
+    "context": null,
+    "command": "router isis"
+  },
+  {
+    "section": "ISIS SPBM CONFIGURATION",
+    "context": "router isis",
+    "command": "spbm 1"
+  },
+  {
+    "section": "ISIS SPBM CONFIGURATION",
+    "context": "router isis",
+    "command": "spbm 1 nick-name 0.00.13"
+  },
+  {
+    "section": "ISIS SPBM CONFIGURATION",
+    "context": "router isis",
+    "command": "spbm 1 b-vid 4051-4052 primary 4051"
+  },
+  {
+    "section": "GLOBAL AUTO-SENSE CONFIGURATION - PHASE I",
+    "context": null,
+    "command": "no auto-sense dhcp-detection"
+  },
+  {
+    "section": "GLOBAL AUTO-SENSE CONFIGURATION - PHASE I",
+    "context": null,
+    "command": "auto-sense auto-mlt enable"
+  },
+  {
+    "section": "VLAN CONFIGURATION",
+    "context": null,
+    "command": "vlan members remove 1 1/1-1/26 portmember"
+  },
+  {
+    "section": "VLAN CONFIGURATION",
+    "context": null,
+    "command": "vlan create 10 name \"users\" type port-mstprstp 0"
+  },
+  {
+    "section": "VLAN CONFIGURATION",
+    "context": null,
+    "command": "vlan members 10 1/3 portmember"
+  },
+  {
+    "section": "VLAN CONFIGURATION",
+    "context": null,
+    "command": "vlan i-sid 10 20010"
+  },
+  {
+    "section": "VLAN CONFIGURATION",
+    "context": null,
+    "command": "vlan create 20 name \"voice\" type port-mstprstp 0"
+  },
+  {
+    "section": "VLAN CONFIGURATION",
+    "context": null,
+    "command": "vlan members 20 1/4 portmember"
+  },
+  {
+    "section": "VLAN CONFIGURATION",
+    "context": null,
+    "command": "vlan i-sid 20 20020"
+  },
+  {
+    "section": "VLAN CONFIGURATION",
+    "context": null,
+    "command": "vlan create 30 name \"printers\" type port-mstprstp 0"
+  },
+  {
+    "section": "VLAN CONFIGURATION",
+    "context": null,
+    "command": "vlan members 30 1/5 portmember"
+  },
+  {
+    "section": "VLAN CONFIGURATION",
+    "context": null,
+    "command": "vlan i-sid 30 20030"
+  },
+  {
+    "section": "VLAN CONFIGURATION",
+    "context": null,
+    "command": "vlan create 4048 name \"onboarding-vlan\" type pvlan-mstprstp 0 secondary 4049"
+  },
+  {
+    "section": "VLAN CONFIGURATION",
+    "context": null,
+    "command": "vlan i-sid 4048 15999999"
+  },
+  {
+    "section": "VLAN CONFIGURATION",
+    "context": null,
+    "command": "vlan create 4051 name \"bvlan-1\" type spbm-bvlan"
+  },
+  {
+    "section": "VLAN CONFIGURATION",
+    "context": null,
+    "command": "vlan create 4052 name \"bvlan-2\" type spbm-bvlan"
+  },
+  {
+    "section": "NLS CONFIGURATION",
+    "context": null,
+    "command": "mgmt oob"
+  },
+  {
+    "section": "NLS CONFIGURATION",
+    "context": "mgmt oob",
+    "command": "ip address 10.99.0.13/24"
+  },
+  {
+    "section": "NLS CONFIGURATION",
+    "context": "mgmt oob",
+    "command": "ip route 0.0.0.0/0 next-hop 10.99.0.1 weight 300"
+  },
+  {
+    "section": "NLS CONFIGURATION",
+    "context": "mgmt oob",
+    "command": "enable"
+  },
+  {
+    "section": "NLS CONFIGURATION",
+    "context": null,
+    "command": "mgmt vlan 4048"
+  },
+  {
+    "section": "NLS CONFIGURATION",
+    "context": "mgmt vlan 4048",
+    "command": "mac-offset 0"
+  },
+  {
+    "section": "NLS CONFIGURATION",
+    "context": "mgmt vlan 4048",
+    "command": "enable"
+  },
+  {
+    "section": "PTP CONFIGURATION",
+    "context": null,
+    "command": "ptp enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/1"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/1",
+    "command": "default-vlan-id 0"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/1",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/1",
+    "command": "isis"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/1",
+    "command": "isis spbm 1"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/1",
+    "command": "isis enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/1",
+    "command": "no spanning-tree mstp force-port-state enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/1",
+    "command": "no spanning-tree mstp msti 62 force-port-state enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/2"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/2",
+    "command": "default-vlan-id 0"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/2",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/2",
+    "command": "isis"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/2",
+    "command": "isis spbm 1"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/2",
+    "command": "isis enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/2",
+    "command": "no spanning-tree mstp force-port-state enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/2",
+    "command": "no spanning-tree mstp msti 62 force-port-state enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/3"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/3",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/4"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/4",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/5"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/5",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/6"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/6",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/7"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/7",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/8"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/8",
+    "command": "auto-sense enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/8",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/9"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/9",
+    "command": "auto-sense enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/9",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/10"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/10",
+    "command": "auto-sense enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/10",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/11"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/11",
+    "command": "auto-sense enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/11",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/12"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/12",
+    "command": "auto-sense enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/12",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/13"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/13",
+    "command": "auto-sense enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/13",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/14"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/14",
+    "command": "auto-sense enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/14",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/15"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/15",
+    "command": "auto-sense enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/15",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/16"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/16",
+    "command": "auto-sense enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/16",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/17"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/17",
+    "command": "auto-sense enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/17",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/18"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/18",
+    "command": "auto-sense enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/18",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/19"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/19",
+    "command": "auto-sense enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/19",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/20"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/20",
+    "command": "auto-sense enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/20",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/21"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/21",
+    "command": "auto-sense enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/21",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/22"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/22",
+    "command": "auto-sense enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/22",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/23"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/23",
+    "command": "auto-sense enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/23",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/24"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/24",
+    "command": "auto-sense enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/24",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/25"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/25",
+    "command": "auto-sense enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/25",
+    "command": "no shutdown"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "interface GigabitEthernet 1/26"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/26",
+    "command": "auto-sense enable"
+  },
+  {
+    "section": "PORT CONFIGURATION - PHASE II",
+    "context": "interface GigabitEthernet 1/26",
+    "command": "no shutdown"
+  },
+  {
+    "section": "ISIS CONFIGURATION",
+    "context": null,
+    "command": "router isis"
+  },
+  {
+    "section": "ISIS CONFIGURATION",
+    "context": "router isis",
+    "command": "is-type l1"
+  },
+  {
+    "section": "ISIS CONFIGURATION",
+    "context": "router isis",
+    "command": "manual-area 49.0001"
+  },
+  {
+    "section": "ISIS CONFIGURATION",
+    "context": null,
+    "command": "router isis enable"
+  },
+  {
+    "section": "QOS CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "qos queue-profile 1 member add 1/1-1/26"
+  },
+  {
+    "section": "CFM CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "cfm spbm enable"
+  },
+  {
+    "section": "NTP CONFIGURATION",
+    "context": null,
+    "command": "no ntp"
+  },
+  {
+    "section": "OSPF CONFIGURATION - GlobalRouter",
+    "context": null,
+    "command": "router ospf"
+  },
+  {
+    "section": "IP REDISTRIBUTION CONFIGURATION - GlobalRouter",
+    "context": null,
+    "command": "router isis"
+  },
+  {
+    "section": "IPV6 RIPng CONFIGURATION",
+    "context": null,
+    "command": "router rip"
+  },
+  {
+    "section": "I-SID NAME CONFIGURATION",
+    "context": null,
+    "command": "i-sid name 15999999 \"Onboarding I-SID\""
+  },
+  {
+    "section": "GLOBAL AUTO-SENSE CONFIGURATION - PHASE II",
+    "context": null,
+    "command": "no auto-sense guest-isid enable"
+  },
+  {
+    "section": "ISIS MULTI-AREA CONFIGURATION",
+    "context": null,
+    "command": "router isis"
+  }
+]
