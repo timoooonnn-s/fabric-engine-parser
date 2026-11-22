@@ -1,0 +1,37 @@
+************************************************************************************
+		Command Execution Time: Sat Nov 21 22:10:59 2026 UTC
+************************************************************************************
+
+====================================================================================================
+                               ISIS General Info
+====================================================================================================
+	                    AdminState : enabled
+	                    RouterType : Level 1
+	                     System ID : 0c19.1050.0084
+	          Max LSP Gen Interval : 900
+	                        Metric : wide
+	           Overload-on-startup : 20
+	                      Overload : false
+	                 Csnp Interval : 10
+	                 PSNP Interval : 2
+	             Rxmt LSP Interval : 5
+	                     spf-delay : 100
+	                   Router Name : 5520-24T-FabricEngine
+	             ip source-address : 
+	           ipv6 source-address : 
+	      ip tunnel source-address : 
+	                    Tunnel vrf : 
+	                 ip tunnel mtu : 
+	             Num of Interfaces : 0
+	         Num of Area Addresses : 0
+	           Inband Mgmt Clip Ip :
+	                      backbone : disabled
+	      Dynamically Learned Area : 
+	                    FAN Member : Yes
+	                 Hello Padding : enabled
+	          Multi-Area OperState : disabled
+	              Multi-Area Flags : home-always-up
+	        Designated BN Hostname : 
+	  Designated BN Home System ID : 
+	Designated BN Remote System ID : 
+

@@ -36,19 +36,32 @@ class Table:
         return all(label.upper() in words for label in labels)
 
 
-def split_tables(lines: Iterable[str]) -> list[Table]:
+def split_tables(lines: Iterable[str], *, gaps: bool = False) -> list[Table]:
+    """Cut the lines into tables. A blank line normally ends a table body.
+
+    gaps=True: a single blank line between rows does not end the body, two in a
+    row do. Fabric Engine 9.x prints `show vlan members` with a blank line after
+    every VLAN. Only for tables known to do that: after a single blank line the
+    header of a following table would otherwise be read as rows.
+    """
     tables: list[Table] = []
     title = ""
     header: tuple[str, ...] = ()
     pending: list[str] = []  # non-blank lines since the last blank line or rule
     rows: list[str] | None = None  # None while not inside a table body
+    gap = False  # the previous line was a blank line inside a body (gaps=True)
 
     for line in lines:
         rule = _RULE.match(line)
         if rows is not None:
             if line.strip() and not rule and not _FOOTER.match(line):
                 rows.append(line)
+                gap = False
                 continue
+            if gaps and not line.strip() and not gap:
+                gap = True
+                continue
+            gap = False
             tables.append(Table(title, header, tuple(rows)))
             rows = None
             if not rule:
@@ -82,23 +95,48 @@ class Columns:
     starts: tuple[int, ...]
 
     @classmethod
-    def locate(cls, header_line: str, *labels: str) -> Columns:
-        """Find each label left to right; repeated labels (two 'PORT's) are fine."""
-        upper = header_line.upper()
+    def locate(cls, header: str | Sequence[str], *labels: str) -> Columns:
+        """Find each label left to right; repeated labels (two 'PORT's) are fine.
+
+        `header` is one header line, or all of them: then each label is taken from
+        whichever line has it first after the previous label (a two-line header
+        such as `show i-sid` puts ORIGIN on the first line, NAME on the second).
+        """
+        lines = [header] if isinstance(header, str) else list(header)
+        uppers = [line.upper() for line in lines]
         starts: list[int] = []
         position = 0
         for label in labels:
-            found = re.compile(rf"(?<!\S){re.escape(label.upper())}(?!\S)").search(upper, position)
-            if found is None:
-                raise ValueError(f"column {label!r} not found in header {header_line!r}")
+            pattern = re.compile(rf"(?<!\S){re.escape(label.upper())}(?!\S)")
+            matches = [m for upper in uppers if (m := pattern.search(upper, position))]
+            if not matches:
+                raise ValueError(f"column {label!r} not found in header {lines!r}")
+            found = min(matches, key=lambda match: match.start())
             starts.append(found.start())
             position = found.end()
         starts[0] = 0  # the first column always starts at the left margin
         return cls(tuple(starts))
 
     def cut(self, line: str) -> list[str]:
-        ends = (*self.starts[1:], None)
-        return [line[start:end].strip() for start, end in zip(self.starts, ends, strict=True)]
+        """Cut a line at the column starts.
+
+        A word that begins one character left of its column header belongs to that
+        column: 9.x `show lldp neighbor summary` prints SYSDESCR values one position
+        left of the header, which would otherwise cut '5520-24T' into '5' + '520-24T'.
+        """
+        starts = [self._start_in(line, start) for start in self.starts]
+        ends = (*starts[1:], None)
+        return [line[start:end].strip() for start, end in zip(starts, ends, strict=True)]
+
+    @staticmethod
+    def _start_in(line: str, start: int) -> int:
+        if (
+            2 <= start < len(line)
+            and line[start - 2] == " "
+            and " " not in line[start - 1 : start + 1]
+        ):
+            return start - 1
+        return start
 
     def cut_rows(self, rows: Iterable[str]) -> list[list[str]]:
         """Cut every row and fold wrapped continuation lines into the row above.

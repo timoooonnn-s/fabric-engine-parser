@@ -8,7 +8,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 31,
@@ -19,7 +20,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 99,
@@ -30,7 +32,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 174,
@@ -41,7 +44,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 695,
@@ -52,7 +56,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 696,
@@ -63,7 +68,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 699,
@@ -74,7 +80,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 735,
@@ -85,7 +92,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 839,
@@ -96,7 +104,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 847,
@@ -107,7 +116,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 848,
@@ -118,7 +128,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 849,
@@ -129,7 +140,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 850,
@@ -140,7 +152,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 851,
@@ -151,7 +164,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 852,
@@ -162,7 +176,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 853,
@@ -173,7 +188,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2200,
@@ -184,7 +200,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2201,
@@ -195,7 +212,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2230,
@@ -206,7 +224,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2232,
@@ -217,7 +236,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2233,
@@ -228,7 +248,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2246,
@@ -239,7 +260,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2261,
@@ -250,7 +272,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2262,
@@ -261,7 +284,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2266,
@@ -272,7 +296,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2600,
@@ -283,7 +308,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2601,
@@ -294,7 +320,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2602,
@@ -305,7 +332,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2603,
@@ -316,7 +344,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2604,
@@ -327,7 +356,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2900,
@@ -338,7 +368,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2901,
@@ -349,7 +380,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2903,
@@ -360,7 +392,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2905,
@@ -371,7 +404,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2906,
@@ -382,7 +416,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2907,
@@ -393,7 +428,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 2952,
@@ -404,7 +440,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 4051,
@@ -415,7 +452,8 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   },
   {
     "vlan_id": 4052,
@@ -426,6 +464,7 @@
     "subnet": null,
     "subnet_mask": null,
     "vrf_id": 0,
-    "origin": "CONFIG"
+    "origin": "CONFIG",
+    "l3_access": null
   }
 ]

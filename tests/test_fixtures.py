@@ -18,6 +18,22 @@ from fabric_weft import UnknownCommandError, find_parser
 
 FIXTURES = Path(__file__).parent / "fixtures"
 CAPTURES = sorted(FIXTURES.glob("*/*.txt"))
+# Real captures from a switch that has none of the thing (no MLT, no vIST). They pin
+# that an empty table parses to no records without a skipped line. Every other
+# fixture must produce records, so a parser that silently drops everything fails.
+_NO_MLT_NO_VIST = ("show_mlt", "show_virtual-ist")
+EMPTY_ON_PURPOSE = {
+    f"{lab}/{command}"
+    for lab, commands in (
+        # a lone switch a few minutes after boot: no neighbour either
+        ("fe-9.4-gns3-sw1", (*_NO_MLT_NO_VIST, "show_isis_adjacencies", "show_isis_interface")),
+        ("fe-9.4-gns3-fe-01", _NO_MLT_NO_VIST),
+        ("fe-9.4-gns3-fe-02", _NO_MLT_NO_VIST),
+        ("fe-9.4-gns3-fe-03", _NO_MLT_NO_VIST),
+        ("fe-9.4-gns3-fe-04", _NO_MLT_NO_VIST),
+    )
+    for command in commands
+}
 
 
 def command_of(capture: Path) -> str:
@@ -43,4 +59,7 @@ def test_capture_matches_golden(capture: Path, request: pytest.FixtureRequest) -
         golden.write_text(actual)
     assert golden.exists(), f"no golden file, run: pytest --update-golden ({golden.name})"
     assert actual == golden.read_text()
-    assert result.records, "a fixture should contain at least one record"
+    if f"{capture.parent.name}/{capture.stem}" in EMPTY_ON_PURPOSE:
+        assert not result.records, "listed in EMPTY_ON_PURPOSE but has records"
+    else:
+        assert result.records, "a fixture should contain at least one record"

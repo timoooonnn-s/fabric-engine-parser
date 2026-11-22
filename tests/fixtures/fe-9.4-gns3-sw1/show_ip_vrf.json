@@ -1,0 +1,38 @@
+[
+  {
+    "name": "GlobalRouter",
+    "vrf_id": 0,
+    "vlan_count": 4,
+    "arp_count": 0,
+    "rip": true,
+    "ospf": true,
+    "bgp": true,
+    "pim": true,
+    "ipv6_neighbor_count": 0,
+    "ripng": true,
+    "ospfv3": true,
+    "pim6": true,
+    "unicast_active": true,
+    "sd_wan_local_breakout": false,
+    "origin": "DYNAMIC",
+    "segmented": false
+  },
+  {
+    "name": "MgmtRouter",
+    "vrf_id": 512,
+    "vlan_count": 1,
+    "arp_count": 0,
+    "rip": false,
+    "ospf": false,
+    "bgp": false,
+    "pim": false,
+    "ipv6_neighbor_count": 0,
+    "ripng": false,
+    "ospfv3": false,
+    "pim6": false,
+    "unicast_active": true,
+    "sd_wan_local_breakout": false,
+    "origin": "DYNAMIC",
+    "segmented": false
+  }
+]

@@ -7,6 +7,7 @@ from collections.abc import Callable, Iterable, Iterator
 from typing import TypeVar
 
 from fabric_weft.errors import DeviceError, ParseError
+from fabric_weft.fields import split_sections
 from fabric_weft.result import SkippedLine
 from fabric_weft.tables import Table, first_with, split_tables
 
@@ -40,7 +41,7 @@ def fullmatch(pattern: re.Pattern[str], line: str) -> re.Match[str]:
 class Output:
     """Handed to every parser. Collects skipped lines; raises them in strict mode."""
 
-    __slots__ = ("_tables", "command", "lines", "skipped", "strict")
+    __slots__ = ("_sections", "_tables", "command", "lines", "skipped", "strict")
 
     def __init__(self, command: str, text: str, *, strict: bool) -> None:
         self.command = command
@@ -48,6 +49,7 @@ class Output:
         self.lines = clean_lines(text)
         self.skipped: list[SkippedLine] = []
         self._tables: list[Table] | None = None
+        self._sections: dict[str, dict[str, str]] | None = None
         self._raise_for_device_error()
 
     def _raise_for_device_error(self) -> None:
@@ -66,11 +68,34 @@ class Output:
             self._tables = split_tables(self.lines)
         return self._tables
 
-    def table(self, *labels: str, required: bool = True) -> Table | None:
-        """The first table whose header has all labels. A missing required table is skipped."""
-        found = first_with(self.tables, *labels)
+    def table(
+        self, *labels: str, required: bool = True, gaps: bool = False, title: str | None = None
+    ) -> Table | None:
+        """The first table whose header has all labels. A missing required table is skipped.
+
+        gaps=True: rows may be separated by single blank lines (see `split_tables`).
+        title: only tables with this title (case-insensitive), for commands that print
+        several tables with the same header (`show lacp interface`).
+        """
+        tables = split_tables(self.lines, gaps=True) if gaps else self.tables
+        if title is not None:
+            tables = [table for table in tables if table.title.lower() == title.lower()]
+        found = first_with(tables, *labels)
         if found is None and required:
-            self.skip("", f"no table with the columns {' '.join(labels)}")
+            where = f" titled {title!r}" if title else ""
+            self.skip("", f"no table{where} with the columns {' '.join(labels)}")
+        return found
+
+    def section(self, name: str, *, required: bool = True) -> dict[str, str] | None:
+        """The `Key : value` fields under a section header such as 'General Info :'.
+
+        A missing required section is skipped, like a missing table.
+        """
+        if self._sections is None:
+            self._sections = split_sections(self.lines)
+        found = self._sections.get(name)
+        if found is None and required:
+            self.skip("", f"no section {name!r}")
         return found
 
     def skip(self, line: str, reason: str) -> None:

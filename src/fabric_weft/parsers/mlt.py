@@ -1,4 +1,4 @@
-"""Link aggregation: `show mlt` and `show virtual-ist`."""
+"""Link aggregation: `show mlt`, `show virtual-ist` and `show lacp interface`."""
 
 from __future__ import annotations
 
@@ -9,7 +9,7 @@ from typing import Any
 
 from fabric_weft.output import Output, fullmatch
 from fabric_weft.registry import parser
-from fabric_weft.values import flag, int_list, optional, ports
+from fabric_weft.values import PORT, flag, int_list, mac, optional, ports
 
 
 @dataclass(frozen=True, slots=True)
@@ -44,6 +44,43 @@ class VirtualIst:
     dialect: str | None = None
     state: str | None = None
     role: str | None = None  # 'Master' / 'Slave'
+
+
+@dataclass(frozen=True, slots=True)
+class LacpParticipant:
+    """One end of a LACP link as a port sees it: itself (actor) or its neighbour (partner)."""
+
+    system_priority: int
+    system_id: str  # a MAC; 00:00:00:00:00:00 when there is no partner
+    key: int
+    port_number: int  # printed in hex: '0xc0' -> 192
+    port_priority: int
+    state: tuple[str, ...]  # the flags as printed: ('act', 'long', 'indi')
+
+
+@dataclass(frozen=True, slots=True)
+class LacpPort:
+    """The LACP settings and state of one port, merged from the five per-port tables."""
+
+    port: str
+    actor_admin: LacpParticipant
+    actor_oper_key: int
+    selected_aggregator_id: int  # 0: none
+    attached_aggregator_id: int  # 0: none
+    aggregating: bool  # AGGR
+    actor_oper_state: tuple[str, ...]
+    partner_admin: LacpParticipant
+    partner_oper: LacpParticipant
+    lacp_enabled_admin: bool
+    lacp_enabled_oper: bool
+    fast_periodic_ms_admin: int
+    slow_periodic_ms_admin: int
+    aggregation_wait_ms_admin: int
+    timeout_scale_admin: int
+    fast_periodic_ms_oper: int
+    slow_periodic_ms_oper: int
+    aggregation_wait_ms_oper: int
+    timeout_scale_oper: int
 
 
 _MLT_INFO_ROW = re.compile(
@@ -178,3 +215,96 @@ def parse_virtual_ist(output: Output) -> Iterator[VirtualIst]:
         )
 
     yield from output.build_each(table.rows, build)
+
+
+_PARTICIPANT_ROW = re.compile(
+    rf"(?P<port>{PORT})\s+(?P<priority>\d+)\s+(?P<system_id>\S+)\s+(?P<key>\d+)\s+"
+    r"(?P<number>0x[0-9a-f]+)\s+(?P<port_priority>\d+)\s+(?P<state>\S.*)"
+)
+_ACTOR_OPER_ROW = re.compile(
+    rf"(?P<port>{PORT})\s+(?P<key>\d+)\s+(?P<selected>\d+)\s+(?P<attached>\d+)\s+"
+    r"(?P<aggregating>\S+)\s+(?P<state>\S.*)"
+)
+_EXTENSION_ROW = re.compile(rf"(?P<port>{PORT})\s+(?P<admin>\S+)\s+(?P<oper>\S+)" + r"\s+(\d+)" * 8)
+_PARTICIPANT_LABELS = ("INDEX", "SYS", "KEY", "STATE")
+
+
+def _participant(field: str) -> Callable[[re.Match[str]], dict[str, Any]]:
+    def read(cells: re.Match[str]) -> dict[str, Any]:
+        participant = LacpParticipant(
+            system_priority=int(cells["priority"]),
+            system_id=mac(cells["system_id"]),
+            key=int(cells["key"]),
+            port_number=int(cells["number"], 16),
+            port_priority=int(cells["port_priority"]),
+            state=tuple(cells["state"].split()),
+        )
+        return {field: participant}
+
+    return read
+
+
+def _actor_oper(cells: re.Match[str]) -> dict[str, Any]:
+    return {
+        "actor_oper_key": int(cells["key"]),
+        "selected_aggregator_id": int(cells["selected"]),
+        "attached_aggregator_id": int(cells["attached"]),
+        "aggregating": flag(cells["aggregating"]),
+        "actor_oper_state": tuple(cells["state"].split()),
+    }
+
+
+def _extension(cells: re.Match[str]) -> dict[str, Any]:
+    timers = [int(value) for value in cells.groups()[3:]]
+    names = ("fast_periodic_ms", "slow_periodic_ms", "aggregation_wait_ms", "timeout_scale")
+    return {
+        "lacp_enabled_admin": flag(cells["admin"]),
+        "lacp_enabled_oper": flag(cells["oper"]),
+        **{f"{name}_admin": value for name, value in zip(names, timers[:4], strict=True)},
+        **{f"{name}_oper": value for name, value in zip(names, timers[4:], strict=True)},
+    }
+
+
+# (title, header labels, row pattern, column reader). Three tables share one header,
+# so they are told apart by their titles.
+_LACP_TABLES: tuple[
+    tuple[str, tuple[str, ...], re.Pattern[str], Callable[[re.Match[str]], dict[str, Any]]], ...
+] = (
+    ("Actor Admin", _PARTICIPANT_LABELS, _PARTICIPANT_ROW, _participant("actor_admin")),
+    ("Actor Oper", ("INDEX", "SELECTED", "ATTACHED"), _ACTOR_OPER_ROW, _actor_oper),
+    ("Partner Admin", _PARTICIPANT_LABELS, _PARTICIPANT_ROW, _participant("partner_admin")),
+    ("Partner Operational", _PARTICIPANT_LABELS, _PARTICIPANT_ROW, _participant("partner_oper")),
+    ("LACP Extension", ("INDEX", "AGGRWAIT", "TIMEOUT"), _EXTENSION_ROW, _extension),
+)
+
+
+@parser("show lacp interface")
+def parse_lacp_ports(output: Output) -> Iterator[LacpPort]:
+    """`show lacp interface` -> one LacpPort per port, merged from the per-port tables.
+
+    The LACP Aggregator tables after them (per MLT) are not read yet: no capture
+    has shown them with rows.
+    """
+    tables = [
+        (output.table(*labels, title=title), pattern, read)
+        for title, labels, pattern, read in _LACP_TABLES
+    ]
+    if any(table is None for table, _, _ in tables):
+        return
+    fields: dict[str, dict[str, Any]] = {}
+    for index, (table, pattern, read) in enumerate(tables):
+        for row in table.rows:  # type: ignore[union-attr]
+            try:
+                cells = fullmatch(pattern, row)
+                if index == 0:
+                    fields[cells["port"]] = {"port": cells["port"]}
+                elif cells["port"] not in fields:
+                    raise ValueError("port not in the Actor Admin table")
+                fields[cells["port"]].update(read(cells))
+            except ValueError as error:
+                output.skip(row, str(error))
+    for values in fields.values():
+        try:
+            yield LacpPort(**values)
+        except TypeError:
+            output.skip("", f"port {values['port']} is missing from one of the LACP tables")

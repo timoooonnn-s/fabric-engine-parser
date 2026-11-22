@@ -2,196 +2,235 @@
   {
     "vlan_id": 1,
     "isid": null,
-    "isid_name": null
+    "isid_name": null,
+    "vlan_name": null
   },
   {
     "vlan_id": 31,
     "isid": 1531100,
-    "isid_name": "ISID-1531100"
+    "isid_name": "ISID-1531100",
+    "vlan_name": null
   },
   {
     "vlan_id": 99,
     "isid": null,
-    "isid_name": null
+    "isid_name": null,
+    "vlan_name": null
   },
   {
     "vlan_id": 174,
     "isid": 2510174,
-    "isid_name": "ISID-2510174"
+    "isid_name": "ISID-2510174",
+    "vlan_name": null
   },
   {
     "vlan_id": 695,
     "isid": 2500695,
-    "isid_name": "ISID-2500695"
+    "isid_name": "ISID-2500695",
+    "vlan_name": null
   },
   {
     "vlan_id": 696,
     "isid": 2510696,
-    "isid_name": "ISID-2510696"
+    "isid_name": "ISID-2510696",
+    "vlan_name": null
   },
   {
     "vlan_id": 699,
     "isid": 2500699,
-    "isid_name": "ISID-2500699"
+    "isid_name": "ISID-2500699",
+    "vlan_name": null
   },
   {
     "vlan_id": 735,
     "isid": 2510735,
-    "isid_name": "ISID-2510735"
+    "isid_name": "ISID-2510735",
+    "vlan_name": null
   },
   {
     "vlan_id": 839,
     "isid": 2510839,
-    "isid_name": "ISID-2510839"
+    "isid_name": "ISID-2510839",
+    "vlan_name": null
   },
   {
     "vlan_id": 847,
     "isid": 2510847,
-    "isid_name": "ISID-2510847"
+    "isid_name": "ISID-2510847",
+    "vlan_name": null
   },
   {
     "vlan_id": 848,
     "isid": 2510848,
-    "isid_name": "ISID-2510848"
+    "isid_name": "ISID-2510848",
+    "vlan_name": null
   },
   {
     "vlan_id": 849,
     "isid": 2510849,
-    "isid_name": "ISID-2510849"
+    "isid_name": "ISID-2510849",
+    "vlan_name": null
   },
   {
     "vlan_id": 850,
     "isid": 2510850,
-    "isid_name": "ISID-2510850"
+    "isid_name": "ISID-2510850",
+    "vlan_name": null
   },
   {
     "vlan_id": 851,
     "isid": 2510851,
-    "isid_name": "ISID-2510851"
+    "isid_name": "ISID-2510851",
+    "vlan_name": null
   },
   {
     "vlan_id": 852,
     "isid": 2510852,
-    "isid_name": "ISID-2510852"
+    "isid_name": "ISID-2510852",
+    "vlan_name": null
   },
   {
     "vlan_id": 853,
     "isid": 2510853,
-    "isid_name": "ISID-2510853"
+    "isid_name": "ISID-2510853",
+    "vlan_name": null
   },
   {
     "vlan_id": 2200,
     "isid": 2502200,
-    "isid_name": "ISID-2502200"
+    "isid_name": "ISID-2502200",
+    "vlan_name": null
   },
   {
     "vlan_id": 2201,
     "isid": 2502201,
-    "isid_name": "ISID-2502201"
+    "isid_name": "ISID-2502201",
+    "vlan_name": null
   },
   {
     "vlan_id": 2230,
     "isid": 2502230,
-    "isid_name": "ISID-2502230"
+    "isid_name": "ISID-2502230",
+    "vlan_name": null
   },
   {
     "vlan_id": 2232,
     "isid": 2502232,
-    "isid_name": "ISID-2502232"
+    "isid_name": "ISID-2502232",
+    "vlan_name": null
   },
   {
     "vlan_id": 2233,
     "isid": 2502233,
-    "isid_name": "ISID-2502233"
+    "isid_name": "ISID-2502233",
+    "vlan_name": null
   },
   {
     "vlan_id": 2246,
     "isid": 2512246,
-    "isid_name": "ISID-2512246"
+    "isid_name": "ISID-2512246",
+    "vlan_name": null
   },
   {
     "vlan_id": 2261,
     "isid": 2512261,
-    "isid_name": "ISID-2512261"
+    "isid_name": "ISID-2512261",
+    "vlan_name": null
   },
   {
     "vlan_id": 2262,
     "isid": 2502262,
-    "isid_name": "ISID-2502262"
+    "isid_name": "ISID-2502262",
+    "vlan_name": null
   },
   {
     "vlan_id": 2266,
     "isid": 2502266,
-    "isid_name": "ISID-2502266"
+    "isid_name": "ISID-2502266",
+    "vlan_name": null
   },
   {
     "vlan_id": 2600,
     "isid": 2512600,
-    "isid_name": "ISID-2512600"
+    "isid_name": "ISID-2512600",
+    "vlan_name": null
   },
   {
     "vlan_id": 2601,
     "isid": 2512601,
-    "isid_name": "ISID-2512601"
+    "isid_name": "ISID-2512601",
+    "vlan_name": null
   },
   {
     "vlan_id": 2602,
     "isid": 2512602,
-    "isid_name": "ISID-2512602"
+    "isid_name": "ISID-2512602",
+    "vlan_name": null
   },
   {
     "vlan_id": 2603,
     "isid": 2512603,
-    "isid_name": "ISID-2512603"
+    "isid_name": "ISID-2512603",
+    "vlan_name": null
   },
   {
     "vlan_id": 2604,
     "isid": 2512604,
-    "isid_name": "ISID-2512604"
+    "isid_name": "ISID-2512604",
+    "vlan_name": null
   },
   {
     "vlan_id": 2900,
     "isid": 2512900,
-    "isid_name": "ISID-2512900"
+    "isid_name": "ISID-2512900",
+    "vlan_name": null
   },
   {
     "vlan_id": 2901,
     "isid": 2512901,
-    "isid_name": "ISID-2512901"
+    "isid_name": "ISID-2512901",
+    "vlan_name": null
   },
   {
     "vlan_id": 2903,
     "isid": 2512903,
-    "isid_name": "ISID-2512903"
+    "isid_name": "ISID-2512903",
+    "vlan_name": null
   },
   {
     "vlan_id": 2905,
     "isid": 2512905,
-    "isid_name": "ISID-2512905"
+    "isid_name": "ISID-2512905",
+    "vlan_name": null
   },
   {
     "vlan_id": 2906,
     "isid": 2512906,
-    "isid_name": "ISID-2512906"
+    "isid_name": "ISID-2512906",
+    "vlan_name": null
   },
   {
     "vlan_id": 2907,
     "isid": 2512907,
-    "isid_name": "ISID-2512907"
+    "isid_name": "ISID-2512907",
+    "vlan_name": null
   },
   {
     "vlan_id": 2952,
     "isid": 2512952,
-    "isid_name": "ISID-2512952"
+    "isid_name": "ISID-2512952",
+    "vlan_name": null
   },
   {
     "vlan_id": 4051,
     "isid": null,
-    "isid_name": null
+    "isid_name": null,
+    "vlan_name": null
   },
   {
     "vlan_id": 4052,
     "isid": null,
-    "isid_name": null
+    "isid_name": null,
+    "vlan_name": null
   }
 ]

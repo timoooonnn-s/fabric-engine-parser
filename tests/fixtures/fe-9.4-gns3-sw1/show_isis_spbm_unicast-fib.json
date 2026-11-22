@@ -1,0 +1,24 @@
+[
+  {
+    "destination_mac": "0c:19:10:50:00:84",
+    "bvlan": 4051,
+    "system_id": "0c19.1050.0084",
+    "host_name": "5520-24T-FabricEngine",
+    "outgoing_interface": "cpp",
+    "port": null,
+    "cost": 0,
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "destination_mac": "0c:19:10:50:00:84",
+    "bvlan": 4052,
+    "system_id": "0c19.1050.0084",
+    "host_name": "5520-24T-FabricEngine",
+    "outgoing_interface": "cpp",
+    "port": null,
+    "cost": 0,
+    "area": "HOME",
+    "area_name": null
+  }
+]

@@ -19,7 +19,10 @@
       }
     ],
     "origin": "CONFIG",
-    "name": "Server-100"
+    "name": "Server-100",
+    "vlan_id": null,
+    "vlan_member_ports": [],
+    "vlan_member_mlts": []
   },
   {
     "isid": 10200,
@@ -32,7 +35,10 @@
       }
     ],
     "origin": "CONFIG",
-    "name": "Server-200"
+    "name": "Server-200",
+    "vlan_id": null,
+    "vlan_member_ports": [],
+    "vlan_member_mlts": []
   },
   {
     "isid": 20300,
@@ -45,7 +51,10 @@
     ],
     "mlt_bindings": [],
     "origin": "CONFIG",
-    "name": "Special-300"
+    "name": "Special-300",
+    "vlan_id": null,
+    "vlan_member_ports": [],
+    "vlan_member_mlts": []
   },
   {
     "isid": 2502201,
@@ -58,6 +67,9 @@
     ],
     "mlt_bindings": [],
     "origin": "CONFIG",
-    "name": "quarantaine"
+    "name": "quarantaine",
+    "vlan_id": null,
+    "vlan_member_ports": [],
+    "vlan_member_mlts": []
   }
 ]

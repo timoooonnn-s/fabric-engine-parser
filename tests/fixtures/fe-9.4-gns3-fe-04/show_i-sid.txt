@@ -1,0 +1,24 @@
+************************************************************************************
+		Command Execution Time: Sun Nov 22 11:57:34 2026 UTC
+************************************************************************************
+
+==================================================================================================================================
+                                                            Isid Info
+==================================================================================================================================
+ISID      ISID              PORT               MLT                ORIGIN                      ISID                            
+ID        TYPE     VLANID   INTERFACES         INTERFACES                                     NAME                            
+----------------------------------------------------------------------------------------------------------------------------------
+20010     CVLAN    10       1/3                -                  C  ---  -  ---  -  -  --    ISID-20010                      
+20020     CVLAN    20       1/4                -                  C  ---  -  ---  -  -  --    ISID-20020                      
+20030     CVLAN    30       1/5                -                  C  ---  -  ---  -  -  --    ISID-20030                      
+15999999  CVLAN    4048     -                  -                  C  ---  -  ---  -  -  --    Onboarding I-SID                
+16777001  ELAN     N/A      -                  -                  C  ---  -  ---  -  -  --    FAN-ISID                        
+
+c: customer vid    u: untagged-traffic
+
+All 5 out of 5 Total Num of i-sids displayed
+
+ORIGIN Legend:
+C: manually configured; D: discovered by FA or EPT; M: FA management; E: discovered by EAP
+A: auto-sense; R: multi-area redist; RV: radius created vlan; S: static routed multicast
+l: discover by local switch  r: discover by remote VIST switch

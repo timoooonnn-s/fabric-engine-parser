@@ -32,7 +32,7 @@ class LldpNeighbor:
 
     local_port: str
     index: int
-    age: str  # as printed, e.g. '10 days, 02:33:19'
+    age: str | None  # as printed, e.g. '10 days, 02:33:19'; None: not printed (9.x)
     protocol: str | None = None
     chassis_id_subtype: str | None = None  # e.g. 'MAC Address'
     chassis_id: str | None = None
@@ -43,13 +43,16 @@ class LldpNeighbor:
     system_capabilities: str | None = None
     port_description: str | None = None
     address: str | None = None
+    ipv6_address: str | None = None  # as printed; 9.x prints '0:0:0:0:0:0:0:0' for none
 
 
+# 9.x prints no Time and pads the keys: 'Port: 1/1       Index    : 1'
 _NEIGHBOR_START = re.compile(
-    rf"Port:\s*(?P<port>{PORT})\s+Index:\s*(?P<index>\d+)\s+Time:\s*(?P<age>.+)"
+    rf"Port:\s*(?P<port>{PORT})\s+Index\s*:\s*(?P<index>\d+)(?:\s+Time\s*:\s*(?P<age>.+))?"
 )
-_NEIGHBOR_FIELD = re.compile(r"\s+(?P<key>\w+)\s*:\s*(?P<value>.*)")
-_BLOCK_END = re.compile(r"\s*(?:-{10,}|Total Neighbors\s*:.*)?")
+_NEIGHBOR_FIELD = re.compile(r"\s+(?P<key>\w+(?: \w+)*)\s*:\s*(?P<value>.*)")
+_BLOCK_END = re.compile(r"\s*(?:-{10,})?")
+_TOTAL = re.compile(r"\s*Total Neighbors\s*:\s*(?P<count>\d+)\s*")
 _SUBTYPE_AND_VALUE = re.compile(r"(?P<subtype>.+?)\s{2,}(?P<value>\S.*)")
 # key printed by the switch -> LldpNeighbor field
 _FIELD_NAMES = {
@@ -59,6 +62,7 @@ _FIELD_NAMES = {
     "syscap": "system_capabilities",
     "portdescr": "port_description",
     "address": "address",
+    "ipv6 address": "ipv6_address",
 }
 _IDENTIFIERS = {"chassisid": "chassis_id", "portid": "port_id"}
 
@@ -100,18 +104,34 @@ def parse_lldp_summary(output: Output) -> Iterator[LldpNeighborSummary]:
 
 @parser("show lldp neighbor")
 def parse_lldp_neighbors(output: Output) -> Iterator[LldpNeighbor]:
-    """`show lldp neighbor` -> one LldpNeighbor per block. A port can have several."""
+    """`show lldp neighbor` -> one LldpNeighbor per block. A port can have several.
+
+    The 'Total Neighbors' line is checked against the blocks read, so a block
+    header the parser does not recognise cannot silently drop neighbours.
+    """
     neighbor: dict[str, Any] | None = None
+    count = 0
     for line in output.lines:
         start = _NEIGHBOR_START.fullmatch(line.strip())
+        total = _TOTAL.fullmatch(line)
         if start:
             if neighbor:
                 yield LldpNeighbor(**neighbor)
+                count += 1
             neighbor = {
                 "local_port": start["port"],
                 "index": int(start["index"]),
-                "age": start["age"],
+                "age": start["age"].strip() if start["age"] else None,
             }
+        elif total:
+            if neighbor:
+                yield LldpNeighbor(**neighbor)
+                count += 1
+                neighbor = None
+            if int(total["count"]) != count:
+                output.skip(
+                    line, f"{count} neighbour blocks read, the switch counts {total['count']}"
+                )
         elif neighbor is not None and not _BLOCK_END.fullmatch(line):
             found = _NEIGHBOR_FIELD.fullmatch(line)
             if found is None:

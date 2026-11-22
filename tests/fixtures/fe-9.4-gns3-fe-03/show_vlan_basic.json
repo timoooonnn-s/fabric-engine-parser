@@ -1,0 +1,86 @@
+[
+  {
+    "vlan_id": 1,
+    "name": "Default",
+    "vlan_type": "byPort",
+    "mstp_instance": 0,
+    "protocol_id": null,
+    "subnet": null,
+    "subnet_mask": null,
+    "vrf_id": 0,
+    "origin": "CONFIG",
+    "l3_access": "GlobalRouter"
+  },
+  {
+    "vlan_id": 10,
+    "name": "users",
+    "vlan_type": "byPort",
+    "mstp_instance": 0,
+    "protocol_id": null,
+    "subnet": null,
+    "subnet_mask": null,
+    "vrf_id": 0,
+    "origin": "CONFIG",
+    "l3_access": "GlobalRouter"
+  },
+  {
+    "vlan_id": 20,
+    "name": "voice",
+    "vlan_type": "byPort",
+    "mstp_instance": 0,
+    "protocol_id": null,
+    "subnet": null,
+    "subnet_mask": null,
+    "vrf_id": 0,
+    "origin": "CONFIG",
+    "l3_access": "GlobalRouter"
+  },
+  {
+    "vlan_id": 30,
+    "name": "printers",
+    "vlan_type": "byPort",
+    "mstp_instance": 0,
+    "protocol_id": null,
+    "subnet": null,
+    "subnet_mask": null,
+    "vrf_id": 0,
+    "origin": "CONFIG",
+    "l3_access": "GlobalRouter"
+  },
+  {
+    "vlan_id": 4048,
+    "name": "onboarding-vlan",
+    "vlan_type": "private",
+    "mstp_instance": 0,
+    "protocol_id": null,
+    "subnet": null,
+    "subnet_mask": null,
+    "vrf_id": 0,
+    "origin": "CONFIG",
+    "l3_access": "GlobalRouter"
+  },
+  {
+    "vlan_id": 4051,
+    "name": "bvlan-1",
+    "vlan_type": "spbm-bvlan",
+    "mstp_instance": 62,
+    "protocol_id": null,
+    "subnet": null,
+    "subnet_mask": null,
+    "vrf_id": 0,
+    "origin": "CONFIG",
+    "l3_access": "GlobalRouter"
+  },
+  {
+    "vlan_id": 4052,
+    "name": "bvlan-2",
+    "vlan_type": "spbm-bvlan",
+    "mstp_instance": 62,
+    "protocol_id": null,
+    "subnet": null,
+    "subnet_mask": null,
+    "vrf_id": 0,
+    "origin": "CONFIG",
+    "l3_access": "GlobalRouter"
+  }
+]

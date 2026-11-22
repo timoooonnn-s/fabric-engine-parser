@@ -8,7 +8,7 @@ so an unknown value never turns silently into a wrong one.
 from __future__ import annotations
 
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # Placeholders Fabric Engine prints for "no value".
 _EMPTY_MARKERS = frozenset({"", "-", "--", "n/a", "none"})
@@ -19,7 +19,15 @@ _FALSE_WORDS = frozenset({"false", "disable", "disabled", "down", "no"})
 # slot/port or slot/port/sub-port (channelized). A pattern string, for use inside row patterns.
 PORT = r"\d+/\d+(?:/\d+)?"
 _PORT = re.compile(PORT)
+# '1/1', '1/1-1/4,2/1': a port list as typed after a command.
+PORT_LIST = rf"{PORT}(?:-{PORT})?(?:,{PORT}(?:-{PORT})?)*"
 _MAC_DIGITS = re.compile(r"[0-9a-f]{12}")
+# IS-IS system ID 'xxxx.xxxx.xxxx' and SPBM nickname 'x.xx.xx'. Pattern strings, for row patterns.
+SYSTEM_ID = r"[0-9a-f]{4}\.[0-9a-f]{4}\.[0-9a-f]{4}"
+NICKNAME = r"[0-9a-f]\.[0-9a-f]{2}\.[0-9a-f]{2}"
+_SYSTEM_ID = re.compile(SYSTEM_ID)
+_NICKNAME = re.compile(NICKNAME)
+_DURATION = re.compile(r"(?:(?P<days>\d+) days?(?:\(s\))?,\s*)?(?P<h>\d+):(?P<m>\d\d):(?P<s>\d\d)")
 
 
 def optional(cell: str) -> str | None:
@@ -110,3 +118,32 @@ def timestamp(cell: str, layout: str = "%m/%d/%y %H:%M:%S") -> datetime | None:
     """Parse a switch timestamp (no time zone information is printed)."""
     value = optional(cell)
     return None if value is None else datetime.strptime(value, layout)
+
+
+def duration(cell: str) -> timedelta:
+    """'3 day(s), 04:05:06' (sys-info uptime) or '00:04:03' (IS-IS uptime) -> timedelta."""
+    found = _DURATION.fullmatch(cell.strip())
+    if found is None:
+        raise ValueError(f"not a duration: {cell!r}")
+    return timedelta(
+        days=int(found["days"] or 0),
+        hours=int(found["h"]),
+        minutes=int(found["m"]),
+        seconds=int(found["s"]),
+    )
+
+
+def system_id(cell: str) -> str:
+    """Validate an IS-IS system ID such as '0c91.dc31.0084' (kept as printed, decision 0004)."""
+    cell = cell.strip()
+    if not _SYSTEM_ID.fullmatch(cell):
+        raise ValueError(f"not a system ID: {cell!r}")
+    return cell
+
+
+def nickname(cell: str) -> str | None:
+    """Validate an SPBM nickname such as '0.00.12'. Empty (no nickname) -> None."""
+    value = optional(cell)
+    if value is not None and not _NICKNAME.fullmatch(value):
+        raise ValueError(f"not an SPBM nickname: {cell!r}")
+    return value

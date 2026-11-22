@@ -1,0 +1,30 @@
+[
+  {
+    "vlan_id": 1,
+    "ports": [],
+    "active_ports": [],
+    "static_ports": [],
+    "not_allowed_ports": []
+  },
+  {
+    "vlan_id": 4048,
+    "ports": [],
+    "active_ports": [],
+    "static_ports": [],
+    "not_allowed_ports": []
+  },
+  {
+    "vlan_id": 4051,
+    "ports": [],
+    "active_ports": [],
+    "static_ports": [],
+    "not_allowed_ports": []
+  },
+  {
+    "vlan_id": 4052,
+    "ports": [],
+    "active_ports": [],
+    "static_ports": [],
+    "not_allowed_ports": []
+  }
+]

@@ -4,34 +4,39 @@
     "admin_up": true,
     "oper_up": true,
     "reason": null,
-    "changed_at": "2026-03-08 08:13:38"
+    "changed_at": "2026-03-08 08:13:38",
+    "flex_uni": null
   },
   {
     "port": "1/2",
     "admin_up": true,
     "oper_up": false,
     "reason": null,
-    "changed_at": "2026-03-08 08:13:17"
+    "changed_at": "2026-03-08 08:13:17",
+    "flex_uni": null
   },
   {
     "port": "1/47",
     "admin_up": true,
     "oper_up": true,
     "reason": null,
-    "changed_at": "2026-07-12 09:14:17"
+    "changed_at": "2026-07-12 09:14:17",
+    "flex_uni": null
   },
   {
     "port": "1/48",
     "admin_up": false,
     "oper_up": false,
     "reason": "SSH",
-    "changed_at": "2026-05-13 15:54:53"
+    "changed_at": "2026-05-13 15:54:53",
+    "flex_uni": null
   },
   {
     "port": "2/1/1",
     "admin_up": true,
     "oper_up": true,
     "reason": null,
-    "changed_at": "2026-06-04 19:42:02"
+    "changed_at": "2026-06-04 19:42:02",
+    "flex_uni": null
   }
 ]

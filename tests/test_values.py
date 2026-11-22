@@ -57,3 +57,13 @@ def test_optional_placeholders_become_none(cell: str) -> None:
 def test_timestamp() -> None:
     assert values.timestamp("03/08/26 08:13:38") == datetime(2026, 3, 8, 8, 13, 38)
     assert values.timestamp("--") is None
+
+
+def test_system_id_and_nickname_are_validated() -> None:
+    assert values.system_id(" 0c91.dc31.0084 ") == "0c91.dc31.0084"
+    assert values.nickname("0.00.12") == "0.00.12"
+    assert values.nickname("") is None  # a node without a nickname
+    with pytest.raises(ValueError, match="system ID"):
+        values.system_id("0c:91:dc:31:00:84")
+    with pytest.raises(ValueError, match="nickname"):
+        values.nickname("0.0.12")

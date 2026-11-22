@@ -53,8 +53,16 @@ Choosing how to read rows (decision 0003):
 - **`Columns.locate(header_line, ...)` + `columns.cut_rows(rows)`** when cells can be
   empty or contain spaces, or when lists wrap under their own column.
 
+When a command prints several tables with the same header (`show lacp interface`:
+Actor Admin, Partner Admin, Partner Operational), pick each by its title as well:
+`output.table("INDEX", "KEY", title="Partner Admin")`.
+
+Output that is `Key : value` fields under section headers, not a table
+(`show sys-info`), is read with `output.section("General Info")` instead (decision 0009).
+See `parsers/system.py`.
+
 Use the converters in `values.py` (`flag`, `optional`, `ports`, `mac`, `int_list`,
-`timestamp`) so the same value looks the same in every record (decision 0004). Keep open
+`timestamp`, `duration`) so the same value looks the same in every record (decision 0004). Keep open
 vocabularies as strings.
 
 ## 3. Export it

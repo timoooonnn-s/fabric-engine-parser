@@ -37,19 +37,29 @@ and called directly.
 | `show interfaces gigabitEthernet [interface]` | `parse_port_interfaces` | `PortInterface` |
 | `show interfaces gigabitEthernet name` | `parse_port_names` | `PortName` |
 | `show interfaces gigabitEthernet state` | `parse_port_states` | `PortState` |
+| `show interfaces gigabitEthernet vlan` | `parse_port_vlans` | `PortVlans` |
+| `show interfaces gigabitEthernet i-sid` | `parse_port_isids` | `PortIsid` |
 | `show vlan basic` | `parse_vlans` | `Vlan` |
 | `show vlan members` | `parse_vlan_members` | `VlanMembers` |
 | `show vlan i-sid` | `parse_vlan_isids` | `VlanIsid` |
+| `show vlan mac-address-entry` | `parse_mac_entries` | `MacEntry` |
 | `show i-sid` | `parse_isids` | `Isid` (with `PortBinding`, `MltBinding`) |
 | `show isis spbm i-sid all` / `config` / `discover` | `parse_spbm_isids` | `SpbmIsid` |
 | `show mlt` | `parse_mlts` | `Mlt` (all four tables merged) |
 | `show virtual-ist` | `parse_virtual_ist` | `VirtualIst` |
+| `show lacp interface` | `parse_lacp_ports` | `LacpPort` (with `LacpParticipant`) |
 | `show lldp neighbor summary` | `parse_lldp_summary` | `LldpNeighborSummary` |
 | `show lldp neighbor` | `parse_lldp_neighbors` | `LldpNeighbor` |
+| `show sys-info` | `parse_sys_info` | `SysInfo` (name, release, model, uptime, MACs) |
+| `show isis adjacencies` | `parse_isis_adjacencies` | `IsisAdjacency` |
+| `show isis interface` | `parse_isis_interfaces` | `IsisInterface` |
+| `show isis spbm nick-name` | `parse_spbm_nicknames` | `SpbmNickname` |
+| `show isis spbm unicast-fib` | `parse_spbm_unicast_fib` | `SpbmUnicastRoute` |
+| `show ip vrf` | `parse_vrfs` | `Vrf` |
 
 The records are frozen dataclasses. Their fields are listed in the source, one module per
-command family under `src/fabric_weft/parsers/`. Next up: IS-IS adjacencies, the MAC
-table, routes per VRF, `sys-info` (see `council/PLAN.md`).
+command family under `src/fabric_weft/parsers/`. Next up: routes, ARP and IP
+interfaces once the lab has L3 (see `council/PLAN.md`).
 
 ## What you get back
 
@@ -67,6 +77,7 @@ What the values look like:
 - `-`, `--`, `N/A` and `NONE` become `None`.
 - Port lists are expanded: `'1/1-1/3'` becomes `('1/1', '1/2', '1/3')`.
 - MACs come out as `aa:bb:cc:dd:ee:ff`.
+- Uptimes come out as `datetime.timedelta`.
 - Words the switch can extend, such as VLAN type or I-SID type, stay as printed.
 
 ## Errors

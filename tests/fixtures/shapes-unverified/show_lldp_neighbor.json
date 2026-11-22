@@ -12,7 +12,8 @@
     "system_description": null,
     "system_capabilities": "Br / Br",
     "port_description": null,
-    "address": null
+    "address": null,
+    "ipv6_address": null
   },
   {
     "local_port": "1/47",
@@ -27,6 +28,7 @@
     "system_description": null,
     "system_capabilities": "Br / Br",
     "port_description": null,
-    "address": null
+    "address": null,
+    "ipv6_address": null
   }
 ]

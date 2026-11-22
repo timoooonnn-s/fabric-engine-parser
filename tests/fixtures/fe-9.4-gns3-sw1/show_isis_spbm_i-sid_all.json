@@ -1,0 +1,13 @@
+[
+  {
+    "isid": 16777001,
+    "nickname": null,
+    "bvlan": 4051,
+    "system_id": "0c19.1050.0084",
+    "origin": "discover",
+    "host_name": "5520-24T-FabricEngine",
+    "isid_name": "FAN-ISID",
+    "area": "HOME",
+    "area_name": null
+  }
+]

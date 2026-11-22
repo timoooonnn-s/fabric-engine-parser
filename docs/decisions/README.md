@@ -13,6 +13,11 @@ record that says which one it supersedes, and the old record gets a "superseded 
 | [0006](0006-fixtures.md) | Real captures are the evidence; golden files | accepted |
 | [0007](0007-command-matching.md) | Commands matched like the CLI matches them | accepted |
 | [0008](0008-port-lists.md) | How port lists are expanded | accepted |
+| [0009](0009-key-value-output.md) | `Key : value` output read into sections; durations as `timedelta` | accepted, user may veto |
+| [0010](0010-empty-fixtures.md) | Empty captures are fixtures only when listed | accepted, user may veto |
+| [0011](0011-command-arguments.md) | A parser may say which arguments it accepts | accepted |
+| [0012](0012-column-one-left.md) | A value one character left of its header belongs to that column | accepted |
+| [0013](0013-vlan-zero.md) | VLAN 0 in a VLAN cell means "no VLAN" | accepted, user may veto |
 
 Template: **Status**, **Date**, **Proposed by**, **Objection**, then *Decision*, *Why*,
 and the objection with its answer.

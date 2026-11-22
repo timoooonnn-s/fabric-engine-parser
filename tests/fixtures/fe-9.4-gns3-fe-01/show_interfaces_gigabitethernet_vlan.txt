@@ -1,0 +1,39 @@
+************************************************************************************
+		Command Execution Time: Sun Nov 22 11:56:13 2026 UTC
+************************************************************************************
+
+====================================================================================================
+                                   Port Vlans
+====================================================================================================
+PORT             DISCARD DISCARD   DEFAULT VLAN         PORT     UNTAG    DYNAMIC UNTAG  FA/     
+NUM      TAGGING TAGFRAM UNTAGFRAM VLANID  IDS          TYPE     DEFVLAN  VLANS   VLANS  Flex UNI
+-----------------------------------------------------------------------------------------------------------
+1/1      enable  false   false     0       4051,4052    normal   disable  P              disable 
+1/2      enable  false   false     0       4051,4052    normal   disable  P              disable 
+1/3      enable  false   false     0       4051,4052    normal   disable  P              disable 
+1/4      disable false   false     40      40           normal   disable  P       40     disable 
+1/5      disable false   false     0       0            normal   disable  P              disable 
+1/6      disable false   false     0       0            normal   disable  P              disable 
+1/7      disable false   false     0       0            normal   disable  P              disable 
+1/8      disable false   false     0       0            normal   disable  P              disable 
+1/9      disable false   false     0       0            normal   disable  P              disable 
+1/10     disable false   false     0       0            normal   disable  P              disable 
+1/11     disable false   false     0       0            normal   disable  P              disable 
+1/12     disable false   false     0       0            normal   disable  P              disable 
+1/13     disable false   false     0       0            normal   disable  P              disable 
+1/14     disable false   false     0       0            normal   disable  P              disable 
+1/15     disable false   false     0       0            normal   disable  P              disable 
+1/16     disable false   false     0       0            normal   disable  P              disable 
+1/17     disable false   false     0       0            normal   disable  P              disable 
+1/18     disable false   false     0       0            normal   disable  P              disable 
+1/19     disable false   false     0       0            normal   disable  P              disable 
+1/20     disable false   false     0       0            normal   disable  P              disable 
+1/21     disable false   false     0       0            normal   disable  P              disable 
+1/22     disable false   false     0       0            normal   disable  P              disable 
+1/23     disable false   false     0       0            normal   disable  P              disable 
+1/24     disable false   false     0       0            normal   disable  P              disable 
+1/25     disable false   false     0       0            normal   disable  P              disable 
+1/26     disable false   false     0       0            normal   disable  P              disable 
+----------------------------------------------------------------------------------------------------
+DYNAMIC VLAN Legend:
+P=Protocol enabled.

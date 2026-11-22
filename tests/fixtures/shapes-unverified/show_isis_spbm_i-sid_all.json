@@ -5,7 +5,10 @@
     "bvlan": 4051,
     "system_id": "b0ad.aa41.b4df",
     "origin": "config",
-    "host_name": "dvr-01"
+    "host_name": "dvr-01",
+    "isid_name": null,
+    "area": null,
+    "area_name": null
   },
   {
     "isid": 10100,
@@ -13,7 +16,10 @@
     "bvlan": 4052,
     "system_id": "b0ad.aa41.c2aa",
     "origin": "discover",
-    "host_name": "beb-07"
+    "host_name": "beb-07",
+    "isid_name": null,
+    "area": null,
+    "area_name": null
   },
   {
     "isid": 10200,
@@ -21,7 +27,10 @@
     "bvlan": 4051,
     "system_id": "b0ad.aa41.b4df",
     "origin": "config",
-    "host_name": "dvr-01"
+    "host_name": "dvr-01",
+    "isid_name": null,
+    "area": null,
+    "area_name": null
   },
   {
     "isid": 20300,
@@ -29,7 +38,10 @@
     "bvlan": 4051,
     "system_id": "b0ad.aa41.d3bb",
     "origin": "discover",
-    "host_name": "beb-08"
+    "host_name": "beb-08",
+    "isid_name": null,
+    "area": null,
+    "area_name": null
   },
   {
     "isid": 20400,
@@ -37,6 +49,9 @@
     "bvlan": 4052,
     "system_id": "b0ad.aa41.d3bb",
     "origin": "discover",
-    "host_name": "beb-08"
+    "host_name": "beb-08",
+    "isid_name": null,
+    "area": null,
+    "area_name": null
   }
 ]

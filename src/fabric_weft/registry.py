@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from collections.abc import Callable, Iterable
 from typing import Any, Protocol, TypeVar
 
@@ -16,6 +17,7 @@ class Parser(Protocol[RecordT_co]):
     """A registered parser: raw command output in, `ParseResult` out."""
 
     commands: tuple[str, ...]
+    arguments: re.Pattern[str] | None
 
     def __call__(
         self, text: str, *, strict: bool = False, command: str | None = None
@@ -25,23 +27,37 @@ class Parser(Protocol[RecordT_co]):
 _PARSERS: dict[tuple[str, ...], Parser[Any]] = {}
 
 
-def parser(*commands: str) -> Callable[[Callable[[Output], Iterable[Any]]], Parser[Any]]:
+def parser(
+    *commands: str, arguments: str | None = None
+) -> Callable[[Callable[[Output], Iterable[Any]]], Parser[Any]]:
     """Register a record generator for one or more full command spellings.
 
     The decorated generator receives an `Output` and yields records. What the
     decorator returns is the public parser: `parse_x(text, strict=False)`.
+
+    `arguments`: a pattern the words typed after the command must match, such as
+    a port list. Without it any words are accepted (`show ip route vrf RED`). With
+    it, `show interfaces gigabitEthernet vlan` is not taken for the bare command
+    with an argument 'vlan' (decision 0011).
     """
 
     def register(collect: Callable[[Output], Iterable[Any]]) -> Parser[Any]:
         def run(text: str, *, strict: bool = False, command: str | None = None) -> ParseResult[Any]:
             output = Output(command or commands[0], text, strict=strict)
-            records = tuple(collect(output))
-            return ParseResult(output.command, records, tuple(output.skipped))
+            records: list[Any] = []
+            try:
+                records.extend(collect(output))
+            except ValueError as error:
+                # A table the parser cannot place (a missing column label): reported like
+                # a missing table, never a bare ValueError (decision 0005).
+                output.skip("", str(error))
+            return ParseResult(output.command, tuple(records), tuple(output.skipped))
 
         run.__name__ = run.__qualname__ = collect.__name__
         run.__doc__ = collect.__doc__
         run.__module__ = collect.__module__
         run.commands = commands  # type: ignore[attr-defined]
+        run.arguments = re.compile(arguments) if arguments else None  # type: ignore[attr-defined]
         for spelling in commands:
             _PARSERS[tuple(spelling.lower().split())] = run  # type: ignore[assignment]
         return run  # type: ignore[return-value]
@@ -61,7 +77,10 @@ def find_parser(command: str) -> Parser[Any]:
     for words, run in _PARSERS.items():
         if len(words) > len(typed) or len(words) < best_length:
             continue
-        if all(word.startswith(part) for word, part in zip(words, typed, strict=False)):
+        if not all(word.startswith(part) for word, part in zip(words, typed, strict=False)):
+            continue
+        rest = " ".join(typed[len(words) :])
+        if not rest or run.arguments is None or run.arguments.fullmatch(rest):
             if len(words) > best_length:
                 best, best_length = {}, len(words)
             best[id(run)] = run
