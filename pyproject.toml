@@ -12,7 +12,7 @@ requires-python = ">=3.10"
 dependencies = []  # standard library only, see docs/decisions/0002
 
 [project.optional-dependencies]
-dev = ["pytest>=7", "ruff>=0.4"]
+dev = ["pytest>=7", "ruff>=0.4", "mypy>=1.10"]
 capture = ["netmiko>=4"]  # only for tools/capture.py, never imported by the library
 
 [tool.setuptools.packages.find]
@@ -24,6 +24,12 @@ fabric_weft = ["py.typed"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
+
+[tool.mypy]
+# strict on the library: it is imported by other tools and ships py.typed (decision 0015)
+files = ["src", "tests"]
+python_version = "3.10"
+strict = true
 
 [tool.ruff]
 line-length = 100

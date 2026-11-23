@@ -1,0 +1,28 @@
+[
+  {
+    "mlt_id": 10,
+    "ifindex": 6153,
+    "name": "lacp-to-peer",
+    "port_type": "access",
+    "admin_type": "norm",
+    "current_type": "norm",
+    "members": [
+      "1/5",
+      "1/6"
+    ],
+    "vlan_ids": [
+      50
+    ],
+    "origin": "CONFIG",
+    "designated_port": "1/5",
+    "lacp_enabled": true,
+    "lacp_oper_up": true,
+    "created_on": "LOCAL",
+    "remote_members": [],
+    "programmed_on": "LOCAL",
+    "dot1q_encapsulation": false,
+    "lossless": false,
+    "private_vlan": false,
+    "flex_uni": false
+  }
+]

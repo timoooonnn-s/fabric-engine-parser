@@ -1,0 +1,67 @@
+# fe-04 · lab build 2 (2026-11-22) · VRF blue with a host · see tools/lab/README.md
+# [new] = never accepted by these switches yet; every other line was, in an earlier round.
+enable
+configure terminal
+
+# ---- 1. base: your Ansible already does this ----
+prompt "fe-04"
+spbm
+spbm ethertype 0x8100
+vlan create 4051 name "bvlan-1" type spbm-bvlan
+vlan create 4052 name "bvlan-2" type spbm-bvlan
+interface loopback 1
+ip address 1 10.255.0.4/255.255.255.255
+exit
+router isis
+spbm 1
+spbm 1 nick-name 0.00.14
+spbm 1 b-vid 4051-4052 primary 4051
+spbm 1 ip enable
+is-type l1
+manual-area 49.0001
+ip-source-address 10.255.0.4
+exit
+interface gigabitEthernet 1/1-1/2
+encapsulation dot1q
+isis
+isis spbm 1
+isis enable
+no spanning-tree mstp force-port-state enable
+exit
+router isis enable
+
+# ---- 2. global routes over IP shortcuts ----
+router isis
+redistribute direct
+redistribute direct enable
+exit
+isis apply redistribute direct
+
+# ---- 3. VLANs 10 and 20 on 1/3-1/4, L2 VSNs with fe-03 ----
+interface gigabitEthernet 1/3-1/5
+no auto-sense enable
+exit
+vlan create 10 name "users" type port-mstprstp 0
+vlan members add 10 1/3
+vlan i-sid 10 20010
+vlan create 20 name "voice" type port-mstprstp 0
+vlan members add 20 1/4
+vlan i-sid 20 20020
+
+# ---- 4. VRF blue with an L3 VSN, VLAN 104 on 1/5 with a host ----
+ip vrf blue vrfid 1
+router vrf blue
+ipvpn
+i-sid 30001
+ipvpn enable
+isis redistribute direct
+isis redistribute direct enable
+exit
+isis apply redistribute direct vrf blue
+vlan create 104 name "blue-4" type port-mstprstp 0
+vlan members add 104 1/5
+interface vlan 104
+vrf blue
+ip address 10.100.4.1 255.255.255.0
+exit
+end

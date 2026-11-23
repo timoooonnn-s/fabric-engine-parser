@@ -1,0 +1,15 @@
+[
+  {
+    "vrf": "GlobalRouter",
+    "interface": "Clip1",
+    "ip_address": "10.255.0.4",
+    "prefix_length": 32,
+    "admin_enabled": true,
+    "oper_up": true,
+    "vlan_id": null,
+    "brouter_port": false,
+    "ipsec_enabled": false,
+    "l3_access": "GlobalRouter",
+    "ip_name": null
+  }
+]

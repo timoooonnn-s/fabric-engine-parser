@@ -1,0 +1,30 @@
+[
+  {
+    "interface": "Port1/1",
+    "port": "1/1",
+    "level": "1",
+    "state": "UP",
+    "uptime": "0:11:00",
+    "priority": 127,
+    "hold_time_seconds": 22,
+    "system_id": "0c52.cf92.0084",
+    "host_name": "fe-01",
+    "status": "ACTIVE",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "interface": "Port1/2",
+    "port": "1/2",
+    "level": "1",
+    "state": "UP",
+    "uptime": "0:10:59",
+    "priority": 127,
+    "hold_time_seconds": 24,
+    "system_id": "0ce7.427f.0084",
+    "host_name": "fe-02",
+    "status": "ACTIVE",
+    "area": "HOME",
+    "area_name": null
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "vrf": "GlobalRouter",
+    "interface": "Clip1",
+    "ip_address": "10.255.0.2",
+    "prefix_length": 32,
+    "admin_enabled": true,
+    "oper_up": true,
+    "vlan_id": null,
+    "brouter_port": false,
+    "ipsec_enabled": false,
+    "l3_access": "GlobalRouter",
+    "ip_name": null
+  },
+  {
+    "vrf": "GlobalRouter",
+    "interface": "Vlan4000",
+    "ip_address": "192.168.255.2",
+    "prefix_length": 30,
+    "admin_enabled": true,
+    "oper_up": true,
+    "vlan_id": 4000,
+    "brouter_port": false,
+    "ipsec_enabled": false,
+    "l3_access": "GlobalRouter",
+    "ip_name": null
+  }
+]

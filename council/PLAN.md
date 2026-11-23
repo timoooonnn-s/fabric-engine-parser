@@ -122,26 +122,68 @@ the switch prints (900, 10, 2, 5, 100); the output itself names no unit.
 context closed where the capture's `exit` is). Commands are not interpreted; that is the
 config linter's job. Still unseen: nested contexts.
 
-## Next: needs a new capture
+## Done: lab2 capture (2026-11-22)
 
-Every captured command with rows now has a parser.
-Captured but empty in this lab: `show dvr`, `dvr interfaces`, `dvr members`,
-`show smlt mlt`, `show ipv6 route`.
+Real 9.4 evidence for L3 and the shapes lab 1 could not show. New parsers: `show ip route`
+→ `IpRoute`, `show ip arp` → `ArpEntry`, `show ip interface` → `IpInterface` (each with the
+VRF from the table title, with and without `vrf X`).
 
-Still without rows, so still waiting for a lab change: `show ip route` / `arp` /
-`interface` (no L3 in the lab), `show mlt` / `virtual-ist` with an MLT,
-and a VLAN on enough ports that `show vlan members` wraps.
+Fixed because of it:
+- `show running-config` gave eleven commands the wrong context when `interface Vlan X`
+  follows `vlan create` lines (decision 0016 replaces the layout rule of 0014).
+- `show interfaces gigabitEthernet vlan`: a long VLAN list overflows its column instead of
+  wrapping; read with a row pattern now. The wrap test was a guess and is gone.
+- `show mlt` on 9.4: ORIGIN column, designated port `null`, empty member lists, PVLAN `-`.
+- `Error: …` answers (unknown VRF) are a `DeviceError` now, like `% …`; the capture tool
+  rejects them instead of saving them.
+- `tools/capture.py`: fixed prompt pattern, buffer cleared and empty output retried, one
+  lost command no longer loses the rest of the switch.
 
-### What would make the lab capture most useful
+Seen for the first time and reading correctly: wrapped `show vlan members` lists, `c100:1/8`
+I-SID bindings, an ELAN endpoint with a customer VID, MACs learned through the fabric
+(`tunnel`), routes over IS-IS with a BEB host name as next hop.
 
-Tables with rows are worth far more than empty ones. Still missing from the four-node lab:
+## Done: lab3 capture (2026-11-22)
 
-- an **MLT with LACP** between two nodes;
-- two or three **VLANs with I-SIDs** (L2 VSNs), a port in each, and **one VLAN on many
-  ports** so the member list wraps;
-- one **VRF with an L3 VSN** and a static route, so `show ip route vrf` has content;
-- a little **traffic** (VPCS hosts pinging each other), so the MAC table and ARP have entries;
-- if possible, one capture *before* and one *after* a change. That is exactly what idea #3 compares.
+fe-01 and fe-02 with 1/5–1/7 cabled. Fixed: `show i-sid` on 9.4 prints a further binding
+of an I-SID on its own line (`u:1/7` under `c100:1/8`); it was read as a broken row.
+`PortIsid` gets `untagged_traffic` (C-VID printed `untag`), so an untagged endpoint is not
+confused with a CVLAN one (`N/A`). ELAN 30100 is advertised now that 1/7 is up.
+
+MLT 10 is still empty: 1/5–1/6 are up (LLDP sees fe-02) and LACP is configured on them,
+but `# LACP CONFIGURATION` has no global `lacp enable`, so LACP is not running.
+
+## Done: lab4 capture and LACP aggregators (2026-11-22)
+
+Global `lacp enable` brought MLT 10 up (members 1/5–1/6, partner the other switch,
+port state `act short aggr sync col dis`). New: `parse_lacp_aggregators` →
+`LacpAggregator`, one per MLT with LACP, from the four aggregator tables of
+`show lacp interface`; a second, unregistered parser for the same output (decision 0017).
+Checked against `show mlt` on every capture.
+
+## Done: lab5 capture (2026-11-22)
+
+fe-01 and fe-02 with VLAN 50 on MLT 10, untagged: a LACP MLT carrying a VLAN. Read without
+a change; the only differences to lab4 are VLAN 50 on the MLT, its ports and its members.
+
+## Done: lab6 capture, build 2 (2026-11-22)
+
+All four nodes rebuilt from `tools/lab/`. New: `show smlt mlt` → `SmltMlt`. First trunk LACP
+MLT, first SMLT (admin `smlt`), routes over IP shortcuts on every node, ARP over the fabric
+(`tunnel`). No parser change was needed for any of it. Not reached: the vIST (no `[new]`
+line took) and SMLT 20 to fe-03 (a leftover cable); fixes in `tools/lab/README.md`.
+
+## Next: finish build 2 (vIST, SMLT to fe-03), capture as lab7
+
+The lab is rebuilt clean from `tools/lab/fe-0X.cli` (cabling, order and checks in
+`tools/lab/README.md`), then captured as `fe-9.4-gns3-lab6-*` on all four nodes with
+`--vrf blue`. It adds what no capture has yet: vIST (fe-01/fe-02), SMLT 20 with LACP to
+fe-03, a trunk LACP MLT (MLT 10, encapsulation before LACP), CLIPs and IP shortcuts on all
+four nodes, and VRF `blue` on an MLT-carried VLAN. Earlier lab facts are folded in: ports
+1/1–1/7 only, encapsulation before LACP, global `lacp enable` last, `flex-uni enable` on
+Switched UNI ports. Lines never accepted by these switches yet are marked `[new]`.
+
+Still without a plan: DVR, IPv6, a capture before and after a change (idea #3).
 
 ## Later
 

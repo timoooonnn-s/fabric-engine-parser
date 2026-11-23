@@ -1,0 +1,42 @@
+[
+  {
+    "lsp_id": "0c44.5807.0084.00-00",
+    "system_id": "0c44.5807.0084",
+    "lifetime_seconds": 1163,
+    "nickname": "0.00.14",
+    "virtual_bmac": "00:00:00:00:00:00",
+    "host_name": "fe-04",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "lsp_id": "0c52.cf92.0084.00-00",
+    "system_id": "0c52.cf92.0084",
+    "lifetime_seconds": 1102,
+    "nickname": "0.00.11",
+    "virtual_bmac": "00:00:00:00:00:00",
+    "host_name": "fe-01",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "lsp_id": "0cbc.fad2.0084.00-00",
+    "system_id": "0cbc.fad2.0084",
+    "lifetime_seconds": 1153,
+    "nickname": "0.00.13",
+    "virtual_bmac": "00:00:00:00:00:00",
+    "host_name": "fe-03",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "lsp_id": "0ce7.427f.0084.00-00",
+    "system_id": "0ce7.427f.0084",
+    "lifetime_seconds": 1135,
+    "nickname": "0.00.12",
+    "virtual_bmac": "00:00:00:00:00:00",
+    "host_name": "fe-02",
+    "area": "HOME",
+    "area_name": null
+  }
+]

@@ -1,0 +1,41 @@
+[
+  {
+    "port": "1/4",
+    "ifindex": 195,
+    "isid": 20040,
+    "vlan_id": 40,
+    "customer_vid": null,
+    "untagged_traffic": false,
+    "isid_type": "CVLAN",
+    "origin": "C  ---  -  ---  -  -  --",
+    "isid_name": "ISID-20040",
+    "bpdu": null,
+    "mac_suni": false
+  },
+  {
+    "port": "1/8",
+    "ifindex": 199,
+    "isid": 30100,
+    "vlan_id": null,
+    "customer_vid": 100,
+    "untagged_traffic": false,
+    "isid_type": "ELAN",
+    "origin": "C  ---  -  ---  -  -  --",
+    "isid_name": "ISID-30100",
+    "bpdu": null,
+    "mac_suni": false
+  },
+  {
+    "port": "1/9",
+    "ifindex": 200,
+    "isid": 30100,
+    "vlan_id": null,
+    "customer_vid": null,
+    "untagged_traffic": true,
+    "isid_type": "ELAN",
+    "origin": "C  ---  -  ---  -  -  --",
+    "isid_name": "ISID-30100",
+    "bpdu": "disabled",
+    "mac_suni": false
+  }
+]

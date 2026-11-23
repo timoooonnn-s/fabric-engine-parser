@@ -28,12 +28,14 @@ from __future__ import annotations
 import argparse
 import getpass
 import os
+import re
 import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
 from netmiko import ConnectHandler
+from netmiko.exceptions import ReadTimeout
 
 ROOT = Path(__file__).resolve().parent.parent
 COMMAND_FILE = Path(__file__).with_name("capture_commands.txt")
@@ -41,7 +43,7 @@ FIXTURES = ROOT / "tests" / "fixtures"
 
 
 def read_commands(path: Path, vrfs: list[str]) -> list[str]:
-    commands = []
+    commands: list[str] = []
     for line in path.read_text().splitlines():
         command = line.split("#", 1)[0].strip()
         if not command:
@@ -117,13 +119,16 @@ def main() -> int:
                 secret=os.environ.get("FE_SECRET", ""),
             ) as connection:
                 prepare(connection, privileged=not options.no_enable)
-                rejected = capture(connection, commands, target.folder)
+                rejected, lost = capture(connection, commands, target.folder)
         except Exception as error:  # one dead switch must not stop the rest
             print(f"FAILED  {target.host}: {error}", file=sys.stderr)
             failed += 1
             continue
         for command, message in rejected:
             print(f"REJECTED {command}: {message}", file=sys.stderr)
+        for command, message in lost:
+            print(f"LOST    {command}: {message}", file=sys.stderr)
+        failed += bool(lost)
 
     folders = " ".join(str(target.folder.relative_to(ROOT)) for target in targets)
     print(f"\n{folders}: run `pytest --update-golden`, then review the new .json files")
@@ -148,19 +153,60 @@ def prepare(connection: Any, *, privileged: bool) -> None:
     print("ok      terminal more disable")
 
 
-def capture(connection: Any, commands: list[str], folder: Path) -> list[tuple[str, str]]:
-    """Run the commands, save each output, return the ones the switch rejected."""
+def capture(
+    connection: Any, commands: list[str], folder: Path
+) -> tuple[list[tuple[str, str]], list[tuple[str, str]]]:
+    """Run the commands and save each output.
+
+    Returns the commands the switch rejected, and the ones whose output was lost
+    (empty twice, or no prompt within the timeout). Neither is saved: an empty or cut
+    file would become a wrong fixture. One lost command does not stop the others.
+    """
     folder.mkdir(parents=True, exist_ok=True)
+    # The prompt is matched by this pattern, never found again per command: on a slow
+    # switch netmiko's own prompt search read leftover output as the prompt (fe-04,
+    # 2026-11-22) and every later command then waited for that line.
+    prompt = re.escape(connection.base_prompt) + r"[^\n]*[>#]"
     rejected: list[tuple[str, str]] = []
+    lost: list[tuple[str, str]] = []
     for command in commands:
-        output = connection.send_command(command, read_timeout=120)
-        first_line = next((line.strip() for line in output.splitlines() if line.strip()), "")
-        if first_line.startswith(("%", "^")):
+        output = run(connection, command, prompt)
+        if output is None:
+            lost.append((command, "no output after a retry; run this switch again"))
+            continue
+        if is_rejected(output):
             rejected.append((command, output.strip().splitlines()[-1]))
             continue
         (folder / fixture_name(command)).write_text(output + "\n")
         print(f"saved   {command}")
-    return rejected
+    return rejected, lost
+
+
+def is_rejected(output: str) -> bool:
+    """The switch refused the command: '% Invalid input …' or 'Error: …', after the banner."""
+    for line in output.splitlines():
+        text = line.strip()
+        if not text or text.startswith(("*", "Command Execution Time")):
+            continue
+        return text.startswith(("%", "^", "Error:"))
+    return False
+
+
+def run(connection: Any, command: str, prompt: str) -> str | None:
+    """One command's output, or None if it came back empty twice or timed out.
+
+    The buffer is cleared first, so a stray prompt from the command before cannot end
+    this one early with empty output.
+    """
+    for _attempt in range(2):
+        connection.clear_buffer()
+        try:
+            output: str = connection.send_command(command, expect_string=prompt, read_timeout=120)
+        except ReadTimeout:
+            continue
+        if output.strip():
+            return output
+    return None
 
 
 if __name__ == "__main__":

@@ -1,0 +1,44 @@
+[
+  {
+    "interface": "Port1/1",
+    "port": "1/1",
+    "level": "1",
+    "state": "UP",
+    "uptime": "1:41:36",
+    "priority": 127,
+    "hold_time_seconds": 23,
+    "system_id": "0c04.d270.0084",
+    "host_name": "fe-01",
+    "status": "ACTIVE",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "interface": "Port1/2",
+    "port": "1/2",
+    "level": "1",
+    "state": "UP",
+    "uptime": "0:50:42",
+    "priority": 127,
+    "hold_time_seconds": 22,
+    "system_id": "0c03.90b8.0084",
+    "host_name": "fe-03",
+    "status": "ACTIVE",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "interface": "Port1/3",
+    "port": "1/3",
+    "level": "1",
+    "state": "UP",
+    "uptime": "0:49:16",
+    "priority": 127,
+    "hold_time_seconds": 25,
+    "system_id": "0ca3.ded8.0084",
+    "host_name": "fe-04",
+    "status": "ACTIVE",
+    "area": "HOME",
+    "area_name": null
+  }
+]

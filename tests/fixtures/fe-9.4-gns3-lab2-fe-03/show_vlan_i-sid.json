@@ -1,0 +1,50 @@
+[
+  {
+    "vlan_id": 1,
+    "isid": null,
+    "isid_name": null,
+    "vlan_name": null
+  },
+  {
+    "vlan_id": 10,
+    "isid": 20010,
+    "isid_name": "ISID-20010",
+    "vlan_name": "users"
+  },
+  {
+    "vlan_id": 20,
+    "isid": 20020,
+    "isid_name": "ISID-20020",
+    "vlan_name": "voice"
+  },
+  {
+    "vlan_id": 30,
+    "isid": 20030,
+    "isid_name": "ISID-20030",
+    "vlan_name": "printers"
+  },
+  {
+    "vlan_id": 103,
+    "isid": null,
+    "isid_name": null,
+    "vlan_name": null
+  },
+  {
+    "vlan_id": 4048,
+    "isid": 15999999,
+    "isid_name": "Onboarding I-SID",
+    "vlan_name": "onboarding-vlan"
+  },
+  {
+    "vlan_id": 4051,
+    "isid": null,
+    "isid_name": null,
+    "vlan_name": null
+  },
+  {
+    "vlan_id": 4052,
+    "isid": null,
+    "isid_name": null,
+    "vlan_name": null
+  }
+]

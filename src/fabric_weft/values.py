@@ -8,7 +8,9 @@ so an unknown value never turns silently into a wrong one.
 from __future__ import annotations
 
 import re
+from collections.abc import Callable
 from datetime import datetime, timedelta
+from typing import TypeVar
 
 # Placeholders Fabric Engine prints for "no value".
 _EMPTY_MARKERS = frozenset({"", "-", "--", "n/a", "none"})
@@ -19,6 +21,8 @@ _FALSE_WORDS = frozenset({"false", "disable", "disabled", "down", "no"})
 # slot/port or slot/port/sub-port (channelized). A pattern string, for use inside row patterns.
 PORT = r"\d+/\d+(?:/\d+)?"
 _PORT = re.compile(PORT)
+# The front port in an interface name: 'Port1/1' (IS-IS), 'Port-1/1' (FDB), '1/1' (SPBM FIB).
+_INTERFACE_PORT = re.compile(rf"(?:Port-?)?(?P<port>{PORT})")
 # '1/1', '1/1-1/4,2/1': a port list as typed after a command.
 PORT_LIST = rf"{PORT}(?:-{PORT})?(?:,{PORT}(?:-{PORT})?)*"
 _MAC_DIGITS = re.compile(r"[0-9a-f]{12}")
@@ -36,9 +40,17 @@ def optional(cell: str) -> str | None:
     return None if cell.lower() in _EMPTY_MARKERS else cell
 
 
-def optional_int(cell: str) -> int | None:
+ValueT = TypeVar("ValueT")
+
+
+def optional_as(convert: Callable[[str], ValueT], cell: str) -> ValueT | None:
+    """Convert the cell, or None for a placeholder: optional_as(mac, '-') -> None."""
     value = optional(cell)
-    return None if value is None else int(value)
+    return None if value is None else convert(value)
+
+
+def optional_int(cell: str) -> int | None:
+    return optional_as(int, cell)
 
 
 def flag(cell: str) -> bool:
@@ -81,6 +93,16 @@ def ports(cell: str) -> tuple[str, ...]:
         first, _, last = chunk.partition("-")
         expanded.extend(_port_range(first, last) if last else (port(first),))
     return tuple(expanded)
+
+
+def port_of(interface: str) -> str | None:
+    """The front port an interface name refers to, None for anything else.
+
+    'Port1/1', 'Port-1/1', '1/1' -> '1/1'; 'Port-cpp', 'cpp', 'Mlt2' -> None. Other
+    interface kinds keep their name in the record until a capture shows their form.
+    """
+    found = _INTERFACE_PORT.fullmatch(interface.strip())
+    return found["port"] if found else None
 
 
 def port(cell: str) -> str:

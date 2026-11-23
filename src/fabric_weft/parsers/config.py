@@ -1,7 +1,8 @@
-"""The configuration: `show running-config` (decision 0014)."""
+"""The configuration: `show running-config` (decisions 0014, 0016)."""
 
 from __future__ import annotations
 
+import re
 from collections.abc import Iterator, Sequence
 from dataclasses import dataclass
 
@@ -18,30 +19,20 @@ class ConfigCommand:
     command: str
 
 
+# Commands that open a context, closed again by `exit` (decision 0016). Fabric Engine
+# prints no indentation, so only the command itself says that it opens a context.
+# From the 9.4 captures; a context opener not in this list shows up as a reported
+# "'exit' without a context to close", never as a silent misread.
+_OPENER = re.compile(
+    r"interface \S+ \S+"
+    r"|router (?:isis|ospf|rip|bgp|vrf \S+)"
+    r"|mgmt (?:oob|clip|vlan \d+)"
+    r"|i-sid \d+ elan(?:-transparent)?"
+)
+
+
 def _is_comment(text: str) -> bool:
     return text.startswith("#")
-
-
-def _context_openers(lines: Sequence[str]) -> set[int]:
-    """Indexes of the lines that open a context: the first command of a run ending in `exit`.
-
-    A run starts after the previous `exit`, comment or blank line. Blank lines directly
-    before `exit` belong to the run (9.4 prints one there).
-    """
-    openers: set[int] = set()
-    for end, line in enumerate(lines):
-        if line.strip() != "exit":
-            continue
-        index = end - 1
-        while index >= 0 and not lines[index].strip():
-            index -= 1
-        while index >= 0 and lines[index].strip() and not _is_comment(lines[index].strip()):
-            if lines[index].strip() == "exit":
-                break
-            index -= 1
-        if index + 1 < end and lines[index + 1].strip():
-            openers.add(index + 1)
-    return openers
 
 
 def _section_name(lines: Sequence[str], index: int) -> str | None:
@@ -68,7 +59,6 @@ def parse_running_config(output: Output) -> Iterator[ConfigCommand]:
         output.skip("", "no 'end' line: the output looks cut off")
         end = len(lines)
     body = lines[start:end]
-    openers = _context_openers(body)
 
     section: str | None = None
     context: str | None = None
@@ -77,6 +67,9 @@ def parse_running_config(output: Output) -> Iterator[ConfigCommand]:
         if not text:
             continue
         if _is_comment(text):
+            if context is not None:
+                output.skip(line, f"context {context!r} is not closed by 'exit'")
+                context = None
             section = _section_name(body, index) or section
             continue
         if text == "exit":
@@ -84,7 +77,9 @@ def parse_running_config(output: Output) -> Iterator[ConfigCommand]:
                 output.skip(line, "'exit' without a context to close")
             context = None
             continue
-        if index in openers:
+        if _OPENER.fullmatch(text):
+            if context is not None:
+                output.skip(line, f"context {context!r} is not closed by 'exit'")
             yield ConfigCommand(section, None, text)
             context = text
             continue

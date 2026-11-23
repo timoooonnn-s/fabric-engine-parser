@@ -6,7 +6,8 @@ from collections.abc import Iterator
 from dataclasses import asdict, dataclass
 from typing import Any, Generic, TypeVar
 
-RecordT = TypeVar("RecordT")
+# Covariant: the result is immutable, so a ParseResult[Mlt] is a ParseResult[object].
+RecordT_co = TypeVar("RecordT_co", covariant=True)
 
 
 @dataclass(frozen=True, slots=True)
@@ -18,17 +19,17 @@ class SkippedLine:
 
 
 @dataclass(frozen=True, slots=True)
-class ParseResult(Generic[RecordT]):
+class ParseResult(Generic[RecordT_co]):
     """The records of one command's output, plus every line that was skipped.
 
     Iterating the result iterates the records, so `for mlt in parse(...)` works.
     """
 
     command: str
-    records: tuple[RecordT, ...]
+    records: tuple[RecordT_co, ...]
     skipped: tuple[SkippedLine, ...] = ()
 
-    def __iter__(self) -> Iterator[RecordT]:
+    def __iter__(self) -> Iterator[RecordT_co]:
         return iter(self.records)
 
     def __len__(self) -> int:

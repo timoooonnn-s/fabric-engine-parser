@@ -79,11 +79,12 @@ class PortIsid:
     ifindex: int
     isid: int
     vlan_id: int | None  # the platform VLAN of a CVLAN I-SID; None: 'N/A'
-    customer_vid: int | None  # None: 'N/A' (a CVLAN I-SID has no customer VID)
+    customer_vid: int | None  # None: 'N/A' (CVLAN I-SID) or untagged traffic
+    untagged_traffic: bool  # C-VID printed 'untag': the port's untagged frames join the I-SID
     isid_type: str  # 'CVLAN', 'ELAN', ... kept as printed
     origin: str  # flag slots as printed, see `Isid.origin`
     isid_name: str | None
-    bpdu: str | None  # as printed; None when empty
+    bpdu: str | None  # as printed ('disabled'); None when empty
     mac_suni: bool
 
 
@@ -124,6 +125,13 @@ _STATE_COLUMNS = (
     r"(?:\s+(?P<reason>.*?))?(?:\s+(?P<changed>\d\d/\d\d/\d\d \d\d:\d\d:\d\d))?"
 )
 _STATE_ROW = re.compile(_STATE_COLUMNS)
+_PORT_VLANS_COLUMNS = (
+    rf"(?P<port>{PORT})\s+(?P<tagging>\S+)\s+(?P<discard_tagged>\S+)\s+(?P<discard_untagged>\S+)\s+"
+    r"(?P<default_vlan>\d+)\s+(?P<vlans>[\d,]+)\s+(?P<port_type>\S+)\s+(?P<untag_default>\S+)\s+"
+    r"(?P<dynamic>\S+)(?:\s+(?P<untagged>[\d,]+))?"
+)
+_PORT_VLANS_ROW = re.compile(_PORT_VLANS_COLUMNS)
+_PORT_VLANS_ROW_9X = re.compile(_PORT_VLANS_COLUMNS + r"\s+(?P<flex_uni>\S+)")
 _STATE_ROW_9X = re.compile(_STATE_COLUMNS + r"\s+(?P<flex_uni>\S+)")  # 9.x adds FA/Flex UNI
 
 
@@ -225,36 +233,33 @@ def _vlan_ids(cell: str) -> tuple[int, ...]:
 def parse_port_vlans(output: Output) -> Iterator[PortVlans]:
     """`show interfaces gigabitEthernet vlan` -> one PortVlans per port.
 
-    Cut by column: the VLAN lists can be empty, and long ones wrap onto the next line.
+    Read with a row pattern, not by column: 9.4 does not wrap a long VLAN IDS list, it
+    lets it run into the next columns and shifts the rest of the row (lab2 fe-01, 1/12).
+    Every cell is one word, and only UNTAG VLANS can be empty.
     """
     table = output.table("TAGGING", "DEFVLAN")
     if table is None:
         return
     has_flex_uni = table.has_columns("FLEX")
-    labels = ["NUM", "TAGGING", "TAGFRAM", "UNTAGFRAM", "VLANID", "IDS", "TYPE", "DEFVLAN"]
-    labels += ["VLANS", "VLANS"]  # DYNAMIC VLANS, UNTAG VLANS
-    labels += ["FLEX"] if has_flex_uni else []
-    columns = Columns.locate(table.header, *labels)
+    pattern = _PORT_VLANS_ROW_9X if has_flex_uni else _PORT_VLANS_ROW
 
-    def build(cells: list[str]) -> PortVlans:
-        number, tagging, discard_tagged, discard_untagged, default_vlan, vlans = cells[:6]
-        port_type, untag_default, dynamic, untagged, *flex_uni = cells[6:]
-        default_vlan_id = int(default_vlan)
+    def build(row: str) -> PortVlans:
+        cells = fullmatch(pattern, row)
         return PortVlans(
-            port=port(number),
-            tagging=flag(tagging),
-            discard_tagged_frames=flag(discard_tagged),
-            discard_untagged_frames=flag(discard_untagged),
-            default_vlan_id=default_vlan_id or None,
-            vlan_ids=_vlan_ids(vlans),
-            port_type=port_type,
-            untag_default_vlan=flag(untag_default),
-            dynamic_vlans=optional(dynamic),
-            untagged_vlan_ids=_vlan_ids(untagged),
-            flex_uni=flag(flex_uni[0]) if flex_uni else None,
+            port=cells["port"],
+            tagging=flag(cells["tagging"]),
+            discard_tagged_frames=flag(cells["discard_tagged"]),
+            discard_untagged_frames=flag(cells["discard_untagged"]),
+            default_vlan_id=int(cells["default_vlan"]) or None,
+            vlan_ids=_vlan_ids(cells["vlans"]),
+            port_type=cells["port_type"],
+            untag_default_vlan=flag(cells["untag_default"]),
+            dynamic_vlans=optional(cells["dynamic"]),
+            untagged_vlan_ids=_vlan_ids(cells["untagged"] or ""),
+            flex_uni=flag(cells["flex_uni"]) if has_flex_uni else None,
         )
 
-    yield from output.build_each(columns.cut_rows(table.rows), build)
+    yield from output.build_each(table.rows, build)
 
 
 @parser("show interfaces gigabitethernet i-sid", arguments=PORT_LIST)
@@ -291,7 +296,8 @@ def parse_port_isids(output: Output) -> Iterator[PortIsid]:
             ifindex=int(ifindex),
             isid=int(isid),
             vlan_id=optional_int(vlan_id),
-            customer_vid=optional_int(customer_vid),
+            customer_vid=None if customer_vid == "untag" else optional_int(customer_vid),
+            untagged_traffic=customer_vid == "untag",
             isid_type=isid_type,
             origin=origin,
             isid_name=optional(name),

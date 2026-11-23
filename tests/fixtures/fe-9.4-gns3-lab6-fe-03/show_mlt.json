@@ -1,0 +1,26 @@
+[
+  {
+    "mlt_id": 20,
+    "ifindex": 6163,
+    "name": "uplink-fe01-fe02",
+    "port_type": "trunk",
+    "admin_type": "norm",
+    "current_type": "norm",
+    "members": [],
+    "vlan_ids": [
+      60,
+      103
+    ],
+    "origin": "CONFIG",
+    "designated_port": null,
+    "lacp_enabled": true,
+    "lacp_oper_up": false,
+    "created_on": "LOCAL",
+    "remote_members": [],
+    "programmed_on": "NONE",
+    "dot1q_encapsulation": true,
+    "lossless": false,
+    "private_vlan": null,
+    "flex_uni": false
+  }
+]

@@ -38,6 +38,15 @@ def fullmatch(pattern: re.Pattern[str], line: str) -> re.Match[str]:
     return found
 
 
+def _as_line(row: object) -> str:
+    """A row for a skipped-line report: as printed, or its cut cells joined again."""
+    if isinstance(row, str):
+        return row
+    if isinstance(row, Iterable):
+        return "  ".join(map(str, row))
+    return str(row)
+
+
 class Output:
     """Handed to every parser. Collects skipped lines; raises them in strict mode."""
 
@@ -53,13 +62,17 @@ class Output:
         self._raise_for_device_error()
 
     def _raise_for_device_error(self) -> None:
-        """Fabric Engine prints errors as '% <message>', often under a '^' marker line."""
+        """Fabric Engine prints errors as '% <message>' (often under a '^' marker line) or,
+        for some commands, as 'Error: <message>' ('show ip route vrf X' for an unknown VRF).
+        """
         for line in self.lines:
             text = line.strip()
             if not text or _ERROR_CARET.match(text):
                 continue
             if text.startswith("%"):
                 raise DeviceError(self.command, text.lstrip("% "))
+            if text.startswith("Error:"):
+                raise DeviceError(self.command, text.removeprefix("Error:").strip())
             return
 
     @property
@@ -111,4 +124,4 @@ class Output:
             try:
                 yield build(row)
             except ValueError as error:
-                self.skip(row if isinstance(row, str) else "  ".join(map(str, row)), str(error))
+                self.skip(_as_line(row), str(error))

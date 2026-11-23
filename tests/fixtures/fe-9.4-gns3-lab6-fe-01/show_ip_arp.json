@@ -1,0 +1,46 @@
+[
+  {
+    "vrf": "GlobalRouter",
+    "ip_address": "10.255.0.1",
+    "mac": "00:00:00:00:00:01",
+    "vlan_id": null,
+    "port": null,
+    "entry_type": "LOCAL",
+    "ttl_seconds": 21600,
+    "tunnel": null,
+    "l3_access": "GlobalRouter"
+  },
+  {
+    "vrf": "GlobalRouter",
+    "ip_address": "192.168.255.1",
+    "mac": "0c:52:cf:92:01:01",
+    "vlan_id": 4000,
+    "port": null,
+    "entry_type": "LOCAL",
+    "ttl_seconds": 21600,
+    "tunnel": null,
+    "l3_access": "GlobalRouter"
+  },
+  {
+    "vrf": "GlobalRouter",
+    "ip_address": "192.168.255.2",
+    "mac": "0c:e7:42:7f:01:01",
+    "vlan_id": 4000,
+    "port": "1/1",
+    "entry_type": "DYNAMIC",
+    "ttl_seconds": 21490,
+    "tunnel": "fe-02",
+    "l3_access": "GlobalRouter"
+  },
+  {
+    "vrf": "GlobalRouter",
+    "ip_address": "192.168.255.3",
+    "mac": "ff:ff:ff:ff:ff:ff",
+    "vlan_id": 4000,
+    "port": null,
+    "entry_type": "LOCAL",
+    "ttl_seconds": 21600,
+    "tunnel": null,
+    "l3_access": "GlobalRouter"
+  }
+]

@@ -1,0 +1,16 @@
+[
+  {
+    "releases": [
+      {
+        "name": "FEGNS3.9.4.0.0.GA",
+        "labels": [
+          "Primary Release",
+          "Signed Release"
+        ]
+      }
+    ],
+    "primary_release": "FEGNS3.9.4.0.0.GA",
+    "auto_commit": true,
+    "commit_timeout_minutes": 10
+  }
+]

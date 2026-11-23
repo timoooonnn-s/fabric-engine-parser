@@ -61,9 +61,19 @@ Output that is `Key : value` fields under section headers, not a table
 (`show sys-info`), is read with `output.section("General Info")` instead (decision 0009).
 See `parsers/system.py`.
 
-Use the converters in `values.py` (`flag`, `optional`, `ports`, `mac`, `int_list`,
-`timestamp`, `duration`) so the same value looks the same in every record (decision 0004). Keep open
-vocabularies as strings.
+Use the converters in `values.py` so the same value looks the same in every record
+(decision 0004): `flag`, `optional`, `optional_as` (convert unless a placeholder),
+`optional_int`, `ports`, `port`, `port_of` (front port from an interface name), `mac`,
+`system_id`, `nickname`, `int_list`, `timestamp`, `duration`. Keep open vocabularies as
+strings.
+
+When a column header is missing, `Columns.locate` raises `ValueError`; the registry turns
+that into a skipped line (strict: `ParseError`), so a parser needs no handling for it.
+When one command prints two kinds of records (`show lacp interface`: ports and MLT
+aggregators), give the second kind its own `@parser(command, register=False)` and add it
+to `ALSO_PARSED` in `tests/test_fixtures.py` (decision 0017).
+When one record is spread over several tables (`show mlt`, `show lacp interface`), read
+the first table into a dict per key and add the others with `_merge` in `parsers/mlt.py`.
 
 ## 3. Export it
 
@@ -75,5 +85,6 @@ Add the record and the `parse_...` function to `src/fabric_weft/__init__.py`.
 pytest --update-golden
 ```
 
-Read the generated `.json` against the `.txt` once, by eye. Then add the command to the
+Read the generated `.json` against the `.txt` once, by eye. `ruff check .`,
+`ruff format --check .` and `mypy` must pass too. Then add the command to the
 README table and to `council/PLAN.md`.

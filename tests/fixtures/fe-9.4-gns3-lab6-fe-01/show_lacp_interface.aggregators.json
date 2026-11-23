@@ -1,0 +1,43 @@
+[
+  {
+    "mlt_id": 10,
+    "ifindex": 6153,
+    "mac": "0c:52:cf:92:00:05",
+    "collector_max_delay": 32768,
+    "aggregate_or_individual": "aggr",
+    "members": [
+      "1/6",
+      "1/7"
+    ],
+    "oper_up": true,
+    "last_change_uptime": "0:08:45",
+    "last_change_ago": "0:03:46",
+    "actor_system_priority": 32768,
+    "actor_system_id": "0c:52:cf:92:00:00",
+    "actor_admin_key": 10,
+    "actor_oper_key": 10,
+    "partner_system_priority": 32768,
+    "partner_system_id": "0c:e7:42:7f:00:00",
+    "partner_oper_key": 10
+  },
+  {
+    "mlt_id": 20,
+    "ifindex": 6163,
+    "mac": "0c:52:cf:92:00:04",
+    "collector_max_delay": 32768,
+    "aggregate_or_individual": "aggr",
+    "members": [
+      "1/5"
+    ],
+    "oper_up": true,
+    "last_change_uptime": "0:08:57",
+    "last_change_ago": "0:03:34",
+    "actor_system_priority": 32768,
+    "actor_system_id": "00:00:00:00:00:00",
+    "actor_admin_key": 20,
+    "actor_oper_key": 20,
+    "partner_system_priority": 32768,
+    "partner_system_id": "0c:e7:42:7f:00:00",
+    "partner_oper_key": 20
+  }
+]

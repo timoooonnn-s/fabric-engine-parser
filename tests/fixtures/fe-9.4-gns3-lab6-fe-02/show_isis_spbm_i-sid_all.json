@@ -1,0 +1,200 @@
+[
+  {
+    "isid": 15999999,
+    "nickname": "0.00.14",
+    "bvlan": 4051,
+    "system_id": "0c44.5807.0084",
+    "origin": "discover",
+    "host_name": "fe-04",
+    "isid_name": "Onboarding I-SID",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "isid": 20010,
+    "nickname": "0.00.14",
+    "bvlan": 4052,
+    "system_id": "0c44.5807.0084",
+    "origin": "discover",
+    "host_name": "fe-04",
+    "isid_name": "ISID-20010",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "isid": 20020,
+    "nickname": "0.00.14",
+    "bvlan": 4052,
+    "system_id": "0c44.5807.0084",
+    "origin": "discover",
+    "host_name": "fe-04",
+    "isid_name": "ISID-20020",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "isid": 20030,
+    "nickname": "0.00.14",
+    "bvlan": 4052,
+    "system_id": "0c44.5807.0084",
+    "origin": "discover",
+    "host_name": "fe-04",
+    "isid_name": "ISID-20030",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "isid": 15999999,
+    "nickname": "0.00.11",
+    "bvlan": 4051,
+    "system_id": "0c52.cf92.0084",
+    "origin": "discover",
+    "host_name": "fe-01",
+    "isid_name": "Onboarding I-SID",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "isid": 20040,
+    "nickname": "0.00.11",
+    "bvlan": 4052,
+    "system_id": "0c52.cf92.0084",
+    "origin": "discover",
+    "host_name": "fe-01",
+    "isid_name": "ISID-20040",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "isid": 20060,
+    "nickname": "0.00.11",
+    "bvlan": 4052,
+    "system_id": "0c52.cf92.0084",
+    "origin": "discover",
+    "host_name": "fe-01",
+    "isid_name": "ISID-20060",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "isid": 30100,
+    "nickname": "0.00.11",
+    "bvlan": 4052,
+    "system_id": "0c52.cf92.0084",
+    "origin": "discover",
+    "host_name": "fe-01",
+    "isid_name": "ISID-30100",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "isid": 40000,
+    "nickname": "0.00.11",
+    "bvlan": 4052,
+    "system_id": "0c52.cf92.0084",
+    "origin": "discover",
+    "host_name": "fe-01",
+    "isid_name": "ISID-40000",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "isid": 15999999,
+    "nickname": "0.00.13",
+    "bvlan": 4051,
+    "system_id": "0cbc.fad2.0084",
+    "origin": "discover",
+    "host_name": "fe-03",
+    "isid_name": "Onboarding I-SID",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "isid": 20010,
+    "nickname": "0.00.13",
+    "bvlan": 4052,
+    "system_id": "0cbc.fad2.0084",
+    "origin": "discover",
+    "host_name": "fe-03",
+    "isid_name": "ISID-20010",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "isid": 20020,
+    "nickname": "0.00.13",
+    "bvlan": 4052,
+    "system_id": "0cbc.fad2.0084",
+    "origin": "discover",
+    "host_name": "fe-03",
+    "isid_name": "ISID-20020",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "isid": 20030,
+    "nickname": "0.00.13",
+    "bvlan": 4052,
+    "system_id": "0cbc.fad2.0084",
+    "origin": "discover",
+    "host_name": "fe-03",
+    "isid_name": "ISID-20030",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "isid": 15999999,
+    "nickname": "0.00.12",
+    "bvlan": 4051,
+    "system_id": "0ce7.427f.0084",
+    "origin": "config",
+    "host_name": "fe-02",
+    "isid_name": "Onboarding I-SID",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "isid": 20040,
+    "nickname": "0.00.12",
+    "bvlan": 4052,
+    "system_id": "0ce7.427f.0084",
+    "origin": "config",
+    "host_name": "fe-02",
+    "isid_name": "ISID-20040",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "isid": 20060,
+    "nickname": "0.00.12",
+    "bvlan": 4052,
+    "system_id": "0ce7.427f.0084",
+    "origin": "config",
+    "host_name": "fe-02",
+    "isid_name": "ISID-20060",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "isid": 30100,
+    "nickname": "0.00.12",
+    "bvlan": 4052,
+    "system_id": "0ce7.427f.0084",
+    "origin": "config",
+    "host_name": "fe-02",
+    "isid_name": "ISID-30100",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "isid": 40000,
+    "nickname": "0.00.12",
+    "bvlan": 4052,
+    "system_id": "0ce7.427f.0084",
+    "origin": "config",
+    "host_name": "fe-02",
+    "isid_name": "ISID-40000",
+    "area": "HOME",
+    "area_name": null
+  }
+]

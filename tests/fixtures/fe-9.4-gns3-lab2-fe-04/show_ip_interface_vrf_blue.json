@@ -1,0 +1,15 @@
+[
+  {
+    "vrf": "blue",
+    "interface": "Vlan104",
+    "ip_address": "10.100.4.1",
+    "prefix_length": 24,
+    "admin_enabled": true,
+    "oper_up": true,
+    "vlan_id": 104,
+    "brouter_port": false,
+    "ipsec_enabled": false,
+    "l3_access": "blue",
+    "ip_name": null
+  }
+]

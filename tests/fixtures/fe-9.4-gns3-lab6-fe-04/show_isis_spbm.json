@@ -1,0 +1,24 @@
+[
+  {
+    "instance": 1,
+    "bvlans": [
+      4051,
+      4052
+    ],
+    "primary_bvlan": 4051,
+    "nickname": "0.00.14",
+    "lsdb_trap": false,
+    "ip_shortcuts": true,
+    "ipv6_shortcuts": false,
+    "multicast": false,
+    "spb_pim_gateway": false,
+    "stp_multi_homing": false,
+    "origin": "config",
+    "smlt_split_beb": "primary",
+    "smlt_virtual_bmac": "00:00:00:00:00:00",
+    "smlt_peer_system_id": null,
+    "smlt_peer_nickname": null,
+    "smlt_peer_host_name": null,
+    "remote_nickname": "0.00.00"
+  }
+]

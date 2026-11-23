@@ -48,7 +48,9 @@ and called directly.
 | `show isis spbm i-sid all` / `config` / `discover` | `parse_spbm_isids` | `SpbmIsid` |
 | `show mlt` | `parse_mlts` | `Mlt` (all four tables merged) |
 | `show virtual-ist` | `parse_virtual_ist` | `VirtualIst` |
+| `show smlt mlt` | `parse_smlt_mlts` | `SmltMlt` |
 | `show lacp interface` | `parse_lacp_ports` | `LacpPort` (with `LacpParticipant`) |
+| `show lacp interface` (aggregator tables) | `parse_lacp_aggregators`, called directly | `LacpAggregator` |
 | `show lldp neighbor summary` | `parse_lldp_summary` | `LldpNeighborSummary` |
 | `show lldp neighbor` | `parse_lldp_neighbors` | `LldpNeighbor` |
 | `show sys-info` | `parse_sys_info` | `SysInfo` (name, release, model, uptime, MACs) |
@@ -62,11 +64,14 @@ and called directly.
 | `show isis spbm nick-name` | `parse_spbm_nicknames` | `SpbmNickname` |
 | `show isis spbm unicast-fib` | `parse_spbm_unicast_fib` | `SpbmUnicastRoute` |
 | `show ip vrf` | `parse_vrfs` | `Vrf` |
+| `show ip route [vrf X]` | `parse_ip_routes` | `IpRoute` |
+| `show ip arp [vrf X]` | `parse_arp_entries` | `ArpEntry` |
+| `show ip interface [vrf X]` | `parse_ip_interfaces` | `IpInterface` |
 | `show running-config` | `parse_running_config` | `ConfigCommand` (section, context, command as printed) |
 
 The records are frozen dataclasses. Their fields are listed in the source, one module per
-command family under `src/fabric_weft/parsers/`. Next up: routes, ARP and IP
-interfaces once the lab has L3 (see `council/PLAN.md`).
+command family under `src/fabric_weft/parsers/`. Next up: vIST/SMLT
+(see `council/PLAN.md`).
 
 ## What you get back
 
@@ -85,14 +90,21 @@ What the values look like:
 - Port lists are expanded: `'1/1-1/3'` becomes `('1/1', '1/2', '1/3')`.
 - MACs come out as `aa:bb:cc:dd:ee:ff`.
 - Uptimes come out as `datetime.timedelta`.
+- Numbers printed in hex (`0xc0`) become `int`. VLAN `0` means "no VLAN": `None` or `()`.
+- IS-IS system IDs stay `xxxx.xxxx.xxxx`, and every IS-IS and SPBM record carries
+  `system_id`, so adjacencies, nicknames, FIB entries and the LSDB join on it.
+- Interfaces keep their printed name (`Port1/1`, `Port-cpp`); records that have one
+  also give `port` (`'1/1'`, or `None` when it is not a front port).
 - Words the switch can extend, such as VLAN type or I-SID type, stay as printed.
+- `show running-config` is not interpreted: one `ConfigCommand` per line, with the
+  section and context it stands in (decision 0014).
 
 ## Errors
 
 | | default | `strict=True` |
 |---|---|---|
 | a line that can't be read | skipped, listed in `result.skipped` | `ParseError` |
-| the switch answered `% Invalid input ...` | `DeviceError` | `DeviceError` |
+| the switch answered `% Invalid input ...` or `Error: ...` | `DeviceError` | `DeviceError` |
 | no parser for the command | `UnknownCommandError` | `UnknownCommandError` |
 
 All three exceptions derive from `WeftError`. Use `strict=True` where a missed line
@@ -105,6 +117,7 @@ shows up when the account lacks the privilege for a command.
 pytest                    # every fixture is parsed in strict mode and compared to its .json
 pytest --update-golden    # after adding a capture or changing a parser: review the diff!
 ruff check . && ruff format --check .
+mypy                      # strict, on src and tests (decision 0015)
 python tools/capture.py --host <lab-switch> --source fe-9.4-gns3   # needs '.[capture]'
 ```
 

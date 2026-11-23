@@ -10,7 +10,7 @@ from datetime import timedelta
 from fabric_weft.fields import required
 from fabric_weft.output import Output
 from fabric_weft.registry import parser
-from fabric_weft.values import duration, flag, mac, optional, optional_int
+from fabric_weft.values import duration, flag, mac, optional, optional_as, optional_int
 
 
 @dataclass(frozen=True, slots=True)
@@ -71,7 +71,6 @@ def parse_sys_info(output: Output) -> Iterator[SysInfo]:
     def build() -> SysInfo:
         description = required(general, "SysDescr")
         release = _RELEASE.search(description)
-        management_mac = optional(chassis.get("MgmtMacAddr", ""))
         return SysInfo(
             sys_name=required(general, "SysName"),
             description=description,
@@ -85,7 +84,7 @@ def parse_sys_info(output: Output) -> Iterator[SysInfo]:
             hardware_revision=optional(chassis.get("H/W Revision", "")),
             part_number=optional(chassis.get("Part Number", "")),
             base_mac=mac(required(chassis, "BaseMacAddr")),
-            management_mac=mac(management_mac) if management_mac else None,
+            management_mac=optional_as(mac, chassis.get("MgmtMacAddr", "")),
             slot_count=int(required(chassis, "NumSlots")),
             port_count=int(required(chassis, "NumPorts")),
             system_mtu=optional_int(chassis.get("System MTU", "")),

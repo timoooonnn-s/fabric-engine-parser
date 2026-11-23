@@ -1,0 +1,70 @@
+[
+  {
+    "vlan_id": 1,
+    "ports": [],
+    "active_ports": [],
+    "static_ports": [],
+    "not_allowed_ports": []
+  },
+  {
+    "vlan_id": 40,
+    "ports": [
+      "1/4"
+    ],
+    "active_ports": [
+      "1/4"
+    ],
+    "static_ports": [],
+    "not_allowed_ports": []
+  },
+  {
+    "vlan_id": 50,
+    "ports": [
+      "1/5",
+      "1/6"
+    ],
+    "active_ports": [
+      "1/5",
+      "1/6"
+    ],
+    "static_ports": [],
+    "not_allowed_ports": []
+  },
+  {
+    "vlan_id": 4048,
+    "ports": [],
+    "active_ports": [],
+    "static_ports": [],
+    "not_allowed_ports": []
+  },
+  {
+    "vlan_id": 4051,
+    "ports": [
+      "1/1",
+      "1/2",
+      "1/3"
+    ],
+    "active_ports": [
+      "1/1",
+      "1/2",
+      "1/3"
+    ],
+    "static_ports": [],
+    "not_allowed_ports": []
+  },
+  {
+    "vlan_id": 4052,
+    "ports": [
+      "1/1",
+      "1/2",
+      "1/3"
+    ],
+    "active_ports": [
+      "1/1",
+      "1/2",
+      "1/3"
+    ],
+    "static_ports": [],
+    "not_allowed_ports": []
+  }
+]

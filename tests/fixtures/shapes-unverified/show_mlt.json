@@ -13,6 +13,7 @@
     "vlan_ids": [
       4000
     ],
+    "origin": null,
     "designated_port": "1/47",
     "lacp_enabled": false,
     "lacp_oper_up": false,
@@ -54,6 +55,7 @@
       2600,
       2601
     ],
+    "origin": null,
     "designated_port": "1/1",
     "lacp_enabled": true,
     "lacp_oper_up": true,
@@ -81,6 +83,7 @@
     "vlan_ids": [
       100
     ],
+    "origin": null,
     "designated_port": "2/1/1",
     "lacp_enabled": false,
     "lacp_oper_up": false,

@@ -1,0 +1,18 @@
+************************************************************************************
+		Command Execution Time: Sun Nov 22 18:30:23 2026 UTC
+************************************************************************************
+========================================================================================================================
+                                                  IP Route - VRF blue
+========================================================================================================================
+                                                     NH                      INTER   
+DST             MASK            NEXT                 VRF/ISID         COST   FACE     PROT   AGE TYPE   PRF ACCESS      
+------------------------------------------------------------------------------------------------------------------------
+10.100.4.0      255.255.255.0   fe-04                blue             20     4051     ISIS   0   IBSV   7   Trusted     
+
+1 out of 1 Total Num of Route Entries, 1 Total Num of Dest Networks displayed.
+------------------------------------------------------------------------------------------------------------------------
+TYPE Legend:
+I=Indirect Route, D=Direct Route, A=Alternative Route, B=Best Route, E=Ecmp Route, 
+U=Unresolved Route, N=Not in HW, F=Replaced by FTN, V=IPVPN Route, S=SPBM Route, R=Remote SPBM Route
+PROTOCOL Legend:
+v=Inter-VRF route redistributed

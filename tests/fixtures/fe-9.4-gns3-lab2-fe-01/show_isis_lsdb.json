@@ -1,0 +1,122 @@
+[
+  {
+    "lsp_id": "0c03.90b8.0084.00-00",
+    "system_id": "0c03.90b8.0084",
+    "level": "1",
+    "lifetime_seconds": 580,
+    "sequence_number": 13,
+    "checksum": 62312,
+    "host_name": "fe-03",
+    "area": "HOME"
+  },
+  {
+    "lsp_id": "0c03.90b8.0084.00-01",
+    "system_id": "0c03.90b8.0084",
+    "level": "1",
+    "lifetime_seconds": 580,
+    "sequence_number": 12,
+    "checksum": 22808,
+    "host_name": "fe-03",
+    "area": "HOME"
+  },
+  {
+    "lsp_id": "0c03.90b8.0084.00-02",
+    "system_id": "0c03.90b8.0084",
+    "level": "1",
+    "lifetime_seconds": 1051,
+    "sequence_number": 1,
+    "checksum": 26696,
+    "host_name": "fe-03",
+    "area": "HOME"
+  },
+  {
+    "lsp_id": "0c03.90b8.0084.00-03",
+    "system_id": "0c03.90b8.0084",
+    "level": "1",
+    "lifetime_seconds": 715,
+    "sequence_number": 5,
+    "checksum": 16858,
+    "host_name": "fe-03",
+    "area": "HOME"
+  },
+  {
+    "lsp_id": "0c04.d270.0084.00-00",
+    "system_id": "0c04.d270.0084",
+    "level": "1",
+    "lifetime_seconds": 1109,
+    "sequence_number": 15,
+    "checksum": 9022,
+    "host_name": "fe-01",
+    "area": "HOME"
+  },
+  {
+    "lsp_id": "0c04.d270.0084.00-01",
+    "system_id": "0c04.d270.0084",
+    "level": "1",
+    "lifetime_seconds": 1109,
+    "sequence_number": 8,
+    "checksum": 44218,
+    "host_name": "fe-01",
+    "area": "HOME"
+  },
+  {
+    "lsp_id": "0c91.dc31.0084.00-00",
+    "system_id": "0c91.dc31.0084",
+    "level": "1",
+    "lifetime_seconds": 1111,
+    "sequence_number": 15,
+    "checksum": 9952,
+    "host_name": "fe-02",
+    "area": "HOME"
+  },
+  {
+    "lsp_id": "0c91.dc31.0084.00-01",
+    "system_id": "0c91.dc31.0084",
+    "level": "1",
+    "lifetime_seconds": 1107,
+    "sequence_number": 7,
+    "checksum": 48835,
+    "host_name": "fe-02",
+    "area": "HOME"
+  },
+  {
+    "lsp_id": "0ca3.ded8.0084.00-00",
+    "system_id": "0ca3.ded8.0084",
+    "level": "1",
+    "lifetime_seconds": 668,
+    "sequence_number": 10,
+    "checksum": 49278,
+    "host_name": "fe-04",
+    "area": "HOME"
+  },
+  {
+    "lsp_id": "0ca3.ded8.0084.00-01",
+    "system_id": "0ca3.ded8.0084",
+    "level": "1",
+    "lifetime_seconds": 668,
+    "sequence_number": 10,
+    "checksum": 39083,
+    "host_name": "fe-04",
+    "area": "HOME"
+  },
+  {
+    "lsp_id": "0ca3.ded8.0084.00-02",
+    "system_id": "0ca3.ded8.0084",
+    "level": "1",
+    "lifetime_seconds": 990,
+    "sequence_number": 1,
+    "checksum": 29470,
+    "host_name": "fe-04",
+    "area": "HOME"
+  },
+  {
+    "lsp_id": "0ca3.ded8.0084.00-03",
+    "system_id": "0ca3.ded8.0084",
+    "level": "1",
+    "lifetime_seconds": 668,
+    "sequence_number": 2,
+    "checksum": 12063,
+    "host_name": "fe-04",
+    "area": "HOME"
+  }
+]

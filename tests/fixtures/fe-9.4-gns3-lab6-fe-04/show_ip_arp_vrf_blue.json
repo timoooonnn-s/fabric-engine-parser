@@ -1,0 +1,24 @@
+[
+  {
+    "vrf": "blue",
+    "ip_address": "10.100.4.1",
+    "mac": "0c:44:58:07:01:01",
+    "vlan_id": 104,
+    "port": null,
+    "entry_type": "LOCAL",
+    "ttl_seconds": 21600,
+    "tunnel": null,
+    "l3_access": "blue"
+  },
+  {
+    "vrf": "blue",
+    "ip_address": "10.100.4.255",
+    "mac": "ff:ff:ff:ff:ff:ff",
+    "vlan_id": 104,
+    "port": null,
+    "entry_type": "LOCAL",
+    "ttl_seconds": 21600,
+    "tunnel": null,
+    "l3_access": "blue"
+  }
+]

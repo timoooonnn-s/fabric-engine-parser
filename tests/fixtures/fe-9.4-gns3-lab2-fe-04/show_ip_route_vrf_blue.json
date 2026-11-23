@@ -1,0 +1,28 @@
+[
+  {
+    "vrf": "blue",
+    "prefix": "10.100.3.0/24",
+    "next_hop": "fe-03",
+    "next_hop_vrf": "blue",
+    "cost": 20,
+    "interface": "4051",
+    "protocol": "ISIS",
+    "age": 0,
+    "type_flags": "IBSV",
+    "preference": 7,
+    "access": "Trusted"
+  },
+  {
+    "vrf": "blue",
+    "prefix": "10.100.4.0/24",
+    "next_hop": "10.100.4.1",
+    "next_hop_vrf": null,
+    "cost": 1,
+    "interface": "104",
+    "protocol": "LOC",
+    "age": 0,
+    "type_flags": "DB",
+    "preference": 0,
+    "access": "Trusted"
+  }
+]

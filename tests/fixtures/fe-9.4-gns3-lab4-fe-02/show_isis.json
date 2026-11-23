@@ -1,0 +1,33 @@
+[
+  {
+    "admin_enabled": true,
+    "router_type": "Level 1",
+    "system_id": "0c91.dc31.0084",
+    "max_lsp_gen_interval_seconds": 900,
+    "metric": "wide",
+    "overload_on_startup_seconds": 20,
+    "overload": false,
+    "csnp_interval_seconds": 10,
+    "psnp_interval_seconds": 2,
+    "retransmit_lsp_interval_seconds": 5,
+    "spf_delay_ms": 100,
+    "router_name": "fe-02",
+    "ip_source_address": null,
+    "ipv6_source_address": null,
+    "ip_tunnel_source_address": null,
+    "tunnel_vrf": null,
+    "ip_tunnel_mtu": null,
+    "interface_count": 3,
+    "area_address_count": 1,
+    "inband_mgmt_clip_ip": null,
+    "backbone_enabled": false,
+    "dynamically_learned_area": null,
+    "fan_member": false,
+    "hello_padding": true,
+    "multi_area_oper_enabled": false,
+    "multi_area_flags": "home-always-up",
+    "designated_bn_host_name": null,
+    "designated_bn_home_system_id": null,
+    "designated_bn_remote_system_id": null
+  }
+]

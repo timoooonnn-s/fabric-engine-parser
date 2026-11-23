@@ -1,0 +1,21 @@
+************************************************************************************
+		Command Execution Time: Sun Nov 22 12:54:41 2026 UTC
+************************************************************************************
+
+
+============================================================================================================================================
+                                                              VRF INFORMATION
+============================================================================================================================================
+VRF       VLAN      ARP       RIP       OSPF      BGP      PIM      NBRv6    RIPng    OSPFv3   PIM6     VRF IDs  
+COUNT     COUNT     COUNT     COUNT     COUNT     COUNT    COUNT    COUNT    COUNT    COUNT    COUNT    ALLOCATED
+--------------------------------------------------------------------------------------------------------------------------------------------
+3         9         8         1         1         1        1        0        1        1        1        3        
+
+VRF                  VRF  VLAN   ARP                                NBRv6                       UNICAST  SD-WAN LOCAL  VRF                
+NAME                 ID   COUNT  COUNT  RIP    OSPF   BGP    PIM    COUNT  RIPng  OSPFv3 PIM6   ACTIVE   BREAKOUT      ORIGIN    SEGMENTED
+--------------------------------------------------------------------------------------------------------------------------------------------
+GlobalRouter         0    7      5      TRUE   TRUE   TRUE   TRUE   0      TRUE   TRUE   TRUE   TRUE     FALSE         DYNAMIC   FALSE    
+blue                 1    1      3      FALSE  FALSE  FALSE  FALSE  0      FALSE  FALSE  FALSE  TRUE     FALSE         CONFIG    FALSE    
+MgmtRouter           512  1      0      FALSE  FALSE  FALSE  FALSE  0      FALSE  FALSE  FALSE  TRUE     FALSE         DYNAMIC   FALSE    
+
+3 out of 3 Total Num of VRF Entries displayed.

@@ -1,0 +1,200 @@
+[
+  {
+    "vlan_id": 10,
+    "status": "learned",
+    "mac": "00:50:79:66:68:01",
+    "interface": "Port-1/2",
+    "port": "1/2",
+    "smlt_remote": false,
+    "tunnel": "fe-04"
+  },
+  {
+    "vlan_id": 10,
+    "status": "self",
+    "mac": "0c:03:90:b8:01:02",
+    "interface": "Port-cpp",
+    "port": null,
+    "smlt_remote": false,
+    "tunnel": null
+  },
+  {
+    "vlan_id": 103,
+    "status": "learned",
+    "mac": "00:50:79:66:68:09",
+    "interface": "Port-1/6",
+    "port": "1/6",
+    "smlt_remote": false,
+    "tunnel": null
+  },
+  {
+    "vlan_id": 103,
+    "status": "self",
+    "mac": "0c:03:90:b8:01:01",
+    "interface": "Port-cpp",
+    "port": null,
+    "smlt_remote": false,
+    "tunnel": null
+  },
+  {
+    "vlan_id": 4051,
+    "status": "self",
+    "mac": "02:00:11:ff:ff:ff",
+    "interface": "Port-1/1",
+    "port": "1/1",
+    "smlt_remote": false,
+    "tunnel": null
+  },
+  {
+    "vlan_id": 4051,
+    "status": "self",
+    "mac": "02:00:12:ff:ff:ff",
+    "interface": "Port-1/2",
+    "port": "1/2",
+    "smlt_remote": false,
+    "tunnel": null
+  },
+  {
+    "vlan_id": 4051,
+    "status": "self",
+    "mac": "02:00:13:ff:ff:ff",
+    "interface": "Port-cpp",
+    "port": null,
+    "smlt_remote": false,
+    "tunnel": null
+  },
+  {
+    "vlan_id": 4051,
+    "status": "self",
+    "mac": "02:00:14:ff:ff:ff",
+    "interface": "Port-1/1",
+    "port": "1/1",
+    "smlt_remote": false,
+    "tunnel": null
+  },
+  {
+    "vlan_id": 4051,
+    "status": "self",
+    "mac": "09:00:2b:00:00:05",
+    "interface": "Port-cpp",
+    "port": null,
+    "smlt_remote": false,
+    "tunnel": null
+  },
+  {
+    "vlan_id": 4051,
+    "status": "self",
+    "mac": "0c:03:90:b8:00:84",
+    "interface": "Port-cpp",
+    "port": null,
+    "smlt_remote": false,
+    "tunnel": null
+  },
+  {
+    "vlan_id": 4051,
+    "status": "self",
+    "mac": "0c:04:d2:70:00:84",
+    "interface": "Port-1/1",
+    "port": "1/1",
+    "smlt_remote": false,
+    "tunnel": null
+  },
+  {
+    "vlan_id": 4051,
+    "status": "self",
+    "mac": "0c:91:dc:31:00:84",
+    "interface": "Port-1/2",
+    "port": "1/2",
+    "smlt_remote": false,
+    "tunnel": null
+  },
+  {
+    "vlan_id": 4051,
+    "status": "self",
+    "mac": "0c:a3:de:d8:00:84",
+    "interface": "Port-1/1",
+    "port": "1/1",
+    "smlt_remote": false,
+    "tunnel": null
+  },
+  {
+    "vlan_id": 4052,
+    "status": "self",
+    "mac": "02:00:11:ff:ff:ff",
+    "interface": "Port-1/1",
+    "port": "1/1",
+    "smlt_remote": false,
+    "tunnel": null
+  },
+  {
+    "vlan_id": 4052,
+    "status": "self",
+    "mac": "02:00:12:ff:ff:ff",
+    "interface": "Port-1/2",
+    "port": "1/2",
+    "smlt_remote": false,
+    "tunnel": null
+  },
+  {
+    "vlan_id": 4052,
+    "status": "self",
+    "mac": "02:00:13:ff:ff:ff",
+    "interface": "Port-cpp",
+    "port": null,
+    "smlt_remote": false,
+    "tunnel": null
+  },
+  {
+    "vlan_id": 4052,
+    "status": "self",
+    "mac": "02:00:14:ff:ff:ff",
+    "interface": "Port-1/2",
+    "port": "1/2",
+    "smlt_remote": false,
+    "tunnel": null
+  },
+  {
+    "vlan_id": 4052,
+    "status": "self",
+    "mac": "09:00:2b:00:00:05",
+    "interface": "Port-cpp",
+    "port": null,
+    "smlt_remote": false,
+    "tunnel": null
+  },
+  {
+    "vlan_id": 4052,
+    "status": "self",
+    "mac": "0c:03:90:b8:00:84",
+    "interface": "Port-cpp",
+    "port": null,
+    "smlt_remote": false,
+    "tunnel": null
+  },
+  {
+    "vlan_id": 4052,
+    "status": "self",
+    "mac": "0c:04:d2:70:00:84",
+    "interface": "Port-1/1",
+    "port": "1/1",
+    "smlt_remote": false,
+    "tunnel": null
+  },
+  {
+    "vlan_id": 4052,
+    "status": "self",
+    "mac": "0c:91:dc:31:00:84",
+    "interface": "Port-1/2",
+    "port": "1/2",
+    "smlt_remote": false,
+    "tunnel": null
+  },
+  {
+    "vlan_id": 4052,
+    "status": "self",
+    "mac": "0c:a3:de:d8:00:84",
+    "interface": "Port-1/2",
+    "port": "1/2",
+    "smlt_remote": false,
+    "tunnel": null
+  }
+]

@@ -1,0 +1,53 @@
+[
+  {
+    "mlt_id": 10,
+    "ifindex": 6153,
+    "name": "lacp-to-peer",
+    "port_type": "trunk",
+    "admin_type": "norm",
+    "current_type": "norm",
+    "members": [
+      "1/6",
+      "1/7"
+    ],
+    "vlan_ids": [
+      50
+    ],
+    "origin": "CONFIG",
+    "designated_port": "1/6",
+    "lacp_enabled": true,
+    "lacp_oper_up": true,
+    "created_on": "LOCAL",
+    "remote_members": [],
+    "programmed_on": "LOCAL",
+    "dot1q_encapsulation": true,
+    "lossless": false,
+    "private_vlan": false,
+    "flex_uni": false
+  },
+  {
+    "mlt_id": 20,
+    "ifindex": 6163,
+    "name": "smlt-fe03",
+    "port_type": "trunk",
+    "admin_type": "smlt",
+    "current_type": "norm",
+    "members": [
+      "1/5"
+    ],
+    "vlan_ids": [
+      60
+    ],
+    "origin": "CONFIG",
+    "designated_port": "1/5",
+    "lacp_enabled": true,
+    "lacp_oper_up": true,
+    "created_on": "LOCAL",
+    "remote_members": [],
+    "programmed_on": "LOCAL",
+    "dot1q_encapsulation": true,
+    "lossless": false,
+    "private_vlan": false,
+    "flex_uni": false
+  }
+]

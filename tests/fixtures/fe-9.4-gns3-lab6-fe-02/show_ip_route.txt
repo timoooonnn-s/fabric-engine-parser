@@ -1,0 +1,23 @@
+************************************************************************************
+		Command Execution Time: Sun Nov 22 18:30:10 2026 UTC
+************************************************************************************
+========================================================================================================================
+                                                IP Route - GlobalRouter
+========================================================================================================================
+                                                     NH                      INTER   
+DST             MASK            NEXT                 VRF/ISID         COST   FACE     PROT   AGE TYPE   PRF ACCESS      
+------------------------------------------------------------------------------------------------------------------------
+10.10.10.0      255.255.255.0   fe-03                GlobalRouter     10     4051     ISIS   0   IBS    7   Trusted     
+10.255.0.1      255.255.255.255 fe-01                GlobalRouter     10     4051     ISIS   0   IBS    7   Trusted     
+10.255.0.2      255.255.255.255 10.255.0.2           -                1      0        LOC    0   DB     0   Trusted     
+10.255.0.3      255.255.255.255 fe-03                GlobalRouter     10     4051     ISIS   0   IBS    7   Trusted     
+10.255.0.4      255.255.255.255 fe-04                GlobalRouter     10     4051     ISIS   0   IBS    7   Trusted     
+192.168.255.0   255.255.255.252 192.168.255.2        -                1      4000     LOC    0   DB     0   Trusted     
+
+6 out of 6 Total Num of Route Entries, 6 Total Num of Dest Networks displayed.
+------------------------------------------------------------------------------------------------------------------------
+TYPE Legend:
+I=Indirect Route, D=Direct Route, A=Alternative Route, B=Best Route, E=Ecmp Route, 
+U=Unresolved Route, N=Not in HW, F=Replaced by FTN, V=IPVPN Route, S=SPBM Route, R=Remote SPBM Route
+PROTOCOL Legend:
+v=Inter-VRF route redistributed

@@ -67,3 +67,24 @@ def test_system_id_and_nickname_are_validated() -> None:
         values.system_id("0c:91:dc:31:00:84")
     with pytest.raises(ValueError, match="nickname"):
         values.nickname("0.0.12")
+
+
+@pytest.mark.parametrize(
+    ("interface", "expected"),
+    [
+        ("Port1/1", "1/1"),
+        ("Port-1/2", "1/2"),
+        ("1/3", "1/3"),
+        ("Port-cpp", None),
+        ("cpp", None),
+        ("Mlt2", None),
+    ],
+)
+def test_port_of_reads_every_port_interface_form(interface: str, expected: str | None) -> None:
+    assert values.port_of(interface) == expected
+
+
+def test_optional_as_converts_unless_placeholder() -> None:
+    assert values.optional_as(values.mac, "0C:91:DC:31:00:84") == "0c:91:dc:31:00:84"
+    assert values.optional_as(values.mac, "N/A") is None
+    assert values.optional_as(int, "") is None

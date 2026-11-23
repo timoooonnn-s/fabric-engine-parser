@@ -1,0 +1,13 @@
+[
+  {
+    "vrf": "GlobalRouter",
+    "ip_address": "10.255.0.4",
+    "mac": "00:00:00:00:00:01",
+    "vlan_id": null,
+    "port": null,
+    "entry_type": "LOCAL",
+    "ttl_seconds": 21600,
+    "tunnel": null,
+    "l3_access": "GlobalRouter"
+  }
+]

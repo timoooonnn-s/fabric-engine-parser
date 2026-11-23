@@ -1,0 +1,47 @@
+[
+  {
+    "interface": "Port1/1",
+    "port": "1/1",
+    "circuit_type": "pt-pt",
+    "level": "1",
+    "oper_up": true,
+    "admin_up": true,
+    "adjacency_count": 1,
+    "up_adjacency_count": 1,
+    "admin_l1_metric": 10,
+    "oper_l1_metric": 10,
+    "origin": "CONFIG",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "interface": "Port1/2",
+    "port": "1/2",
+    "circuit_type": "pt-pt",
+    "level": "1",
+    "oper_up": true,
+    "admin_up": true,
+    "adjacency_count": 1,
+    "up_adjacency_count": 1,
+    "admin_l1_metric": 10,
+    "oper_l1_metric": 10,
+    "origin": "CONFIG",
+    "area": "HOME",
+    "area_name": null
+  },
+  {
+    "interface": "Port1/3",
+    "port": "1/3",
+    "circuit_type": "pt-pt",
+    "level": "1",
+    "oper_up": true,
+    "admin_up": true,
+    "adjacency_count": 1,
+    "up_adjacency_count": 1,
+    "admin_l1_metric": 10,
+    "oper_l1_metric": 10,
+    "origin": "CONFIG",
+    "area": "HOME",
+    "area_name": null
+  }
+]

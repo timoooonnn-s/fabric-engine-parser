@@ -1,0 +1,20 @@
+[
+  {
+    "sys_name": "fe-02",
+    "description": "5520-24T-FabricEngine (9.4.0.0)",
+    "release": "9.4.0.0",
+    "uptime": "0:12:39",
+    "contact": "http://www.extremenetworks.com/contact/",
+    "location": null,
+    "model": "5520-24T-FabricEngine",
+    "chassis": "5520-24T-FabricEngine",
+    "serial_number": "SIM427F-0000",
+    "hardware_revision": "1",
+    "part_number": "DSGDPM624",
+    "base_mac": "0c:e7:42:7f:00:00",
+    "management_mac": "0c:e7:42:7f:00:81",
+    "slot_count": 2,
+    "port_count": 27,
+    "system_mtu": 1950
+  }
+]

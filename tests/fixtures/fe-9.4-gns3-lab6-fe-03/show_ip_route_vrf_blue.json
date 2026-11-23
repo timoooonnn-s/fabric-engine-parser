@@ -1,0 +1,15 @@
+[
+  {
+    "vrf": "blue",
+    "prefix": "10.100.4.0/24",
+    "next_hop": "fe-04",
+    "next_hop_vrf": "blue",
+    "cost": 20,
+    "interface": "4051",
+    "protocol": "ISIS",
+    "age": 0,
+    "type_flags": "IBSV",
+    "preference": 7,
+    "access": "Trusted"
+  }
+]

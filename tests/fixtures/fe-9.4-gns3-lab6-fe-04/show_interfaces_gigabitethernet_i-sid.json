@@ -1,0 +1,28 @@
+[
+  {
+    "port": "1/3",
+    "ifindex": 194,
+    "isid": 20010,
+    "vlan_id": 10,
+    "customer_vid": null,
+    "untagged_traffic": false,
+    "isid_type": "CVLAN",
+    "origin": "C  ---  -  ---  -  -  --",
+    "isid_name": "ISID-20010",
+    "bpdu": null,
+    "mac_suni": false
+  },
+  {
+    "port": "1/4",
+    "ifindex": 195,
+    "isid": 20020,
+    "vlan_id": 20,
+    "customer_vid": null,
+    "untagged_traffic": false,
+    "isid_type": "CVLAN",
+    "origin": "C  ---  -  ---  -  -  --",
+    "isid_name": "ISID-20020",
+    "bpdu": null,
+    "mac_suni": false
+  }
+]

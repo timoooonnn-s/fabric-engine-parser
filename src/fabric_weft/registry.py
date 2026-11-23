@@ -28,7 +28,7 @@ _PARSERS: dict[tuple[str, ...], Parser[Any]] = {}
 
 
 def parser(
-    *commands: str, arguments: str | None = None
+    *commands: str, arguments: str | None = None, register: bool = True
 ) -> Callable[[Callable[[Output], Iterable[Any]]], Parser[Any]]:
     """Register a record generator for one or more full command spellings.
 
@@ -39,9 +39,13 @@ def parser(
     a port list. Without it any words are accepted (`show ip route vrf RED`). With
     it, `show interfaces gigabitEthernet vlan` is not taken for the bare command
     with an argument 'vlan' (decision 0011).
+
+    `register=False`: a second record type read from the same output. The parser is
+    called directly and `parse(command, ...)` keeps returning the first one
+    (decision 0017).
     """
 
-    def register(collect: Callable[[Output], Iterable[Any]]) -> Parser[Any]:
+    def add(collect: Callable[[Output], Iterable[Any]]) -> Parser[Any]:
         def run(text: str, *, strict: bool = False, command: str | None = None) -> ParseResult[Any]:
             output = Output(command or commands[0], text, strict=strict)
             records: list[Any] = []
@@ -58,11 +62,11 @@ def parser(
         run.__module__ = collect.__module__
         run.commands = commands  # type: ignore[attr-defined]
         run.arguments = re.compile(arguments) if arguments else None  # type: ignore[attr-defined]
-        for spelling in commands:
+        for spelling in commands if register else ():
             _PARSERS[tuple(spelling.lower().split())] = run  # type: ignore[assignment]
         return run  # type: ignore[return-value]
 
-    return register
+    return add
 
 
 def find_parser(command: str) -> Parser[Any]:

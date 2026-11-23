@@ -1,0 +1,17 @@
+************************************************************************************
+		Command Execution Time: Sun Nov 22 12:54:15 2026 UTC
+************************************************************************************
+========================================================================================================================
+                                                IP Route - GlobalRouter
+========================================================================================================================
+                                                     NH                      INTER   
+DST             MASK            NEXT                 VRF/ISID         COST   FACE     PROT   AGE TYPE   PRF ACCESS      
+------------------------------------------------------------------------------------------------------------------------
+
+0 out of 0 Total Num of Route Entries, 0 Total Num of Dest Networks displayed.
+------------------------------------------------------------------------------------------------------------------------
+TYPE Legend:
+I=Indirect Route, D=Direct Route, A=Alternative Route, B=Best Route, E=Ecmp Route, 
+U=Unresolved Route, N=Not in HW, F=Replaced by FTN, V=IPVPN Route, S=SPBM Route, R=Remote SPBM Route
+PROTOCOL Legend:
+v=Inter-VRF route redistributed

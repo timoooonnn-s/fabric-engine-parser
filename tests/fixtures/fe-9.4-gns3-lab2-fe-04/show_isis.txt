@@ -1,0 +1,37 @@
+************************************************************************************
+		Command Execution Time: Sun Nov 22 12:59:44 2026 UTC
+************************************************************************************
+
+====================================================================================================
+                               ISIS General Info
+====================================================================================================
+	                    AdminState : enabled
+	                    RouterType : Level 1
+	                     System ID : 0ca3.ded8.0084
+	          Max LSP Gen Interval : 900
+	                        Metric : wide
+	           Overload-on-startup : 20
+	                      Overload : false
+	                 Csnp Interval : 10
+	                 PSNP Interval : 2
+	             Rxmt LSP Interval : 5
+	                     spf-delay : 100
+	                   Router Name : fe-04
+	             ip source-address : 10.255.0.4
+	           ipv6 source-address : 
+	      ip tunnel source-address : 
+	                    Tunnel vrf : 
+	                 ip tunnel mtu : 
+	             Num of Interfaces : 2
+	         Num of Area Addresses : 1
+	           Inband Mgmt Clip Ip :
+	                      backbone : disabled
+	      Dynamically Learned Area : 
+	                    FAN Member : No
+	                 Hello Padding : enabled
+	          Multi-Area OperState : disabled
+	              Multi-Area Flags : home-always-up
+	        Designated BN Hostname : 
+	  Designated BN Home System ID : 
+	Designated BN Remote System ID : 
+

@@ -1,0 +1,20 @@
+[
+  {
+    "mlt_id": 20,
+    "ifindex": 6163,
+    "mac": "00:00:00:00:00:00",
+    "collector_max_delay": 32768,
+    "aggregate_or_individual": "aggr",
+    "members": [],
+    "oper_up": false,
+    "last_change_uptime": "0:00:00",
+    "last_change_ago": null,
+    "actor_system_priority": 32768,
+    "actor_system_id": "0c:bc:fa:d2:00:00",
+    "actor_admin_key": 20,
+    "actor_oper_key": 20,
+    "partner_system_priority": 0,
+    "partner_system_id": "00:00:00:00:00:00",
+    "partner_oper_key": 0
+  }
+]

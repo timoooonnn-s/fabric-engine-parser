@@ -1,0 +1,48 @@
+[
+  {
+    "isid": 20040,
+    "isid_type": "CVLAN",
+    "port_bindings": [],
+    "mlt_bindings": [],
+    "origin": "C  ---  -  ---  -  -  --",
+    "name": "ISID-20040",
+    "vlan_id": 40,
+    "vlan_member_ports": [
+      "1/4"
+    ],
+    "vlan_member_mlts": []
+  },
+  {
+    "isid": 30100,
+    "isid_type": "ELAN",
+    "port_bindings": [],
+    "mlt_bindings": [],
+    "origin": "C  ---  -  ---  -  -  --",
+    "name": "ISID-30100",
+    "vlan_id": null,
+    "vlan_member_ports": [],
+    "vlan_member_mlts": []
+  },
+  {
+    "isid": 15999999,
+    "isid_type": "CVLAN",
+    "port_bindings": [],
+    "mlt_bindings": [],
+    "origin": "C  ---  -  ---  -  -  --",
+    "name": "Onboarding I-SID",
+    "vlan_id": 4048,
+    "vlan_member_ports": [],
+    "vlan_member_mlts": []
+  },
+  {
+    "isid": 16777001,
+    "isid_type": "ELAN",
+    "port_bindings": [],
+    "mlt_bindings": [],
+    "origin": "C  ---  -  ---  -  -  --",
+    "name": "FAN-ISID",
+    "vlan_id": null,
+    "vlan_member_ports": [],
+    "vlan_member_mlts": []
+  }
+]

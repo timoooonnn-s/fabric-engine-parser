@@ -1,0 +1,35 @@
+[
+  {
+    "vrf": "blue",
+    "ip_address": "10.100.3.1",
+    "mac": "0c:03:90:b8:01:01",
+    "vlan_id": 103,
+    "port": null,
+    "entry_type": "LOCAL",
+    "ttl_seconds": 21600,
+    "tunnel": null,
+    "l3_access": "blue"
+  },
+  {
+    "vrf": "blue",
+    "ip_address": "10.100.3.10",
+    "mac": "00:50:79:66:68:09",
+    "vlan_id": 103,
+    "port": "1/6",
+    "entry_type": "DYNAMIC",
+    "ttl_seconds": 21390,
+    "tunnel": null,
+    "l3_access": "blue"
+  },
+  {
+    "vrf": "blue",
+    "ip_address": "10.100.3.255",
+    "mac": "ff:ff:ff:ff:ff:ff",
+    "vlan_id": 103,
+    "port": null,
+    "entry_type": "LOCAL",
+    "ttl_seconds": 21600,
+    "tunnel": null,
+    "l3_access": "blue"
+  }
+]

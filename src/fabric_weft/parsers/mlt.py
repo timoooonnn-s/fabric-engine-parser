@@ -1,15 +1,17 @@
-"""Link aggregation: `show mlt`, `show virtual-ist` and `show lacp interface`."""
+"""Link aggregation: `show mlt`, `show smlt mlt`, `show virtual-ist` and `show lacp interface`."""
 
 from __future__ import annotations
 
 import re
 from collections.abc import Callable, Iterator
 from dataclasses import dataclass
-from typing import Any
+from datetime import timedelta
+from typing import Any, TypeVar
 
 from fabric_weft.output import Output, fullmatch
 from fabric_weft.registry import parser
-from fabric_weft.values import PORT, flag, int_list, mac, optional, ports
+from fabric_weft.tables import Table
+from fabric_weft.values import PORT, duration, flag, int_list, mac, optional, optional_as, ports
 
 
 @dataclass(frozen=True, slots=True)
@@ -22,6 +24,7 @@ class Mlt:
     current_type: str
     members: tuple[str, ...]
     vlan_ids: tuple[int, ...]
+    origin: str | None = None  # 9.x ORIGIN column ('CONFIG'); None: not printed
     # From the second to fourth table; None if a release does not print that table.
     designated_port: str | None = None
     lacp_enabled: bool | None = None
@@ -33,6 +36,15 @@ class Mlt:
     lossless: bool | None = None
     private_vlan: bool | None = None
     flex_uni: bool | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class SmltMlt:
+    """One MLT configured as SMLT (`show smlt mlt`)."""
+
+    mlt_id: int
+    admin_type: str  # 'smlt', as printed
+    current_type: str  # 'smlt' while the vIST is up, 'norm' otherwise, as printed
 
 
 @dataclass(frozen=True, slots=True)
@@ -83,17 +95,42 @@ class LacpPort:
     timeout_scale_oper: int
 
 
+@dataclass(frozen=True, slots=True)
+class LacpAggregator:
+    """One LACP aggregator (an MLT), from the 'LACP Aggregator Information' tables."""
+
+    mlt_id: int
+    ifindex: int
+    mac: str
+    collector_max_delay: int
+    aggregate_or_individual: str  # 'aggr' / 'indi', as printed
+    members: tuple[str, ...]
+    oper_up: bool
+    last_change_uptime: timedelta  # the switch's uptime when the state last changed
+    last_change_ago: timedelta | None  # how long ago that was; None when not printed
+    actor_system_priority: int
+    actor_system_id: str
+    actor_admin_key: int
+    actor_oper_key: int
+    partner_system_priority: int
+    partner_system_id: str  # 00:00:00:00:00:00 while there is no partner
+    partner_oper_key: int
+
+
 _MLT_INFO_ROW = re.compile(
     r"(?P<mlt_id>\d+)\s+(?P<ifindex>\d+)\s+(?P<name>.*?)\s+(?P<port_type>trunk|access)\s+"
-    r"(?P<admin>\S+)\s+(?P<current>\S+)(?:\s+(?P<members>\S*/\S*))?(?:\s+(?P<vlans>[\d ]+))?"
+    r"(?P<admin>\S+)\s+(?P<current>\S+)(?:\s+(?P<members>\S*/\S*))?"
+    # 9.x adds ORIGIN before VLAN IDS; it is a word, the members contain '/'
+    r"(?:\s+(?P<origin>[A-Za-z]\S*))?(?:\s+(?P<vlans>[\d ]+))?"
 )
 _VLAN_CONTINUATION = re.compile(r"\d+(?: +\d+)*")
 _LACP_ROW = re.compile(
-    r"(?P<mlt_id>\d+)\s+\d+\s+(?:(?P<designated>\d\S*)\s+)?(?P<admin>\S+)\s+(?P<oper>\S+)"
+    r"(?P<mlt_id>\d+)\s+\d+\s+(?:(?P<designated>\S+)\s+)?(?P<admin>\S+)\s+(?P<oper>\S+)"
 )
+# 9.4 prints both member lists empty while no port is up; lists always contain '/'.
 _DATA_PATH_ROW = re.compile(
-    r"(?P<mlt_id>\d+)\s+.*?\s+(?P<created>LOC & REM|\S+)\s+(?P<local>\S+)\s+(?P<remote>\S+)\s+"
-    r"(?P<programmed>.+)"
+    r"(?P<mlt_id>\d+)\s+.*?\s+(?P<created>LOC & REM|\S+)\s+"
+    r"(?:(?P<local>\S*/\S*)\s+)?(?:(?P<remote>\S*/\S*)\s+)?(?P<programmed>.+)"
 )
 _ENCAP_ROW = re.compile(
     r"(?P<mlt_id>\d+)\s+\d+\s+(?P<dot1q>\S+)\s+(?P<lossless>\S+)\s+(?P<pvlan>\S+)\s+\S+\s+\S+\s+"
@@ -105,7 +142,8 @@ _IST_STATE_ROW = re.compile(r"(?P<dialect>\S+)\s+(?P<state>.+?)\s+(?P<role>\S+)"
 
 def _lacp_columns(cells: re.Match[str]) -> dict[str, Any]:
     return {
-        "designated_port": cells["designated"],
+        # 9.4 prints 'null' when no port is designated (no member is up)
+        "designated_port": None if cells["designated"] in (None, "null") else cells["designated"],
         "lacp_enabled": flag(cells["admin"]),
         "lacp_oper_up": flag(cells["oper"]),
     }
@@ -114,7 +152,7 @@ def _lacp_columns(cells: re.Match[str]) -> dict[str, Any]:
 def _data_path_columns(cells: re.Match[str]) -> dict[str, Any]:
     return {
         "created_on": cells["created"],
-        "remote_members": ports(cells["remote"]),
+        "remote_members": ports(cells["remote"] or ""),
         "programmed_on": cells["programmed"],
     }
 
@@ -123,7 +161,7 @@ def _encapsulation_columns(cells: re.Match[str]) -> dict[str, Any]:
     return {
         "dot1q_encapsulation": flag(cells["dot1q"]),
         "lossless": flag(cells["lossless"]),
-        "private_vlan": flag(cells["pvlan"]),
+        "private_vlan": optional_as(flag, cells["pvlan"]),  # 9.4 prints '-' for none
         "flex_uni": flag(cells["flex_uni"]),
     }
 
@@ -162,31 +200,50 @@ def parse_mlts(output: Output) -> Iterator[Mlt]:
                 "current_type": cells["current"],
                 "members": ports(cells["members"] or ""),
                 "vlan_ids": int_list(cells["vlans"] or ""),
+                "origin": cells["origin"],
             }
         except ValueError as error:
             output.skip(row, str(error))
 
     for labels, pattern, read in _SECONDARY_TABLES:
-        _merge(output, fields, labels, pattern, read)
+        table = output.table(*labels, required=False)
+        _merge(
+            output,
+            fields,
+            table,
+            pattern,
+            read,
+            key=lambda cells: int(cells["mlt_id"]),
+            missing="MLT id not in the Mlt Info table",
+        )
     for values in fields.values():
         yield Mlt(**values)
 
 
+KeyT = TypeVar("KeyT")
+
+
 def _merge(
     output: Output,
-    fields: dict[int, dict[str, Any]],
-    labels: tuple[str, ...],
+    fields: dict[KeyT, dict[str, Any]],
+    table: Table | None,
     pattern: re.Pattern[str],
     read: Callable[[re.Match[str]], dict[str, Any]],
+    *,
+    key: Callable[[re.Match[str]], KeyT],
+    missing: str,
 ) -> None:
-    """Add the columns of one of the secondary `show mlt` tables to the MLTs."""
-    table = output.table(*labels, required=False)
+    """Add the columns of a secondary table to the records its rows' keys name.
+
+    `show mlt` and `show lacp interface` print one record over several tables. A row
+    whose key is not in the first table is reported, not dropped.
+    """
     for row in table.rows if table else ():
         try:
             cells = fullmatch(pattern, row)
-            target = fields.get(int(cells["mlt_id"]))
+            target = fields.get(key(cells))
             if target is None:
-                raise ValueError("MLT id not in the Mlt Info table")
+                raise ValueError(missing)
             target.update(read(cells))
         except ValueError as error:
             output.skip(row, str(error))
@@ -291,20 +348,132 @@ def parse_lacp_ports(output: Output) -> Iterator[LacpPort]:
     ]
     if any(table is None for table, _, _ in tables):
         return
+    (first, first_pattern, read_first), *rest = tables
     fields: dict[str, dict[str, Any]] = {}
-    for index, (table, pattern, read) in enumerate(tables):
-        for row in table.rows:  # type: ignore[union-attr]
-            try:
-                cells = fullmatch(pattern, row)
-                if index == 0:
-                    fields[cells["port"]] = {"port": cells["port"]}
-                elif cells["port"] not in fields:
-                    raise ValueError("port not in the Actor Admin table")
-                fields[cells["port"]].update(read(cells))
-            except ValueError as error:
-                output.skip(row, str(error))
+    for row in first.rows:  # type: ignore[union-attr]
+        try:
+            cells = fullmatch(first_pattern, row)
+            fields[cells["port"]] = {"port": cells["port"], **read_first(cells)}
+        except ValueError as error:
+            output.skip(row, str(error))
+    for table, pattern, read in rest:
+        _merge(
+            output,
+            fields,
+            table,
+            pattern,
+            read,
+            key=lambda cells: cells["port"],
+            missing="port not in the Actor Admin table",
+        )
     for values in fields.values():
         try:
             yield LacpPort(**values)
         except TypeError:
             output.skip("", f"port {values['port']} is missing from one of the LACP tables")
+
+
+_DURATION_TEXT = r"\d+ days?(?:\(s\))?, \d+:\d\d:\d\d"
+_AGGREGATOR_ROW = re.compile(
+    r"(?P<mlt_id>\d+)\s+(?P<ifindex>\d+)\s+(?P<mac>\S+)\s+(?P<delay>\d+)\s+(?P<aggr>\S+)"
+    r"(?:\s+(?P<members>\S+))?"
+)
+_AGGREGATOR_STATE_ROW = re.compile(
+    rf"(?P<mlt_id>\d+)\s+\d+\s+(?P<state>\S+)\s+(?P<last>{_DURATION_TEXT})"
+    rf"(?:\s+\((?P<ago>{_DURATION_TEXT}) ago\))?"
+)
+_AGGREGATOR_ACTOR_ROW = re.compile(
+    r"(?P<mlt_id>\d+)\s+\d+\s+(?P<priority>\d+)\s+(?P<system_id>\S+)\s+(?P<admin_key>\d+)\s+"
+    r"(?P<oper_key>\d+)"
+)
+_AGGREGATOR_PARTNER_ROW = re.compile(
+    r"(?P<mlt_id>\d+)\s+\d+\s+(?P<priority>\d+)\s+(?P<system_id>\S+)\s+(?P<oper_key>\d+)"
+)
+
+
+def _aggregator_state(cells: re.Match[str]) -> dict[str, Any]:
+    return {
+        "oper_up": flag(cells["state"]),
+        "last_change_uptime": duration(cells["last"]),
+        "last_change_ago": duration(cells["ago"]) if cells["ago"] else None,
+    }
+
+
+def _aggregator_actor(cells: re.Match[str]) -> dict[str, Any]:
+    return {
+        "actor_system_priority": int(cells["priority"]),
+        "actor_system_id": mac(cells["system_id"]),
+        "actor_admin_key": int(cells["admin_key"]),
+        "actor_oper_key": int(cells["oper_key"]),
+    }
+
+
+def _aggregator_partner(cells: re.Match[str]) -> dict[str, Any]:
+    return {
+        "partner_system_priority": int(cells["priority"]),
+        "partner_system_id": mac(cells["system_id"]),
+        "partner_oper_key": int(cells["oper_key"]),
+    }
+
+
+@parser("show lacp interface", register=False)
+def parse_lacp_aggregators(output: Output) -> Iterator[LacpAggregator]:
+    """`show lacp interface` -> one LacpAggregator per MLT with LACP (decision 0017).
+
+    Called directly: `parse("show lacp interface", ...)` returns the per-port records.
+    The aggregator is spread over four untitled tables after 'LACP Aggregator
+    Information', merged by MLT id like `show mlt`.
+    """
+    info = output.table("MAC", "COLLECTOR", "MAXDELAY", required=False)
+    if info is None:  # printed only on a switch that has an LACP MLT
+        return
+    fields: dict[int, dict[str, Any]] = {}
+    for row in info.rows:
+        try:
+            cells = fullmatch(_AGGREGATOR_ROW, row)
+            fields[int(cells["mlt_id"])] = {
+                "mlt_id": int(cells["mlt_id"]),
+                "ifindex": int(cells["ifindex"]),
+                "mac": mac(cells["mac"]),
+                "collector_max_delay": int(cells["delay"]),
+                "aggregate_or_individual": cells["aggr"],
+                "members": ports(cells["members"] or ""),
+            }
+        except ValueError as error:
+            output.skip(row, str(error))
+    for labels, pattern, read in (
+        (("OPER", "OPERLAST"), _AGGREGATOR_STATE_ROW, _aggregator_state),
+        (("ACTOR", "ADMINKEY"), _AGGREGATOR_ACTOR_ROW, _aggregator_actor),
+        (("PARTNER", "OPERKEY"), _AGGREGATOR_PARTNER_ROW, _aggregator_partner),
+    ):
+        _merge(
+            output,
+            fields,
+            output.table(*labels),
+            pattern,
+            read,
+            key=lambda cells: int(cells["mlt_id"]),
+            missing="MLT id not in the LACP Aggregator Information table",
+        )
+    for values in fields.values():
+        try:
+            yield LacpAggregator(**values)
+        except TypeError:
+            output.skip("", f"MLT {values['mlt_id']} is missing from one of the aggregator tables")
+
+
+_SMLT_ROW = re.compile(r"(?P<mlt_id>\d+)\s+(?P<admin>\S+)\s+(?P<current>\S+)")
+
+
+@parser("show smlt mlt")
+def parse_smlt_mlts(output: Output) -> Iterator[SmltMlt]:
+    """`show smlt mlt` -> one SmltMlt per MLT configured as SMLT."""
+    table = output.table("MLT", "ADMIN", "CURRENT")
+    if table is None:
+        return
+
+    def build(row: str) -> SmltMlt:
+        cells = fullmatch(_SMLT_ROW, row)
+        return SmltMlt(int(cells["mlt_id"]), cells["admin"], cells["current"])
+
+    yield from output.build_each(table.rows, build)

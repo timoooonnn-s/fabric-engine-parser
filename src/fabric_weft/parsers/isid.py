@@ -69,14 +69,16 @@ def _split_members(
     """Split a PORT or MLT INTERFACES cell into bindings and plain VLAN members.
 
     'c100:1/10,u:1/11' -> bindings [(100, '1/10'), (None, '1/11')]
+    'c100:1/8 u:1/7'   -> the same: 9.4 prints each further binding on its own line,
+                          and the wrapped lines are joined with a space (lab3 fe-01)
     '1/4,1/6-1/8'      -> members ['1/4', '1/6-1/8'], only for a CVLAN I-SID (vlan_id set)
-    '-'                -> nothing
+    '-', '- -'         -> nothing
     """
     bindings: list[tuple[int | None, str]] = []
     members: list[str] = []
-    if optional(cell) is None:
-        return bindings, members
-    for chunk in cell.split(","):
+    for chunk in re.split(r"[,\s]+", cell):
+        if optional(chunk) is None:
+            continue
         found = _BINDING.fullmatch(chunk)
         if found:
             bindings.append(((int(found["vid"]) if found["vid"] else None), found["member"]))
@@ -133,7 +135,7 @@ def _parse_isids_9x(
             vlan_id=optional_int(vlan_id),
         )
 
-    yield from output.build_each(map(columns.cut, rows), build)
+    yield from output.build_each(columns.cut_rows(rows), build)
 
 
 def _isid(

@@ -1,0 +1,104 @@
+[
+  {
+    "vlan_id": 1,
+    "isid": null,
+    "isid_name": null,
+    "vlan_name": null
+  },
+  {
+    "vlan_id": 40,
+    "isid": 20040,
+    "isid_name": "ISID-20040",
+    "vlan_name": "servers"
+  },
+  {
+    "vlan_id": 50,
+    "isid": null,
+    "isid_name": null,
+    "vlan_name": null
+  },
+  {
+    "vlan_id": 60,
+    "isid": 20060,
+    "isid_name": "ISID-20060",
+    "vlan_name": "smlt-test"
+  },
+  {
+    "vlan_id": 70,
+    "isid": null,
+    "isid_name": null,
+    "vlan_name": null
+  },
+  {
+    "vlan_id": 71,
+    "isid": null,
+    "isid_name": null,
+    "vlan_name": null
+  },
+  {
+    "vlan_id": 72,
+    "isid": null,
+    "isid_name": null,
+    "vlan_name": null
+  },
+  {
+    "vlan_id": 73,
+    "isid": null,
+    "isid_name": null,
+    "vlan_name": null
+  },
+  {
+    "vlan_id": 74,
+    "isid": null,
+    "isid_name": null,
+    "vlan_name": null
+  },
+  {
+    "vlan_id": 75,
+    "isid": null,
+    "isid_name": null,
+    "vlan_name": null
+  },
+  {
+    "vlan_id": 76,
+    "isid": null,
+    "isid_name": null,
+    "vlan_name": null
+  },
+  {
+    "vlan_id": 77,
+    "isid": null,
+    "isid_name": null,
+    "vlan_name": null
+  },
+  {
+    "vlan_id": 78,
+    "isid": null,
+    "isid_name": null,
+    "vlan_name": null
+  },
+  {
+    "vlan_id": 4000,
+    "isid": 40000,
+    "isid_name": "ISID-40000",
+    "vlan_name": "vist"
+  },
+  {
+    "vlan_id": 4048,
+    "isid": 15999999,
+    "isid_name": "Onboarding I-SID",
+    "vlan_name": "onboarding-vlan"
+  },
+  {
+    "vlan_id": 4051,
+    "isid": null,
+    "isid_name": null,
+    "vlan_name": null
+  },
+  {
+    "vlan_id": 4052,
+    "isid": null,
+    "isid_name": null,
+    "vlan_name": null
+  }
+]

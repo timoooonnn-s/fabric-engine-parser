@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from fabric_weft.output import Output, fullmatch
 from fabric_weft.registry import parser
 from fabric_weft.tables import Columns
-from fabric_weft.values import PORT, flag, mac, optional, optional_int, ports
+from fabric_weft.values import flag, mac, optional, optional_int, port_of, ports
 
 
 @dataclass(frozen=True, slots=True)
@@ -67,7 +67,6 @@ _MAC_ROW = re.compile(
     r"(?P<vlan_id>\d+)\s+(?P<status>\S+)\s+(?P<mac>\S+)\s+(?P<interface>\S+)\s+"
     r"(?P<smlt_remote>\S+)\s+(?P<tunnel>\S+)"
 )
-_FRONT_PORT = re.compile(rf"Port-(?P<port>{PORT})")
 _VLAN_ROW_9X = re.compile(_VLAN_COLUMNS + r"\s+(?P<l3_access>\S+)")  # 9.x adds L3 ACCESS
 
 
@@ -164,13 +163,12 @@ def parse_mac_entries(output: Output) -> Iterator[MacEntry]:
 
     def build(row: str) -> MacEntry:
         cells = fullmatch(_MAC_ROW, row)
-        front_port = _FRONT_PORT.fullmatch(cells["interface"])
         return MacEntry(
             vlan_id=int(cells["vlan_id"]),
             status=cells["status"],
             mac=mac(cells["mac"]),
             interface=cells["interface"],
-            port=front_port["port"] if front_port else None,
+            port=port_of(cells["interface"]),
             smlt_remote=flag(cells["smlt_remote"]),
             tunnel=optional(cells["tunnel"]),
         )

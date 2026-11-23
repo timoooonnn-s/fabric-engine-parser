@@ -1,0 +1,80 @@
+[
+  {
+    "vrf": "GlobalRouter",
+    "prefix": "10.10.10.0/24",
+    "next_hop": "10.10.10.3",
+    "next_hop_vrf": null,
+    "cost": 1,
+    "interface": "10",
+    "protocol": "LOC",
+    "age": 0,
+    "type_flags": "DB",
+    "preference": 0,
+    "access": "Trusted"
+  },
+  {
+    "vrf": "GlobalRouter",
+    "prefix": "10.255.0.1/32",
+    "next_hop": "fe-01",
+    "next_hop_vrf": "GlobalRouter",
+    "cost": 10,
+    "interface": "4051",
+    "protocol": "ISIS",
+    "age": 0,
+    "type_flags": "IBS",
+    "preference": 7,
+    "access": "Trusted"
+  },
+  {
+    "vrf": "GlobalRouter",
+    "prefix": "10.255.0.2/32",
+    "next_hop": "fe-02",
+    "next_hop_vrf": "GlobalRouter",
+    "cost": 10,
+    "interface": "4051",
+    "protocol": "ISIS",
+    "age": 0,
+    "type_flags": "IBS",
+    "preference": 7,
+    "access": "Trusted"
+  },
+  {
+    "vrf": "GlobalRouter",
+    "prefix": "10.255.0.3/32",
+    "next_hop": "10.255.0.3",
+    "next_hop_vrf": null,
+    "cost": 1,
+    "interface": "0",
+    "protocol": "LOC",
+    "age": 0,
+    "type_flags": "DB",
+    "preference": 0,
+    "access": "Trusted"
+  },
+  {
+    "vrf": "GlobalRouter",
+    "prefix": "10.255.0.4/32",
+    "next_hop": "fe-04",
+    "next_hop_vrf": "GlobalRouter",
+    "cost": 20,
+    "interface": "4051",
+    "protocol": "ISIS",
+    "age": 0,
+    "type_flags": "IBS",
+    "preference": 7,
+    "access": "Trusted"
+  },
+  {
+    "vrf": "GlobalRouter",
+    "prefix": "192.168.255.0/30",
+    "next_hop": "fe-01",
+    "next_hop_vrf": "GlobalRouter",
+    "cost": 10,
+    "interface": "4051",
+    "protocol": "ISIS",
+    "age": 0,
+    "type_flags": "IBS",
+    "preference": 7,
+    "access": "Trusted"
+  }
+]

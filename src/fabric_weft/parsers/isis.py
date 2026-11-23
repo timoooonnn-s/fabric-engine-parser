@@ -22,14 +22,15 @@ from fabric_weft.output import Output, fullmatch
 from fabric_weft.registry import parser
 from fabric_weft.tables import Columns
 from fabric_weft.values import (
-    PORT,
     SYSTEM_ID,
     duration,
     flag,
     mac,
     nickname,
     optional,
+    optional_as,
     optional_int,
+    port_of,
     system_id,
 )
 
@@ -183,9 +184,7 @@ class SpbmUnicastRoute:
     area_name: str | None
 
 
-_PORT_INTERFACE = re.compile(rf"Port(?P<port>{PORT})")
 _LSP_ID = re.compile(rf"(?P<system_id>{SYSTEM_ID})\.[0-9a-f]{{2}}-[0-9a-f]{{2}}")
-_BARE_PORT = re.compile(PORT)
 # The host name is required: an adjacency printed without one would make the
 # columns after it ambiguous, so such a row is reported instead of guessed.
 _ADJACENCY_ROW = re.compile(
@@ -200,12 +199,6 @@ _INTERFACE_ROW = re.compile(
 )
 
 
-def _port_of(interface: str) -> str | None:
-    """'Port1/1' -> '1/1'. Other interface kinds are not mapped until a capture shows one."""
-    found = _PORT_INTERFACE.fullmatch(interface)
-    return found["port"] if found else None
-
-
 @parser("show isis adjacencies")
 def parse_isis_adjacencies(output: Output) -> Iterator[IsisAdjacency]:
     """`show isis adjacencies` -> one IsisAdjacency per neighbour."""
@@ -217,7 +210,7 @@ def parse_isis_adjacencies(output: Output) -> Iterator[IsisAdjacency]:
         cells = fullmatch(_ADJACENCY_ROW, row)
         return IsisAdjacency(
             interface=cells["interface"],
-            port=_port_of(cells["interface"]),
+            port=port_of(cells["interface"]),
             level=cells["level"],
             state=cells["state"],
             uptime=duration(cells["uptime"]),
@@ -244,7 +237,7 @@ def parse_isis_interfaces(output: Output) -> Iterator[IsisInterface]:
         cells = fullmatch(_INTERFACE_ROW, row)
         return IsisInterface(
             interface=cells["interface"],
-            port=_port_of(cells["interface"]),
+            port=port_of(cells["interface"]),
             circuit_type=cells["type"],
             level=cells["level"],
             oper_up=flag(cells["oper"]),
@@ -318,7 +311,7 @@ def parse_spbm_unicast_fib(output: Output) -> Iterator[SpbmUnicastRoute]:
             system_id=system_id(system),
             host_name=optional(host),
             outgoing_interface=interface,
-            port=interface if _BARE_PORT.fullmatch(interface) else None,
+            port=port_of(interface),
             cost=int(cost),
             area=area,
             area_name=optional(area_name),
@@ -361,8 +354,6 @@ def parse_isis_settings(output: Output) -> Iterator[IsisSettings]:
         return flag(required(fields, key))
 
     try:
-        system = text("Designated BN Home System ID")
-        remote = text("Designated BN Remote System ID")
         yield IsisSettings(
             admin_enabled=enabled("AdminState"),
             router_type=required(fields, "RouterType"),
@@ -391,8 +382,12 @@ def parse_isis_settings(output: Output) -> Iterator[IsisSettings]:
             multi_area_oper_enabled=enabled("Multi-Area OperState"),
             multi_area_flags=text("Multi-Area Flags"),
             designated_bn_host_name=text("Designated BN Hostname"),
-            designated_bn_home_system_id=system_id(system) if system else None,
-            designated_bn_remote_system_id=system_id(remote) if remote else None,
+            designated_bn_home_system_id=optional_as(
+                system_id, required(fields, "Designated BN Home System ID")
+            ),
+            designated_bn_remote_system_id=optional_as(
+                system_id, required(fields, "Designated BN Remote System ID")
+            ),
         )
     except ValueError as error:  # a missing field or a value that does not convert
         output.skip("", str(error))
@@ -478,14 +473,13 @@ def parse_spbm_instances(output: Output) -> Iterator[SpbmInstance]:
                 instance, split_beb, virtual_bmac, peer, peer_nick, peer_host = smlt_columns.cut(
                     row
                 )
-                peer_system = optional(peer)
                 merge(
                     row,
                     instance,
                     {
                         "smlt_split_beb": optional(split_beb),
-                        "smlt_virtual_bmac": mac(virtual_bmac) if optional(virtual_bmac) else None,
-                        "smlt_peer_system_id": system_id(peer_system) if peer_system else None,
+                        "smlt_virtual_bmac": optional_as(mac, virtual_bmac),
+                        "smlt_peer_system_id": optional_as(system_id, peer),
                         "smlt_peer_nickname": nickname(peer_nick),
                         "smlt_peer_host_name": optional(peer_host),
                     },

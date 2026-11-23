@@ -12,6 +12,8 @@ from fabric_weft import (
     UnknownCommandError,
     find_parser,
     parse,
+    parse_lacp_aggregators,
+    parse_lacp_ports,
     parse_mlts,
     parse_port_interfaces,
     parse_port_isids,
@@ -157,27 +159,32 @@ def test_mac_table_maps_front_ports_and_reports_unknown_words() -> None:
 
 
 def test_missing_column_label_is_reported_not_raised() -> None:
-    text = "PORT     TAGGING DEFVLAN\nNUM\n----------------------------------------\n1/1      enable  disable\n"
-    result = parse("show interfaces gigabitethernet vlan", text)
+    text = (
+        "NUM      NAME     DESCRIPTION  DUPLEX   SPEED\n"
+        + "-" * 50
+        + "\n1/1               1000BaseTX   full     1000\n"
+    )
+    result = parse("show interfaces gigabitethernet name", text)
     assert not result.records
-    assert result.skipped[0].reason.startswith("column 'TAGFRAM' not found")
+    assert result.skipped[0].reason.startswith("column 'STATUS' not found")
     with pytest.raises(ParseError):
-        parse_port_vlans(text, strict=True)
+        parse_port_names(text, strict=True)
 
 
 PORT_VLANS = """\
 PORT             DISCARD DISCARD   DEFAULT VLAN         PORT     UNTAG    DYNAMIC UNTAG  FA/
 NUM      TAGGING TAGFRAM UNTAGFRAM VLANID  IDS          TYPE     DEFVLAN  VLANS   VLANS  Flex UNI
 -----------------------------------------------------------------------------------------------------------
-1/1      enable  false   true      1       1,10,20,     normal   enable   P       1      disable
-                                           30,40
+1/1      enable  false   true      1       1,10,20,30,40,50,60,70 normal   enable   P       1      disable
 1/2      disable false   false     0       0            normal   disable  P              enable
 """
 
 
-def test_port_vlans_join_wrapped_lists_and_read_vlan_0_as_none() -> None:
+def test_port_vlans_read_an_overflowing_list_and_vlan_0_as_none() -> None:
+    # 9.4 lets a long VLAN IDS list run into the next columns instead of wrapping it
     trunk, unused = parse_port_vlans(PORT_VLANS, strict=True)
-    assert trunk.vlan_ids == (1, 10, 20, 30, 40)
+    assert trunk.vlan_ids == (1, 10, 20, 30, 40, 50, 60, 70)
+    assert (trunk.port_type, trunk.untag_default_vlan) == ("normal", True)
     assert (trunk.default_vlan_id, trunk.untagged_vlan_ids) == (1, (1,))
     assert (unused.default_vlan_id, unused.vlan_ids, unused.flex_uni) == (None, (), True)
 
@@ -249,3 +256,45 @@ def test_lacp_port_missing_from_one_table_is_reported() -> None:
     result = parse("show lacp interface", _lacp(""))
     assert not result.records
     assert result.skipped[0].reason == "port 1/1 is missing from one of the LACP tables"
+
+
+UNKNOWN_VRF = """\
+************************************************************************************
+\t\tCommand Execution Time: Sun Nov 22 12:53:48 2026 UTC
+************************************************************************************
+Error: The VRF Name entered does not correspond to any VRF
+"""
+
+
+def test_error_line_after_the_banner_is_a_device_error() -> None:
+    # lab2 fe-01, `show ip route vrf blue` on a switch without VRF blue
+    with pytest.raises(DeviceError, match="does not correspond to any VRF"):
+        parse("show ip route vrf blue", UNKNOWN_VRF)
+
+
+ISIDS_9X = """\
+ISID      ISID              PORT               MLT                ORIGIN                      ISID
+ID        TYPE     VLANID   INTERFACES         INTERFACES                                     NAME
+----------------------------------------------------------------------------------------------------------------------------------
+30100     ELAN     N/A      c100:1/8           -                  C  ---  -  ---  -  -  --    ISID-30100
+                            u:1/7              -
+16777001  ELAN     N/A      -                  -                  C  ---  -  ---  -  -  --    FAN-ISID
+"""
+
+
+def test_isid_binding_on_its_own_line_joins_the_row_above() -> None:
+    # lab3 fe-01: 9.4 prints each further binding of an I-SID on a line of its own
+    elan, fan = parse("show i-sid", ISIDS_9X, strict=True)
+    assert [(b.port, b.customer_vid) for b in elan.port_bindings] == [("1/8", 100), ("1/7", None)]
+    assert (elan.mlt_bindings, fan.port_bindings) == ((), ())
+
+
+def test_unregistered_second_parser_does_not_take_over_the_command() -> None:
+    assert find_parser("show lacp interface") is parse_lacp_ports
+    assert parse_lacp_aggregators.commands == ("show lacp interface",)
+
+
+def test_smlt_mlt_rows() -> None:
+    text = "MLT   ADMIN    CURRENT\nID    TYPE     TYPE\n" + "-" * 60 + "\n20    smlt     norm\n"
+    (smlt,) = parse("show smlt mlt", text, strict=True)
+    assert (smlt.mlt_id, smlt.admin_type, smlt.current_type) == (20, "smlt", "norm")

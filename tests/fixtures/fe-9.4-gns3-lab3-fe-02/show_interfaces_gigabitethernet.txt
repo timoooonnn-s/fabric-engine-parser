@@ -1,0 +1,1018 @@
+************************************************************************************
+		Command Execution Time: Sun Nov 22 13:33:48 2026 UTC
+************************************************************************************
+
+==========================================================================================
+                                      Port Interface
+==========================================================================================
+PORT                               LINK  PORT           PHYSICAL          STATUS
+NUM      INDEX DESCRIPTION         TRAP  LOCK     MTU   ADDRESS           ADMIN  OPERATE
+------------------------------------------------------------------------------------------
+1/1      192   1000BaseTX          true  false    1950  0c:91:dc:31:00:00 up     up     
+1/2      193   1000BaseTX          true  false    1950  0c:91:dc:31:00:01 up     up     
+1/3      194   1000BaseTX          true  false    1950  0c:91:dc:31:00:02 up     up     
+1/4      195   1000BaseTX          true  false    1950  0c:91:dc:31:00:03 up     up     
+1/5      196   1000BaseTX          true  false    1950  0c:91:dc:31:00:04 up     up     
+1/6      197   1000BaseTX          true  false    1950  0c:91:dc:31:00:05 up     up     
+1/7      198   1000BaseTX          true  false    1950  0c:91:dc:31:00:06 up     up     
+1/8      199   1000BaseTX          true  false    1950  0c:91:dc:31:00:07 up     down   
+1/9      200   1000BaseTX          true  false    1950  0c:91:dc:31:00:08 up     down   
+1/10     201   1000BaseTX          true  false    1950  0c:91:dc:31:00:09 up     down   
+1/11     202   1000BaseTX          true  false    1950  0c:91:dc:31:00:0a up     down   
+1/12     203   1000BaseTX          true  false    1950  0c:91:dc:31:00:0b up     down   
+1/13     204   1000BaseTX          true  false    1950  0c:91:dc:31:00:0c up     down   
+1/14     205   1000BaseTX          true  false    1950  0c:91:dc:31:00:0d up     down   
+1/15     206   1000BaseTX          true  false    1950  0c:91:dc:31:00:0e up     down   
+1/16     207   1000BaseTX          true  false    1950  0c:91:dc:31:00:0f up     down   
+1/17     208   1000BaseTX          true  false    1950  0c:91:dc:31:00:10 up     down   
+1/18     209   1000BaseTX          true  false    1950  0c:91:dc:31:00:11 up     down   
+1/19     210   1000BaseTX          true  false    1950  0c:91:dc:31:00:12 up     down   
+1/20     211   1000BaseTX          true  false    1950  0c:91:dc:31:00:13 up     down   
+1/21     212   1000BaseTX          true  false    1950  0c:91:dc:31:00:14 up     down   
+1/22     213   1000BaseTX          true  false    1950  0c:91:dc:31:00:15 up     down   
+1/23     214   1000BaseTX          true  false    1950  0c:91:dc:31:00:16 up     down   
+1/24     215   1000BaseTX          true  false    1950  0c:91:dc:31:00:17 up     down   
+1/25     216   40GbNone            true  false    1950  0c:91:dc:31:00:18 up     down   
+1/26     220   40GbNone            true  false    1950  0c:91:dc:31:00:1c up     down   
+
+
+==============================================================================================================
+                                                  Port Name
+==============================================================================================================
+PORT                                                        OPERATE  OPERATE  OPERATE        
+NUM      NAME                           DESCRIPTION         STATUS   DUPLEX   SPEED    VLAN  
+--------------------------------------------------------------------------------------------------------------
+1/1                                     1000BaseTX          up       full     1000     Tagged
+1/2                                     1000BaseTX          up       full     1000     Tagged
+1/3                                     1000BaseTX          up       full     1000     Tagged
+1/4                                     1000BaseTX          up       full     1000     Access
+1/5                                     1000BaseTX          up       full     1000     Access
+1/6                                     1000BaseTX          up       full     1000     Access
+1/7                                     1000BaseTX          up       full     1000     Access
+1/8                                     1000BaseTX          down     half     0        Access
+1/9                                     1000BaseTX          down     half     0        Access
+1/10                                    1000BaseTX          down     half     0        Access
+1/11                                    1000BaseTX          down     half     0        Access
+1/12                                    1000BaseTX          down     half     0        Access
+1/13                                    1000BaseTX          down     half     0        Access
+1/14                                    1000BaseTX          down     half     0        Access
+1/15                                    1000BaseTX          down     half     0        Access
+1/16                                    1000BaseTX          down     half     0        Access
+1/17                                    1000BaseTX          down     half     0        Access
+1/18                                    1000BaseTX          down     half     0        Access
+1/19                                    1000BaseTX          down     half     0        Access
+1/20                                    1000BaseTX          down     half     0        Access
+1/21                                    1000BaseTX          down     half     0        Access
+1/22                                    1000BaseTX          down     half     0        Access
+1/23                                    1000BaseTX          down     half     0        Access
+1/24                                    1000BaseTX          down     half     0        Access
+1/25                                    40GbNone            down     half     0        Access
+1/26                                    40GbNone            down     half     0        Access
+
+
+====================================================================================================
+                                  Port Config
+====================================================================================================
+PORT                         DIFF-SERV    QOS   MLT   VENDOR            
+NUM      TYPE                EN    TYPE   LVL   ID    NAME              
+-----------------------------------------------------------------------------------------------------------
+1/1      1000BaseTX          true  core   1     0     N/A               
+1/2      1000BaseTX          true  core   1     0     N/A               
+1/3      1000BaseTX          true  core   1     0     N/A               
+1/4      1000BaseTX          true  core   1     0     N/A               
+1/5      1000BaseTX          true  core   1     0     N/A               
+1/6      1000BaseTX          true  core   1     0     N/A               
+1/7      1000BaseTX          true  core   1     0     N/A               
+1/8      1000BaseTX          true  core   1     0     N/A               
+1/9      1000BaseTX          true  core   1     0     N/A               
+1/10     1000BaseTX          true  core   1     0     N/A               
+1/11     1000BaseTX          true  core   1     0     N/A               
+1/12     1000BaseTX          true  core   1     0     N/A               
+1/13     1000BaseTX          true  core   1     0     N/A               
+1/14     1000BaseTX          true  core   1     0     N/A               
+1/15     1000BaseTX          true  core   1     0     N/A               
+1/16     1000BaseTX          true  core   1     0     N/A               
+1/17     1000BaseTX          true  core   1     0     N/A               
+1/18     1000BaseTX          true  core   1     0     N/A               
+1/19     1000BaseTX          true  core   1     0     N/A               
+1/20     1000BaseTX          true  core   1     0     N/A               
+1/21     1000BaseTX          true  core   1     0     N/A               
+1/22     1000BaseTX          true  core   1     0     N/A               
+1/23     1000BaseTX          true  core   1     0     N/A               
+1/24     1000BaseTX          true  core   1     0     N/A               
+1/25     40GbNone            true  core   1     0                       
+1/26     40GbNone            true  core   1     0                       
+
+PORT     ADMIN   OPERATE AUTO     ACCESS-SERV  RMON     FLEX-UNI ADMIN   FEC-APPLICABLE   OPERATE NODE ALIAS 
+NUM      ROUTING ROUTING RECOVER  EN                             FEC                      FEC     STATE      
+----------------------------------------------------------------------------------------------------------------------------------
+1/1      Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Disable    
+1/2      Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Disable    
+1/3      Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Disable    
+1/4      Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Disable    
+1/5      Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Disable    
+1/6      Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Disable    
+1/7      Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Disable    
+1/8      Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Enable     
+1/9      Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Enable     
+1/10     Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Disable    
+1/11     Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Disable    
+1/12     Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Enable     
+1/13     Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Enable     
+1/14     Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Enable     
+1/15     Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Enable     
+1/16     Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Enable     
+1/17     Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Enable     
+1/18     Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Enable     
+1/19     Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Enable     
+1/20     Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Enable     
+1/21     Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Enable     
+1/22     Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Enable     
+1/23     Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Enable     
+1/24     Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Enable     
+1/25     Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Enable     
+1/26     Enable  Disable Disable  false        Disable  Disable  Auto    Not Applicable   N/A     Enable     
+
+
+==================================================================================================================================
+                                                          Port Config L1
+==================================================================================================================================
+PORT     AUTO  OPERATE  CUSTOM AUTO NEGOTIATION              CANA            ADMIN       OPERATE     ADMIN         OPERATE      
+NUM      NEG.  AUTO-NEG ADVERTISEMENTS                       ORIGIN          DPLX SPD    DPLX SPD    TX-FLW-CTRL   TX-FLW-CTRL  
+----------------------------------------------------------------------------------------------------------------------------------
+1/1      true  true     10F 10H 100F 100H 1000F              CONFIG          half 100    full 1000   disable       disable      
+1/2      true  true     10F 10H 100F 100H 1000F              CONFIG          half 100    full 1000   disable       disable      
+1/3      true  true     10F 10H 100F 100H 1000F              CONFIG          half 100    full 1000   disable       disable      
+1/4      true  true     10F 10H 100F 100H 1000F              CONFIG          half 100    full 1000   disable       disable      
+1/5      true  true     10F 10H 100F 100H 1000F              CONFIG          half 100    full 1000   disable       disable      
+1/6      true  true     10F 10H 100F 100H 1000F              CONFIG          half 100    full 1000   disable       disable      
+1/7      true  true     10F 10H 100F 100H 1000F              CONFIG          half 100    full 1000   disable       disable      
+1/8      true  true     10F 10H 100F 100H 1000F              CONFIG          half 100         0      disable       disable      
+1/9      true  true     10F 10H 100F 100H 1000F              CONFIG          half 100         0      disable       disable      
+1/10     true  true     10F 10H 100F 100H 1000F              CONFIG          half 100         0      disable       disable      
+1/11     true  true     10F 10H 100F 100H 1000F              CONFIG          half 100         0      disable       disable      
+1/12     true  true     10F 10H 100F 100H 1000F              CONFIG          half 100         0      disable       disable      
+1/13     true  true     10F 10H 100F 100H 1000F              CONFIG          half 100         0      disable       disable      
+1/14     true  true     10F 10H 100F 100H 1000F              CONFIG          half 100         0      disable       disable      
+1/15     true  true     10F 10H 100F 100H 1000F              CONFIG          half 100         0      disable       disable      
+1/16     true  true     10F 10H 100F 100H 1000F              CONFIG          half 100         0      disable       disable      
+1/17     true  true     10F 10H 100F 100H 1000F              CONFIG          half 100         0      disable       disable      
+1/18     true  true     10F 10H 100F 100H 1000F              CONFIG          half 100         0      disable       disable      
+1/19     true  true     10F 10H 100F 100H 1000F              CONFIG          half 100         0      disable       disable      
+1/20     true  true     10F 10H 100F 100H 1000F              CONFIG          half 100         0      disable       disable      
+1/21     true  true     10F 10H 100F 100H 1000F              CONFIG          half 100         0      disable       disable      
+1/22     true  true     10F 10H 100F 100H 1000F              CONFIG          half 100         0      disable       disable      
+1/23     true  true     10F 10H 100F 100H 1000F              CONFIG          half 100         0      disable       disable      
+1/24     true  true     10F 10H 100F 100H 1000F              CONFIG          half 100         0      disable       disable      
+1/25     true  true     Not Configured                       CONFIG          full 40000       0      disable       disable      
+1/26     true  true     Not Configured                       CONFIG          full 40000       0      disable       disable      
+
+
+====================================================================================================
+                                Port Auto-sense
+====================================================================================================
+-----------------------------------------------------------------------------------------------------------
+PORT     AUTO-SENSE   AUTO-SENSE         AUTO-SENSE       AUTO-SENSE         AUTO-SENSE  
+NUM      STATUS       STATE              PORT-DATA-ISID   PORT-WAIT-INTERVAL NO-NNI      
+-----------------------------------------------------------------------------------------------------------
+1/1      Disable      OFF                --               35                 Disable     
+1/2      Disable      OFF                --               35                 Disable     
+1/3      Disable      OFF                --               35                 Disable     
+1/4      Disable      OFF                --               35                 Disable     
+1/5      Disable      OFF                --               35                 Disable     
+1/6      Disable      OFF                --               35                 Disable     
+1/7      Disable      OFF                --               35                 Disable     
+1/8      Enable       DOWN               --               35                 Disable     
+1/9      Enable       DOWN               --               35                 Disable     
+1/10     Disable      OFF                --               35                 Disable     
+1/11     Disable      OFF                --               35                 Disable     
+1/12     Enable       DOWN               --               35                 Disable     
+1/13     Enable       DOWN               --               35                 Disable     
+1/14     Enable       DOWN               --               35                 Disable     
+1/15     Enable       DOWN               --               35                 Disable     
+1/16     Enable       DOWN               --               35                 Disable     
+1/17     Enable       DOWN               --               35                 Disable     
+1/18     Enable       DOWN               --               35                 Disable     
+1/19     Enable       DOWN               --               35                 Disable     
+1/20     Enable       DOWN               --               35                 Disable     
+1/21     Enable       DOWN               --               35                 Disable     
+1/22     Enable       DOWN               --               35                 Disable     
+1/23     Enable       DOWN               --               35                 Disable     
+1/24     Enable       DOWN               --               35                 Disable     
+1/25     Enable       DOWN               --               35                 Disable     
+1/26     Enable       DOWN               --               35                 Disable     
+
+
+====================================================================================================
+                                   Port State
+====================================================================================================
+PORT NUM   ADMINSTATUS  PORTSTATE   REASON        DATE               FA/Flex UNI
+-----------------------------------------------------------------------------------------------------------
+1/1        up           up          --            11/22/26 11:51:51  disable    
+1/2        up           up          --            11/22/26 11:51:51  disable    
+1/3        up           up          --            11/22/26 11:51:51  disable    
+1/4        up           up          --            11/22/26 11:51:51  disable    
+1/5        up           up          --            11/22/26 13:31:22  disable    
+1/6        up           up          --            11/22/26 13:31:26  disable    
+1/7        up           up          --            11/22/26 13:27:30  disable    
+1/8        up           down        --            11/22/26 11:51:47  disable    
+1/9        up           down        --            11/22/26 11:51:47  disable    
+1/10       up           down        --            11/22/26 11:51:47  disable    
+1/11       up           down        --            11/22/26 11:51:47  disable    
+1/12       up           down        --            11/22/26 11:51:47  disable    
+1/13       up           down        --            11/22/26 11:51:47  disable    
+1/14       up           down        --            11/22/26 11:51:47  disable    
+1/15       up           down        --            11/22/26 11:51:47  disable    
+1/16       up           down        --            11/22/26 11:51:47  disable    
+1/17       up           down        --            11/22/26 11:51:47  disable    
+1/18       up           down        --            11/22/26 11:51:47  disable    
+1/19       up           down        --            11/22/26 11:51:47  disable    
+1/20       up           down        --            11/22/26 11:51:47  disable    
+1/21       up           down        --            11/22/26 11:51:47  disable    
+1/22       up           down        --            11/22/26 11:51:47  disable    
+1/23       up           down        --            11/22/26 11:51:47  disable    
+1/24       up           down        --            11/22/26 11:51:47  disable    
+1/25       up           down        --            11/22/26 11:51:47  disable    
+1/26       up           down        --            11/22/26 11:51:47  disable    
+
+
+====================================================================================================
+                                    Port Arp
+====================================================================================================
+PORT_NUM DOPROXY    DORESP    
+-----------------------------------------------------------------------------------------------------------
+1/1      false      true      
+1/2      false      true      
+1/3      false      true      
+1/4      false      true      
+1/5      false      true      
+1/6      false      true      
+1/7      false      true      
+1/8      false      true      
+1/9      false      true      
+1/10     false      true      
+1/11     false      true      
+1/12     false      true      
+1/13     false      true      
+1/14     false      true      
+1/15     false      true      
+1/16     false      true      
+1/17     false      true      
+1/18     false      true      
+1/19     false      true      
+1/20     false      true      
+1/21     false      true      
+1/22     false      true      
+1/23     false      true      
+1/24     false      true      
+1/25     false      true      
+1/26     false      true      
+
+
+====================================================================================================
+                                   Port Dhcp
+====================================================================================================
+PORT     VRF                     MAX MIN                ALWAYS CIRCUIT REMOTE TRUST 
+NUM      NAME             ENABLE HOP SEC   MODE         BCAST  ID      ID     CIRC  
+-----------------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+                                Port High-Secure
+====================================================================================================
+PORT NUM     HIGH_SECURE
+-----------------------------------------------------------------------------------------------------------
+1/1         false
+1/2         false
+1/3         false
+1/4         false
+1/5         false
+1/6         false
+1/7         false
+1/8         false
+1/9         false
+1/10        false
+1/11        false
+1/12        false
+1/13        false
+1/14        false
+1/15        false
+1/16        false
+1/17        false
+1/18        false
+1/19        false
+1/20        false
+1/21        false
+1/22        false
+1/23        false
+1/24        false
+1/25        false
+1/26        false
+
+
+====================================================================================================
+                                    Port Fdb
+====================================================================================================
+VLAN            MAC                           SMLT  
+ID   STATUS     ADDRESS            INTERFACE  REMOTE
+-----------------------------------------------------------------------------------------------------------
+4051 self       02:00:11:ff:ff:ff  Port-1/1      false 
+4051 self       02:00:13:ff:ff:ff  Port-1/2      false 
+4051 self       02:00:14:ff:ff:ff  Port-1/3      false 
+4051 self       0c:03:90:b8:00:84  Port-1/2      false 
+4051 self       0c:04:d2:70:00:84  Port-1/1      false 
+4051 self       0c:a3:de:d8:00:84  Port-1/3      false 
+4052 self       02:00:11:ff:ff:ff  Port-1/1      false 
+4052 self       02:00:13:ff:ff:ff  Port-1/2      false 
+4052 self       02:00:14:ff:ff:ff  Port-1/3      false 
+4052 self       0c:03:90:b8:00:84  Port-1/2      false 
+4052 self       0c:04:d2:70:00:84  Port-1/1      false 
+4052 self       0c:a3:de:d8:00:84  Port-1/3      false 
+
+c: customer vid   u: untagged-traffic
+
+12 out of 16 entries in all fdb(s) displayed.
+
+
+
+============================================================================================================
+                                         Brouter Port Ip
+============================================================================================================
+PORT     VRF   IP_ADDRESS    NET_MASK         ADMIN      OPER    ADVERTISE  DIRECT  RPC      RPCMODE    
+NUM      NAME                                 STATUS     STATE   WHEN_DOWN  BCAST  
+------------------------------------------------------------------------------------------------------------
+
+
+PORT     VRF              BROADCAST  REASM  
+NUM      NAME                        MAXSIZE
+-----------------------------------------------------------------------------------------------------------
+
+
+============================================================================================================================================
+                                                  Port Ipv6 Interface
+============================================================================================================================================
+IFINDX VRF              BROUTER  PHYSICAL          ADMIN   OPER  TYPE  MTU  HOP REACHABLE   RETRANSMIT  MCAST    IPSEC    RPC      RPCMODE    
+INDX   NAME                      ADDRESS           STATE   STATE            LMT TIME        TIME        STATUS  
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+====================================================================================================
+                               Port Ipv6 Address
+====================================================================================================
+IPV6 ADDRESS                            BROUTER      TYPE    ORIGIN    STATUS   
+-----------------------------------------------------------------------------------------------------------
+
+0 out of 0 Total Num of Interface Entries displayed.
+0 out of 0 Total Num of Address Entries displayed.
+
+=======================================================================================================================
+                                                 Port Ipv6 Nd
+=======================================================================================================================
+IFID VRF              BTR    RTR-ADV MAX-INT MIN-INT LIFETIME MANAG OTHER DAD-NS MTU     HOP    REACHABLE RETRANSMIT   
+     NAME                                                     FLAG  CONF                 LIMIT  TIME      TIME         
+-----------------------------------------------------------------------------------------------------------------------
+
+Note:  (s) = Set, (d) = Default, (i) = inherit.
+
+0 out of 0 Total Num of Ipv6 ND Entries displayed.
+
+====================================================================================================
+                              Port Ipv6 Nd Prefix
+====================================================================================================
+INTF  VRF              IPV6                                           BTR      VALID       PREF     EUI
+INDEX NAME             ADDRESS/PREFIX                                          LIFE        LIFE        
+----------------------------------------------------------------------------------------------------
+
+0 out of 0 Total Num of Ipv6 ND prefix Entries displayed.
+
+====================================================================================================
+                                 Port Ipv6 MLD
+====================================================================================================
+BROUTER  Q-INT  VR QUERIER                                 Q-M-R  ROBUST L-M-Q 
+-----------------------------------------------------------------------------------------------------------
+ Legend: Q-INT: query-interval VR: version
+         Q-M-R: query-max-resp ROBUST: robustval
+         L-M-Q: last-memb-query-int
+
+0 out of 0 Total Num of Ipv6 MLD Entries displayed.
+
+====================================================================================================
+                                   Port Ospf
+====================================================================================================
+PORT            HELLO   RTRDEAD OSPF                                      
+NUM      ENABLE INTVAL  INTVAL  PRIORITY METRIC AUTHTYPE AUTHKEY    AREA_ID        
+-----------------------------------------------------------------------------------------------------------
+1/1      false  10      40      1        0      none                0.0.0.0
+1/2      false  10      40      1        0      none                0.0.0.0
+1/3      false  10      40      1        0      none                0.0.0.0
+1/4      false  10      40      1        0      none                0.0.0.0
+1/5      false  10      40      1        0      none                0.0.0.0
+1/6      false  10      40      1        0      none                0.0.0.0
+1/7      false  10      40      1        0      none                0.0.0.0
+1/8      false  10      40      1        0      none                0.0.0.0
+1/9      false  10      40      1        0      none                0.0.0.0
+1/10     false  10      40      1        0      none                0.0.0.0
+1/11     false  10      40      1        0      none                0.0.0.0
+1/12     false  10      40      1        0      none                0.0.0.0
+1/13     false  10      40      1        0      none                0.0.0.0
+1/14     false  10      40      1        0      none                0.0.0.0
+1/15     false  10      40      1        0      none                0.0.0.0
+1/16     false  10      40      1        0      none                0.0.0.0
+1/17     false  10      40      1        0      none                0.0.0.0
+1/18     false  10      40      1        0      none                0.0.0.0
+1/19     false  10      40      1        0      none                0.0.0.0
+1/20     false  10      40      1        0      none                0.0.0.0
+1/21     false  10      40      1        0      none                0.0.0.0
+1/22     false  10      40      1        0      none                0.0.0.0
+1/23     false  10      40      1        0      none                0.0.0.0
+1/24     false  10      40      1        0      none                0.0.0.0
+1/25     false  10      40      1        0      none                0.0.0.0
+1/26     false  10      40      1        0      none                0.0.0.0
+
+
+====================================================================================================
+                             Port Ospfv3 Interface
+====================================================================================================
+IFINDX(BTR)      AREAID          ADM IFSTATE  METRIC PRI DR/BDR          IFTYPE   
+-----------------------------------------------------------------------------------------------------------
+
+0 out of 0 Total Num of Ospf Interface Entries displayed.
+
+====================================================================================================
+                                    Port Rip
+====================================================================================================
+PORT            DEFAULT   DEFAULT TRIGGERED AUTOAGG                     
+NUM      ENABLE SUPPLY    LISTEN  UPDATE    ENABLE  SUPPLY LISTEN POISON
+-----------------------------------------------------------------------------------------------------------
+1/1      false  false     false   false     false   true   true   false 
+1/2      false  false     false   false     false   true   true   false 
+1/3      false  false     false   false     false   true   true   false 
+1/4      false  false     false   false     false   true   true   false 
+1/5      false  false     false   false     false   true   true   false 
+1/6      false  false     false   false     false   true   true   false 
+1/7      false  false     false   false     false   true   true   false 
+1/8      false  false     false   false     false   true   true   false 
+1/9      false  false     false   false     false   true   true   false 
+1/10     false  false     false   false     false   true   true   false 
+1/11     false  false     false   false     false   true   true   false 
+1/12     false  false     false   false     false   true   true   false 
+1/13     false  false     false   false     false   true   true   false 
+1/14     false  false     false   false     false   true   true   false 
+1/15     false  false     false   false     false   true   true   false 
+1/16     false  false     false   false     false   true   true   false 
+1/17     false  false     false   false     false   true   true   false 
+1/18     false  false     false   false     false   true   true   false 
+1/19     false  false     false   false     false   true   true   false 
+1/20     false  false     false   false     false   true   true   false 
+1/21     false  false     false   false     false   true   true   false 
+1/22     false  false     false   false     false   true   true   false 
+1/23     false  false     false   false     false   true   true   false 
+1/24     false  false     false   false     false   true   true   false 
+1/25     false  false     false   false     false   true   true   false 
+1/26     false  false     false   false     false   true   true   false 
+
+
+====================================================================================================
+                                Port Rip - Extn
+====================================================================================================
+PORT     ADVERTISE           HOLD   TIME   MANUAL  
+NUM      WHEN-DOWN    COST   DOWN   OUT    TRIGGER 
+-----------------------------------------------------------------------------------------------------------
+1/1      disable      1      120    180    N/A     
+1/2      disable      1      120    180    N/A     
+1/3      disable      1      120    180    N/A     
+1/4      disable      1      120    180    N/A     
+1/5      disable      1      120    180    N/A     
+1/6      disable      1      120    180    N/A     
+1/7      disable      1      120    180    N/A     
+1/8      disable      1      120    180    N/A     
+1/9      disable      1      120    180    N/A     
+1/10     disable      1      120    180    N/A     
+1/11     disable      1      120    180    N/A     
+1/12     disable      1      120    180    N/A     
+1/13     disable      1      120    180    N/A     
+1/14     disable      1      120    180    N/A     
+1/15     disable      1      120    180    N/A     
+1/16     disable      1      120    180    N/A     
+1/17     disable      1      120    180    N/A     
+1/18     disable      1      120    180    N/A     
+1/19     disable      1      120    180    N/A     
+1/20     disable      1      120    180    N/A     
+1/21     disable      1      120    180    N/A     
+1/22     disable      1      120    180    N/A     
+1/23     disable      1      120    180    N/A     
+1/24     disable      1      120    180    N/A     
+1/25     disable      1      120    180    N/A     
+1/26     disable      1      120    180    N/A     
+
+
+====================================================================================================
+                              Port Rip - In Policy
+====================================================================================================
+PORT     IN-POLICY                                                         
+-----------------------------------------------------------------------------------------------------------
+1/1      N/A                                                                
+1/2      N/A                                                                
+1/3      N/A                                                                
+1/4      N/A                                                                
+1/5      N/A                                                                
+1/6      N/A                                                                
+1/7      N/A                                                                
+1/8      N/A                                                                
+1/9      N/A                                                                
+1/10     N/A                                                                
+1/11     N/A                                                                
+1/12     N/A                                                                
+1/13     N/A                                                                
+1/14     N/A                                                                
+1/15     N/A                                                                
+1/16     N/A                                                                
+1/17     N/A                                                                
+1/18     N/A                                                                
+1/19     N/A                                                                
+1/20     N/A                                                                
+1/21     N/A                                                                
+1/22     N/A                                                                
+1/23     N/A                                                                
+1/24     N/A                                                                
+1/25     N/A                                                                
+1/26     N/A                                                                
+
+
+====================================================================================================
+                             Port Rip - Out Policy
+====================================================================================================
+PORT     OUT-POLICY                                                        
+-----------------------------------------------------------------------------------------------------------
+1/1      N/A                                                                
+1/2      N/A                                                                
+1/3      N/A                                                                
+1/4      N/A                                                                
+1/5      N/A                                                                
+1/6      N/A                                                                
+1/7      N/A                                                                
+1/8      N/A                                                                
+1/9      N/A                                                                
+1/10     N/A                                                                
+1/11     N/A                                                                
+1/12     N/A                                                                
+1/13     N/A                                                                
+1/14     N/A                                                                
+1/15     N/A                                                                
+1/16     N/A                                                                
+1/17     N/A                                                                
+1/18     N/A                                                                
+1/19     N/A                                                                
+1/20     N/A                                                                
+1/21     N/A                                                                
+1/22     N/A                                                                
+1/23     N/A                                                                
+1/24     N/A                                                                
+1/25     N/A                                                                
+1/26     N/A                                                                
+
+
+====================================================================================================
+                              Port Ripng Interface
+====================================================================================================
+IFINDX         COST            POISON         SEND           OPER  
+                               STATUS         DEFAULT        STATUS
+-----------------------------------------------------------------------------------------------------------
+
+====================================================================================================
+                                   Port Vrrp
+====================================================================================================
+PORT     VRF              VRRP IP              VIRTUAL           VERSION 
+NUM      NAME             ID   ADDRESS         MAC ADDRESS               
+-----------------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+                               Port Vrrp Extended
+====================================================================================================
+PORT     VRRP VRF                              MASTER          ADVERTISE CRITICAL        VERSION 
+NUM      ID   NAME    STATE  CONTROL PRIORITY  IPADDR          INTERVAL  IPADDR                  
+-----------------------------------------------------------------------------------------------------------
+
+PORT     VRRP VRF          HOLDDWN ACTION  CRITICAL BACKUP  BACKUP  FAST ADV    FAST ADV VERSION 
+NUM      ID   NAME                 TIME    IP       MASTER  MASTER  INTERVAL    ENABLE           
+                                           ENABLE           STATE                                
+-----------------------------------------------------------------------------------------------------------
+
+PORT     VRRP VRF          MASTER ADV   PREEMPT  PSEUDO-HEADER VERSION 
+NUM      ID   NAME         INTERVAL(ms) MODE     CHECKSUM             
+                                                                         
+-----------------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+                                   Port Vlans
+====================================================================================================
+PORT             DISCARD DISCARD   DEFAULT VLAN         PORT     UNTAG    DYNAMIC UNTAG  FA/     
+NUM      TAGGING TAGFRAM UNTAGFRAM VLANID  IDS          TYPE     DEFVLAN  VLANS   VLANS  Flex UNI
+-----------------------------------------------------------------------------------------------------------
+1/1      enable  false   false     0       4051,4052    normal   disable  P              disable 
+1/2      enable  false   false     0       4051,4052    normal   disable  P              disable 
+1/3      enable  false   false     0       4051,4052    normal   disable  P              disable 
+1/4      disable false   false     40      40           normal   disable  P       40     disable 
+1/5      disable false   false     0       0            normal   disable  P              disable 
+1/6      disable false   false     0       0            normal   disable  P              disable 
+1/7      disable false   false     0       0            normal   disable  P              disable 
+1/8      disable false   false     0       0            normal   disable  P              disable 
+1/9      disable false   false     0       0            normal   disable  P              disable 
+1/10     disable false   false     0       0            normal   disable  P              disable 
+1/11     disable false   false     0       0            normal   disable  P              disable 
+1/12     disable false   false     0       0            normal   disable  P              disable 
+1/13     disable false   false     0       0            normal   disable  P              disable 
+1/14     disable false   false     0       0            normal   disable  P              disable 
+1/15     disable false   false     0       0            normal   disable  P              disable 
+1/16     disable false   false     0       0            normal   disable  P              disable 
+1/17     disable false   false     0       0            normal   disable  P              disable 
+1/18     disable false   false     0       0            normal   disable  P              disable 
+1/19     disable false   false     0       0            normal   disable  P              disable 
+1/20     disable false   false     0       0            normal   disable  P              disable 
+1/21     disable false   false     0       0            normal   disable  P              disable 
+1/22     disable false   false     0       0            normal   disable  P              disable 
+1/23     disable false   false     0       0            normal   disable  P              disable 
+1/24     disable false   false     0       0            normal   disable  P              disable 
+1/25     disable false   false     0       0            normal   disable  P              disable 
+1/26     disable false   false     0       0            normal   disable  P              disable 
+----------------------------------------------------------------------------------------------------
+DYNAMIC VLAN Legend:
+P=Protocol enabled.
+
+====================================================================================================
+                              Port VRF Association
+====================================================================================================
+PORT     VRF   VRF                                                          
+NUM      COUNT LIST                                                         
+-----------------------------------------------------------------------------------------------------------
+1/1      1     GlobalRouter                                                 
+1/2      1     GlobalRouter                                                 
+1/3      1     GlobalRouter                                                 
+1/4      1     GlobalRouter                                                 
+1/5      0                                                                  
+1/6      0                                                                  
+1/7      0                                                                  
+1/8      0                                                                  
+1/9      0                                                                  
+1/10     0                                                                  
+1/11     0                                                                  
+1/12     0                                                                  
+1/13     0                                                                  
+1/14     0                                                                  
+1/15     0                                                                  
+1/16     0                                                                  
+1/17     0                                                                  
+1/18     0                                                                  
+1/19     0                                                                  
+1/20     0                                                                  
+1/21     0                                                                  
+1/22     0                                                                  
+1/23     0                                                                  
+1/24     0                                                                  
+1/25     0                                                                  
+1/26     0                                                                  
+
+
+====================================================================================================
+                                  Port Ip Igmp
+====================================================================================================
+PORT     QUERY QUERY ROBUST VERSION LAST  PROXY  SNOOP  SNOOP           SSM    UPnP   FAST  
+NUM      INTVL MAX                  MEMB  SNOOP  ENABLE ORIGIN          SNOOP  FILTER LEAVE 
+               RESP                 QUERY ENABLE                        ENABLE ENABLE ENABLE
+-----------------------------------------------------------------------------------------------------------
+1/1      125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/2      125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/3      125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/4      125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/5      125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/6      125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/7      125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/8      125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/9      125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/10     125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/11     125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/12     125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/13     125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/14     125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/15     125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/16     125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/17     125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/18     125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/19     125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/20     125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/21     125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/22     125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/23     125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/24     125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/25     125   100   2      2       10    false  false  CONFIG          false  false  false 
+1/26     125   100   2      2       10    false  false  CONFIG          false  false  false 
+
+-----------------------------------------------------------------------------------------------------------
+PORT     DYNAMIC   COMPATIBILITY EXPLICIT UPnP  
+NUM      DOWNGRADE MODE          HOST     FILTER
+         VERSION                 TRACKING ADDRESS
+-----------------------------------------------------------------------------------------------------------
+1/1      enable    disable       disable  239.255.255.250/32
+1/2      enable    disable       disable  239.255.255.250/32
+1/3      enable    disable       disable  239.255.255.250/32
+1/4      enable    disable       disable  239.255.255.250/32
+1/5      enable    disable       disable  239.255.255.250/32
+1/6      enable    disable       disable  239.255.255.250/32
+1/7      enable    disable       disable  239.255.255.250/32
+1/8      enable    disable       disable  239.255.255.250/32
+1/9      enable    disable       disable  239.255.255.250/32
+1/10     enable    disable       disable  239.255.255.250/32
+1/11     enable    disable       disable  239.255.255.250/32
+1/12     enable    disable       disable  239.255.255.250/32
+1/13     enable    disable       disable  239.255.255.250/32
+1/14     enable    disable       disable  239.255.255.250/32
+1/15     enable    disable       disable  239.255.255.250/32
+1/16     enable    disable       disable  239.255.255.250/32
+1/17     enable    disable       disable  239.255.255.250/32
+1/18     enable    disable       disable  239.255.255.250/32
+1/19     enable    disable       disable  239.255.255.250/32
+1/20     enable    disable       disable  239.255.255.250/32
+1/21     enable    disable       disable  239.255.255.250/32
+1/22     enable    disable       disable  239.255.255.250/32
+1/23     enable    disable       disable  239.255.255.250/32
+1/24     enable    disable       disable  239.255.255.250/32
+1/25     enable    disable       disable  239.255.255.250/32
+1/26     enable    disable       disable  239.255.255.250/32
+
+
+
+====================================================================================================
+                            Port limit-fdb-learning
+====================================================================================================
+PORT     FDB      MAXMAC  MINMAC   PORT    CURMAC  MAC     
+NUM      PROTECT  COUNT   COUNT    DOWN    COUNT   LEARN   
+-----------------------------------------------------------------------------------------------------------
+1/1      dis      1024    0        dis     0       true   
+1/2      dis      1024    0        dis     0       true   
+1/3      dis      1024    0        dis     0       true   
+1/4      dis      1024    0        dis     0       true   
+1/5      dis      1024    0        dis     0       true   
+1/6      dis      1024    0        dis     0       true   
+1/7      dis      1024    0        dis     0       true   
+1/8      dis      1024    0        dis     0       true   
+1/9      dis      1024    0        dis     0       true   
+1/10     dis      1024    0        dis     0       true   
+1/11     dis      1024    0        dis     0       true   
+1/12     dis      1024    0        dis     0       true   
+1/13     dis      1024    0        dis     0       true   
+1/14     dis      1024    0        dis     0       true   
+1/15     dis      1024    0        dis     0       true   
+1/16     dis      1024    0        dis     0       true   
+1/17     dis      1024    0        dis     0       true   
+1/18     dis      1024    0        dis     0       true   
+1/19     dis      1024    0        dis     0       true   
+1/20     dis      1024    0        dis     0       true   
+1/21     dis      1024    0        dis     0       true   
+1/22     dis      1024    0        dis     0       true   
+1/23     dis      1024    0        dis     0       true   
+1/24     dis      1024    0        dis     0       true   
+1/25     dis      1024    0        dis     0       true   
+1/26     dis      1024    0        dis     0       true   
+
+
+====================================================================================================
+                                Port Loop-Detect
+====================================================================================================
+PORT     VLAN  MAC                LOOP DETECT     SMLT REMOTE
+                                  ACTION                 
+-----------------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+                                  Port Ip Pim
+====================================================================================================
+PORT-NUM  PIM-ENABLE MODE    HELLOINT  JPINT   CBSRPREF      INTF TYPE
+-----------------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+                                  Actor Admin
+====================================================================================================
+INDEX    SYS   SYS               KEY   PORT    PORT  STATE
+         PRIO  ID                              PRIO  
+-----------------------------------------------------------------------------------------------------------
+1/1      32768 0c:91:dc:31:00:00 1216  0xc0    32768 act long indi                     
+1/2      32768 0c:91:dc:31:00:00 1217  0xc1    32768 act long indi                     
+1/3      32768 0c:91:dc:31:00:00 1218  0xc2    32768 act long indi                     
+1/4      32768 0c:91:dc:31:00:00 1219  0xc3    32768 act long indi                     
+1/5      32768 0c:91:dc:31:00:00 10    0xc4    32768 act short aggr                     
+1/6      32768 0c:91:dc:31:00:00 10    0xc5    32768 act short aggr                     
+1/7      32768 0c:91:dc:31:00:00 1222  0xc6    32768 act long indi                     
+1/8      32768 0c:91:dc:31:00:00 1223  0xc7    32768 act long indi                     
+1/9      32768 0c:91:dc:31:00:00 1224  0xc8    32768 act long indi                     
+1/10     32768 0c:91:dc:31:00:00 10    0xc9    32768 act short aggr                     
+1/11     32768 0c:91:dc:31:00:00 10    0xca    32768 act short aggr                     
+1/12     32768 0c:91:dc:31:00:00 1227  0xcb    32768 act long indi                     
+1/13     32768 0c:91:dc:31:00:00 1228  0xcc    32768 act long indi                     
+1/14     32768 0c:91:dc:31:00:00 1229  0xcd    32768 act long indi                     
+1/15     32768 0c:91:dc:31:00:00 1230  0xce    32768 act long indi                     
+1/16     32768 0c:91:dc:31:00:00 1231  0xcf    32768 act long indi                     
+1/17     32768 0c:91:dc:31:00:00 1232  0xd0    32768 act long indi                     
+1/18     32768 0c:91:dc:31:00:00 1233  0xd1    32768 act long indi                     
+1/19     32768 0c:91:dc:31:00:00 1234  0xd2    32768 act long indi                     
+1/20     32768 0c:91:dc:31:00:00 1235  0xd3    32768 act long indi                     
+1/21     32768 0c:91:dc:31:00:00 1236  0xd4    32768 act long indi                     
+1/22     32768 0c:91:dc:31:00:00 1237  0xd5    32768 act long indi                     
+1/23     32768 0c:91:dc:31:00:00 1238  0xd6    32768 act long indi                     
+1/24     32768 0c:91:dc:31:00:00 1239  0xd7    32768 act long indi                     
+1/25     32768 0c:91:dc:31:00:00 1240  0xd8    32768 act long indi                     
+1/26     32768 0c:91:dc:31:00:00 1244  0xdc    32768 act long indi                     
+
+
+====================================================================================================
+                                   Actor Oper
+====================================================================================================
+INDEX KEY   SELECTED ATTACHED AGGR  STATE
+            AGGR ID  AGGR ID        
+-----------------------------------------------------------------------------------------------------------
+1/1      1216  0        0        false act long indi                     
+1/2      1217  0        0        false act long indi                     
+1/3      1218  0        0        false act long indi                     
+1/4      1219  0        0        false act long indi                     
+1/5      10    0        0        true  act short aggr                     
+1/6      10    0        0        true  act short aggr                     
+1/7      1222  0        0        false act long indi                     
+1/8      1223  0        0        false act long indi                     
+1/9      1224  0        0        false act long indi                     
+1/10     10    0        0        true  act short aggr                     
+1/11     10    0        0        true  act short aggr                     
+1/12     1227  0        0        false act long indi                     
+1/13     1228  0        0        false act long indi                     
+1/14     1229  0        0        false act long indi                     
+1/15     1230  0        0        false act long indi                     
+1/16     1231  0        0        false act long indi                     
+1/17     1232  0        0        false act long indi                     
+1/18     1233  0        0        false act long indi                     
+1/19     1234  0        0        false act long indi                     
+1/20     1235  0        0        false act long indi                     
+1/21     1236  0        0        false act long indi                     
+1/22     1237  0        0        false act long indi                     
+1/23     1238  0        0        false act long indi                     
+1/24     1239  0        0        false act long indi                     
+1/25     1240  0        0        false act long indi                     
+1/26     1244  0        0        false act long indi                     
+
+
+====================================================================================================
+                                 Partner Admin
+====================================================================================================
+INDEX    SYS   SYS               KEY   PORT    PORT  STATE
+         PRIO  ID                              PRIO  
+-----------------------------------------------------------------------------------------------------------
+1/1      0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/2      0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/3      0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/4      0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/5      0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/6      0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/7      0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/8      0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/9      0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/10     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/11     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/12     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/13     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/14     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/15     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/16     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/17     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/18     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/19     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/20     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/21     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/22     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/23     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/24     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/25     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/26     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+
+
+====================================================================================================
+                              Partner Operational
+====================================================================================================
+INDEX    SYS   SYS               KEY   PORT    PORT  STATE
+         PRIO  ID                              PRIO  
+-----------------------------------------------------------------------------------------------------------
+1/1      0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/2      0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/3      0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/4      0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/5      0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/6      0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/7      0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/8      0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/9      0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/10     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/11     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/12     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/13     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/14     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/15     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/16     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/17     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/18     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/19     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/20     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/21     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/22     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/23     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/24     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/25     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+1/26     0     00:00:00:00:00:00 0     0x0     0     pas long indi                     
+
+
+====================================================================================================
+                                 LACP Extension
+====================================================================================================
+INDEX    ADMIN   OPER    FAST   SLOW   AGGRWAIT TIMEOUT FAST   SLOW   AGGRWAIT TIMEOUT
+         ENABLED ENABLED TIME   TIME   TIME     SCALE   TIME   TIME   TIME     SCALE  
+                         ADMIN  ADMIN  ADMIN    ADMIN   OPER   OPER   OPER     OPER   
+-----------------------------------------------------------------------------------------------------------
+1/1      false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/2      false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/3      false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/4      false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/5      true    false   1000   30000  2000     3       1000   30000  2000     3      
+1/6      true    false   1000   30000  2000     3       1000   30000  2000     3      
+1/7      false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/8      false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/9      false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/10     true    false   1000   30000  2000     3       1000   30000  2000     3      
+1/11     true    false   1000   30000  2000     3       1000   30000  2000     3      
+1/12     false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/13     false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/14     false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/15     false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/16     false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/17     false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/18     false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/19     false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/20     false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/21     false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/22     false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/23     false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/24     false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/25     false   false   1000   30000  2000     3       1000   30000  2000     3      
+1/26     false   false   1000   30000  2000     3       1000   30000  2000     3      
+
+
+====================================================================================================
+                               Port Mroute-Limit
+====================================================================================================
+PORT     MROUTE STR    MROUTE STR    ENABLE    
+         LIMIT         LIMIT TMR               
+-----------------------------------------------------------------------------------------------------------
+1/1      1984          10            false     
+1/2      1984          10            false     
+1/3      1984          10            false     
+1/4      1984          10            false     
+1/5      1984          10            false     
+1/6      1984          10            false     
+1/7      1984          10            false     
+1/8      1984          10            false     
+1/9      1984          10            false     
+1/10     1984          10            false     
+1/11     1984          10            false     
+1/12     1984          10            false     
+1/13     1984          10            false     
+1/14     1984          10            false     
+1/15     1984          10            false     
+1/16     1984          10            false     
+1/17     1984          10            false     
+1/18     1984          10            false     
+1/19     1984          10            false     
+1/20     1984          10            false     
+1/21     1984          10            false     
+1/22     1984          10            false     
+1/23     1984          10            false     
+1/24     1984          10            false     
+1/25     1984          10            false     
+1/26     1984          10            false     
+
+
+====================================================================================================
+                                 Port Interface
+====================================================================================================
+PORT        PKT-RX      PKT-RX     INCOMING   SLPP PDU  
+NUM                     THRESHOLD  VLAN ID    ORIGINATOR
+-----------------------------------------------------------------------------------------------------------
+
+PORT        PKT-RX      TIME LEFT TO CLEAR  
+NUM         COUNT       RX COUNT(IN SECONDS)
+-----------------------------------------------------------------------------------------------------------
+
+
+====================================================================================================
+                               Port Private Vlans
+====================================================================================================
+PORT                                                  VID
+NUM       TAGGING   ORIGIN     PVLAN    PVLAN TYPE    TYPE       VID 
+-----------------------------------------------------------------------------------------------------------
+
+All 0 out of 0 Total Num displayed

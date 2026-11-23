@@ -1,6 +1,6 @@
 # 0014 · `show running-config` becomes one record per command, kept as printed
 
-- **Status:** accepted, user may veto
+- **Status:** accepted, user may veto · **superseded in part by [0016](0016-config-contexts.md)** (how a context is found)
 - **Date:** 2026-11-22 · **Proposed by:** Claude, from the four-node 9.4 capture · **Objection:** none yet
 
 ## Decision
