@@ -26,6 +26,33 @@ pip install git+https://github.com/<owner>/<repo>.git   # or from the internal m
 pip install -e '.[dev]'                                  # working on the library itself
 ```
 
+### One-file bundle (no git on the target)
+
+```bash
+python3 tools/make-bundle.py     # -> dist/fabric-engine-parser-bundle-<version>.py
+```
+
+One self-extracting text file (plain ASCII, SHA-256 checked) with every file git
+tracks, minus `council/`. On the target, with Python 3.8+ to unpack and 3.10+
+for the library:
+
+```bash
+python3 fabric-engine-parser-bundle-0.1.0.py          # new ./fabric-engine-parser, or update the copy you are in
+python3 fabric-engine-parser-bundle-0.1.0.py --list   # what is inside
+```
+
+It prints the `pip install -e .` for a new `.venv` (`'.[dev]'` to work on it,
+`'.[capture]'` for `tools/capture.py`). An update rewrites only what changed,
+removes what an earlier bundle installed and this one dropped
+(`.fabric-engine-parser-files`, git-ignored), and never touches `.venv`, `.git`
+or `dist/`; fixtures you captured yourself stay. The name carries `__version__`
+(which must match `pyproject.toml`): the same contents again are a no-op,
+different contents under an existing name are refused until the version is
+bumped (`--force` overrides).
+
+migration-check and switch-migrator do not need this bundle: their bundles
+carry their own copy of the library in `vendor/fabric-weft/`.
+
 ## Supported commands
 
 Every word can be abbreviated (`sh int gig name 1/1-1/4`), and arguments after the
