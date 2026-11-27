@@ -64,16 +64,28 @@ class Output:
     def _raise_for_device_error(self) -> None:
         """Fabric Engine prints errors as '% <message>' (often under a '^' marker line) or,
         for some commands, as 'Error: <message>' ('show ip route vrf X' for an unknown VRF).
+
+        A '%' line is looked for over the WHOLE output, not just at the top. A command
+        with arguments is answered in parts - `show interfaces gigabitEthernet name
+        1/1-1/60` on a 48-port box prints the ports it has and THEN refuses the rest -
+        and stopping at the first line of real output meant that refusal was neither
+        raised nor skipped: the caller got `complete=True` over a table that is missing
+        everything after the error. No real capture has a '%' line inside its output,
+        which is what makes scanning for one safe.
+
+        'Error:' stays a leading-line rule: unlike '%' it is ordinary English and could
+        begin a line of someone's interface description in `show running-config`.
         """
+        leading = True
         for line in self.lines:
             text = line.strip()
             if not text or _ERROR_CARET.match(text):
                 continue
             if text.startswith("%"):
                 raise DeviceError(self.command, text.lstrip("% "))
-            if text.startswith("Error:"):
+            if leading and text.startswith("Error:"):
                 raise DeviceError(self.command, text.removeprefix("Error:").strip())
-            return
+            leading = False
 
     @property
     def tables(self) -> list[Table]:

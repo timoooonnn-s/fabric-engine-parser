@@ -298,3 +298,67 @@ def test_smlt_mlt_rows() -> None:
     text = "MLT   ADMIN    CURRENT\nID    TYPE     TYPE\n" + "-" * 60 + "\n20    smlt     norm\n"
     (smlt,) = parse("show smlt mlt", text, strict=True)
     assert (smlt.mlt_id, smlt.admin_type, smlt.current_type) == (20, "smlt", "norm")
+
+
+REFUSED_HALFWAY = """\
+====================================================================================================
+                                   Vlan I-SID
+====================================================================================================
+VLAN_ID    I-SID                I-SID NAME
+-----------------------------------------------------------------------------------------------------------
+1
+31         1531100              ISID-1531100
+
+% Invalid input detected at '^' marker.
+"""
+
+
+def test_an_error_after_the_output_is_still_a_device_error() -> None:
+    """A command with arguments is answered in parts: the switch prints what it
+    has and THEN refuses the rest. Looking for '%' only before the first line of
+    real output meant that refusal was neither raised nor skipped - the caller
+    got complete=True over a table missing everything after the error, which is
+    the one thing this library promises never to do.
+    """
+    with pytest.raises(DeviceError, match="Invalid input detected"):
+        parse("show vlan i-sid", REFUSED_HALFWAY)
+
+
+def test_error_prefixed_text_inside_output_is_not_an_error() -> None:
+    """'Error:' is ordinary English and could open a line of someone's interface
+    description, so unlike '%' it stays a leading-line rule."""
+    text = (
+        'config terminal\ninterface GigabitEthernet 1/1\nname "Error: see ticket 4711"\n'
+        "exit\nend\n"
+    )
+    result = parse("show running-config", text, strict=True)
+    assert [command.command for command in result] == [
+        "interface GigabitEthernet 1/1",
+        'name "Error: see ticket 4711"',
+    ]
+
+
+ISID_PORT_LIST = """\
+ISID      ISID              PORT               MLT                ORIGIN                      ISID
+ID        TYPE     VLANID   INTERFACES         INTERFACES                                     NAME
+----------------------------------------------------------------------------------------------------------------------------------
+30100     ELAN     N/A      c100:1/8,1/9,      c100:20,21         C  ---  -  ---  -  -  --    ISID-30100
+                            1/10
+"""
+
+
+def test_one_binding_over_several_ports_keeps_its_customer_vid() -> None:
+    """`c-vid 100 port 1/8,1/9,1/10` prints the 'c100:' once and the rest of the
+    port list behind it, and a wrap inside that list rejoins as one cell. Reading
+    every comma-separated chunk as its own binding raised on '1/9' - and because
+    that raise is per ROW, it lost the whole I-SID: the service, its name and
+    every other endpoint, over ports it could have placed.
+    """
+    (elan,) = parse("show i-sid", ISID_PORT_LIST, strict=True)
+    assert [(b.port, b.customer_vid) for b in elan.port_bindings] == [
+        ("1/8", 100),
+        ("1/9", 100),
+        ("1/10", 100),
+    ]
+    assert [(b.mlt_id, b.customer_vid) for b in elan.mlt_bindings] == [(20, 100), (21, 100)]
+    assert elan.vlan_member_ports == ()

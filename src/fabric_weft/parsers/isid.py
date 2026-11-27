@@ -71,21 +71,35 @@ def _split_members(
     'c100:1/10,u:1/11' -> bindings [(100, '1/10'), (None, '1/11')]
     'c100:1/8 u:1/7'   -> the same: 9.4 prints each further binding on its own line,
                           and the wrapped lines are joined with a space (lab3 fe-01)
+    'c100:1/8,1/9'     -> bindings [(100, '1/8'), (100, '1/9')]: one binding over
+                          several ports prints the prefix once and the rest of the
+                          port list after it, and a wrap inside that list rejoins
+                          as one comma-separated cell
     '1/4,1/6-1/8'      -> members ['1/4', '1/6-1/8'], only for a CVLAN I-SID (vlan_id set)
     '-', '- -'         -> nothing
+
+    Within one whitespace-separated group the prefix carries across the commas; a
+    new group starts a new prefix. Reading each comma-separated chunk as its own
+    binding instead raised on the second port and lost the ENTIRE I-SID - service,
+    name and every other endpoint - over ports it could have placed.
     """
     bindings: list[tuple[int | None, str]] = []
     members: list[str] = []
-    for chunk in re.split(r"[,\s]+", cell):
-        if optional(chunk) is None:
-            continue
-        found = _BINDING.fullmatch(chunk)
-        if found:
-            bindings.append(((int(found["vid"]) if found["vid"] else None), found["member"]))
-        elif vlan_id is not None:
-            members.append(chunk)
-        else:
-            raise ValueError(f"not an I-SID binding: {chunk!r}")
+    for group in cell.split():
+        prefix: tuple[int | None, ...] = ()
+        for chunk in group.split(","):
+            if optional(chunk) is None:
+                continue
+            found = _BINDING.fullmatch(chunk)
+            if found:
+                prefix = ((int(found["vid"]) if found["vid"] else None),)
+                bindings.append((prefix[0], found["member"]))
+            elif prefix:
+                bindings.append((prefix[0], chunk))
+            elif vlan_id is not None:
+                members.append(chunk)
+            else:
+                raise ValueError(f"not an I-SID binding: {chunk!r}")
     return bindings, members
 
 
